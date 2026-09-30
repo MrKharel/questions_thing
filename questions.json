@@ -1,28 +1,28 @@
 [
 	{
 		"question": "Prove that f = ma.",
-		"answer": "<p>According to Newton's second law, <strong>F ∝ rate of change of momentum</strong>. For mass m and acceleration a, change in momentum per unit time = ma. Therefore, <strong>F = ma</strong>.</p>",
+		"answer": "<p><strong>Derivation:</strong></p><ul><li>Let an object of mass m be moving with initial velocity u.</li><li>A constant force F acts on it for time t, changing its velocity to v.</li><li>Initial momentum, p₁ = mu.</li><li>Final momentum, p₂ = mv.</li><li>Change in momentum, Δp = mv − mu = m(v − u).</li><li>Rate of change of momentum = m(v − u)/t.</li><li>But acceleration, a = (v − u)/t.</li><li>So, rate of change of momentum = ma.</li><li>According to Newton's second law, F ∝ rate of change of momentum.</li><li>Therefore, F ∝ ma.</li><li>Taking k as the constant of proportionality, F = kma.</li><li>In SI units, k = 1.</li><li>Hence, <strong>F = ma</strong>.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Force and Motion"
 	},
 	{
 		"question": "Derive v = u + at.",
-		"answer": "<p>Acceleration, <strong>a = (v - u) / t</strong>. Therefore, at = v - u, so <strong>v = u + at</strong>.</p>",
+		"answer": "<p><strong>Derivation:</strong></p><ul><li>Let an object have initial velocity u.</li><li>It moves with uniform acceleration a for time t.</li><li>Its final velocity becomes v.</li><li>By definition, acceleration = change in velocity / time taken.</li><li>So, a = (v − u)/t.</li><li>Multiplying both sides by t: at = v − u.</li><li>Rearranging: v = u + at.</li><li>Hence, <strong>v = u + at</strong> is derived.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Force and Motion"
 	},
 	{
 		"question": "Imagine you are inside a moving bus. It abruptly starts to move. Our body moves backwards for a split second. Why is that?",
-		"answer": "<p>Due to <strong>inertia of rest</strong>, our body tends to remain at rest when the bus suddenly starts moving forward. Therefore, we appear to move backwards.</p>",
+		"answer": "<p><strong>Reason:</strong></p><ul><li>Our body is at rest when the bus is stationary.</li><li>When the bus suddenly starts moving forward, our body tends to remain at rest due to <strong>inertia of rest</strong>.</li><li>Therefore, our body appears to move backwards relative to the bus.</li><li>Example: A passenger falls backward when a bus starts suddenly.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Force and Motion"
 	},
 	{
 		"question": "Differentiate Newton's second and third law of motion.",
-		"answer": "<p><strong>Second law:</strong> It relates force, mass and acceleration: <strong>F = ma</strong>.<br><strong>Third law:</strong> Every action has an equal and opposite reaction. Example: a gun recoils when a bullet is fired.</p>",
+		"answer": "<p><strong>Newton's second law:</strong></p><ul><li>It states that the acceleration of an object is directly proportional to the net force and inversely proportional to its mass.</li><li>Formula: F = ma.</li></ul><p><strong>Newton's third law:</strong></p><ul><li>It states that for every action, there is an equal and opposite reaction.</li><li>Example: A gun recoils when a bullet is fired.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Force and Motion"
@@ -50,224 +50,224 @@
 	},
 	{
 		"question": "What information is obtained from the velocity-time graph?",
-		"answer": "<p>A velocity-time graph gives the <strong>velocity and acceleration</strong> of an object; its slope gives acceleration.</p>",
+		"answer": "<p>Velocity and acceleration.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Force and Motion"
 	},
 	{
 		"question": "Define pulley.",
-		"answer": "<p>A <strong>pulley</strong> is a simple machine consisting of a grooved wheel over which a rope or belt passes.</p>",
+		"answer": "<p>A simple machine consisting of a grooved wheel over which a rope or belt passes.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Define wheel and axle.",
-		"answer": "<p>A <strong>wheel and axle</strong> is a simple machine consisting of a large wheel attached to a smaller axle.</p>",
+		"answer": "<p>A simple machine consisting of a large wheel attached to a smaller axle.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Define fixed pulley.",
-		"answer": "<p>A <strong>fixed pulley</strong> is a pulley fixed to a support that changes the direction of effort.</p>",
+		"answer": "<p>A pulley fixed to a support that changes the direction of effort.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Define movable pulley.",
-		"answer": "<p>A <strong>movable pulley</strong> is a pulley that moves along with the load and helps reduce the effort required.</p>",
+		"answer": "<p>A pulley that moves along with the load and reduces the effort required.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Why is an electricity water pump considered a complex machine?",
-		"answer": "<p>An electric water pump is a <strong>complex machine</strong> because it consists of several simple machines and mechanisms working together. For example, it contains rotating parts such as wheels, shafts and gears.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>It is made of several simple machines working together.</li><li>It contains rotating parts such as wheels, shafts and gears.</li><li>Example: An electric water pump uses a motor, impeller and pipes.</li><li>Therefore, it is a complex machine.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Differentiate between mechanical advantage and velocity ratio.",
-		"answer": "<p><strong>Mechanical advantage (MA)</strong> = Load / Effort, while <strong>velocity ratio (VR)</strong> = Distance moved by effort / Distance moved by load. MA measures force multiplication, whereas VR compares distances moved.</p>",
+		"answer": "<p><strong>Mechanical advantage (MA):</strong></p><ul><li>MA = Load / Effort.</li><li>It measures force multiplication.</li></ul><p><strong>Velocity ratio (VR):</strong></p><ul><li>VR = Distance moved by effort / Distance moved by load.</li><li>It compares distances moved.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Differentiate between screw and wedge.",
-		"answer": "<p>A <strong>screw</strong> is an inclined plane wound around a cylinder, while a <strong>wedge</strong> consists of two inclined planes joined together. Screws are used for fastening, while wedges are used for cutting or splitting.</p>",
+		"answer": "<p><strong>Screw:</strong></p><ul><li>An inclined plane wound around a cylinder.</li><li>Used for fastening, e.g. a metal screw.</li></ul><p><strong>Wedge:</strong></p><ul><li>Two inclined planes joined together.</li><li>Used for cutting or splitting, e.g. an axe.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Differentiate between fossil fuel and hydroelectricity.",
-		"answer": "<p><strong>Fossil fuels</strong> are non-renewable sources such as coal and petroleum, while <strong>hydroelectricity</strong> is a renewable source produced from flowing water. Fossil fuels cause more pollution, whereas hydroelectricity produces little direct air pollution.</p>",
+		"answer": "<p><strong>Fossil fuel:</strong></p><ul><li>Non-renewable source such as coal and petroleum.</li><li>Causes more pollution, e.g. burning coal releases smoke.</li></ul><p><strong>Hydroelectricity:</strong></p><ul><li>Renewable source produced from flowing water.</li><li>Produces little direct air pollution, e.g. electricity from a dam.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Energy"
 	},
 	{
 		"question": "What are the uses of simple machines?",
-		"answer": "<p>Simple machines are devices that make work easier.</p><ul><li>They reduce the effort required to do work.</li><li>They can change the direction of applied force.</li><li>They can increase the speed or distance of motion.</li><li>They help us lift heavy loads.</li><li>They make cutting and splitting easier.</li><li>They are used in daily life and industries.</li><li>A pulley helps lift loads.</li><li>A lever is used for lifting or moving objects.</li><li>A wedge is used for cutting and splitting.</li><li>A screw is used for fastening objects.</li></ul>",
+		"answer": "<p><strong>Uses of simple machines:</strong></p><ul><li>They reduce the effort required to do work.</li><li>They can change the direction of applied force.</li><li>They can increase the speed or distance of motion.</li><li>They help us lift heavy loads.</li><li>They make cutting and splitting easier.</li><li>They are used in daily life and industries.</li><li>A pulley helps lift loads.</li><li>A lever is used for lifting or moving objects.</li><li>A wedge is used for cutting and splitting.</li><li>A screw is used for fastening objects.</li><li>An inclined plane helps move objects to a height.</li><li>A wheel and axle helps move vehicles.</li><li>They make work faster and easier.</li><li>They are used in cranes, scissors and ramps.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Machines"
 	},
 	{
 		"question": "Why is the Sun considered the ultimate source of energy for us?",
-		"answer": "<p>The <strong>Sun</strong> is considered the ultimate source of energy because it provides energy for almost all life and natural processes on Earth.</p><ul><li>Plants use sunlight for photosynthesis.</li><li>Plants store solar energy as chemical energy.</li><li>Animals obtain energy by eating plants or other animals.</li><li>Solar heating causes evaporation and the water cycle.</li><li>The water cycle produces flowing water for hydroelectricity.</li><li>Uneven heating of Earth produces wind.</li><li>Plants and animals that lived long ago formed fossil fuels.</li><li>Therefore, many renewable and non-renewable energy sources are ultimately related to solar energy.</li></ul>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>Plants use sunlight for photosynthesis.</li><li>Plants store solar energy as chemical energy.</li><li>Animals obtain energy by eating plants or other animals.</li><li>Solar heating causes evaporation and the water cycle.</li><li>The water cycle produces flowing water for hydroelectricity.</li><li>Uneven heating of Earth produces wind.</li><li>Plants and animals that lived long ago formed fossil fuels.</li><li>Therefore, many renewable and non-renewable energy sources are ultimately related to solar energy.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Energy"
 	},
 	{
 		"question": "What are carbonized and non-carbonized briquettes? How are they formed?",
-		"answer": "<p><strong>Briquettes</strong> are compact blocks of combustible biomass used as fuel.</p><ul><li><strong>Carbonized briquettes</strong> are made from biomass that has first been converted into charcoal.</li><li>Materials such as sawdust, rice husk or agricultural waste are carbonized by heating with little oxygen.</li><li>The resulting charcoal is crushed and mixed with a binder.</li><li>It is then compressed into blocks or other shapes.</li><li><strong>Non-carbonized briquettes</strong> are made directly from raw biomass without carbonization.</li><li>Dry biomass is crushed or ground.</li><li>It is mixed with a suitable binder if necessary.</li><li>The mixture is compressed under high pressure.</li><li>The briquettes are then dried.</li><li>They can be burned as a solid fuel.</li></ul>",
+		"answer": "<p><strong>Carbonized briquettes:</strong></p><ul><li>Made from biomass first converted into charcoal.</li><li>Materials such as sawdust or rice husk are carbonized by heating with little oxygen.</li><li>The charcoal is crushed and mixed with a binder.</li><li>It is then compressed into blocks.</li></ul><p><strong>Non-carbonized briquettes:</strong></p><ul><li>Made directly from raw biomass without carbonization.</li><li>Dry biomass is crushed or ground.</li><li>It is mixed with a binder if necessary.</li><li>The mixture is compressed under high pressure.</li><li>The briquettes are then dried.</li><li>They can be burned as solid fuel.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Energy"
 	},
 	{
 		"question": "Define biomass energy.",
-		"answer": "<p><strong>Biomass energy</strong> is energy obtained from organic materials such as plants, animals and their wastes.</p>",
+		"answer": "<p>Energy obtained from organic materials such as plants, animals and their wastes.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Energy"
 	},
 	{
 		"question": "Define biogas.",
-		"answer": "<p><strong>Biogas</strong> is a combustible gas produced by the anaerobic decomposition of organic matter.</p>",
+		"answer": "<p>A combustible gas produced by the anaerobic decomposition of organic matter.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Energy"
 	},
 	{
 		"question": "Define briquette.",
-		"answer": "<p>A <strong>briquette</strong> is a compact block of biomass or charcoal made by compressing combustible material.</p>",
+		"answer": "<p>A compact block of biomass or charcoal made by compressing combustible material.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Energy"
 	},
 	{
 		"question": "Explain how the wind is generated.",
-		"answer": "<p>Wind is generated mainly due to the <strong>unequal heating of Earth's surface by the Sun</strong>. Different areas become heated to different temperatures, causing differences in air pressure. Warm air becomes less dense and rises, creating a low-pressure area. Cooler, denser air moves from a high-pressure area toward the low-pressure area. This movement of air is called <strong>wind</strong>.</p>",
+		"answer": "<p><strong>Wind generation:</strong></p><ul><li>Wind is generated mainly due to the unequal heating of Earth's surface by the Sun.</li><li>Different areas become heated to different temperatures, causing differences in air pressure.</li><li>Warm air becomes less dense and rises, creating a low-pressure area.</li><li>Cooler, denser air moves from a high-pressure area toward the low-pressure area.</li><li>This movement of air is called wind.</li><li>Example: Sea breeze and land breeze are caused by unequal heating.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Energy"
 	},
 	{
 		"question": "What is binomial system of nomenclature?",
-		"answer": "<p><strong>Binomial nomenclature</strong> is the system of naming organisms using two words: genus and species.</p>",
+		"answer": "<p>The system of naming organisms using two words: genus and species.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Explain shortly about types of organisms in the kingdom Protista.",
-		"answer": "<p><strong>Kingdom Protista</strong> contains mostly unicellular eukaryotic organisms.</p><ul><li>They have a well-defined nucleus and membrane-bound organelles.</li><li>Most live in water or moist places.</li><li>Some are autotrophic and make their own food.</li><li>Others are heterotrophic and obtain food from other organisms.</li><li>Some protists show both plant-like and animal-like characteristics.</li><li><strong>Plant-like protists</strong> include algae such as Chlamydomonas and diatoms.</li><li><strong>Animal-like protists</strong> include Amoeba and Paramecium.</li><li><strong>Fungus-like protists</strong> include slime moulds.</li><li>They reproduce by methods such as binary fission or other forms of cell division.</li><li>Some are useful while others cause diseases.</li></ul>",
+		"answer": "<p><strong>Kingdom Protista:</strong></p><ul><li>Contains mostly unicellular eukaryotic organisms.</li><li>They have a well-defined nucleus and membrane-bound organelles.</li><li>Most live in water or moist places.</li><li>Some are autotrophic and make their own food.</li><li>Others are heterotrophic and obtain food from other organisms.</li><li>Some protists show both plant-like and animal-like characteristics.</li><li><strong>Plant-like protists:</strong> Include algae such as Chlamydomonas and diatoms.</li><li><strong>Animal-like protists:</strong> Include Amoeba and Paramecium.</li><li><strong>Fungus-like protists:</strong> Include slime moulds.</li><li>They reproduce by methods such as binary fission or other forms of cell division.</li><li>Some are useful while others cause diseases.</li><li>Example: Amoeba causes dysentery, while diatoms produce oxygen.</li><li>They form an important part of aquatic food chains.</li><li>They are considered ancestors of plants, animals and fungi.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Explain the life cycle of mushroom.",
-		"answer": "<p>The life cycle of a mushroom begins with the formation and dispersal of <strong>basidiospores</strong>.</p><ul><li>Basidiospores are produced on the gills of a mature mushroom.</li><li>When they land in a suitable place, they germinate.</li><li>Each basidiospore produces a thread-like <strong>primary mycelium</strong>.</li><li>The primary mycelium is usually single-nucleated.</li><li>Two compatible primary mycelia fuse to form a <strong>secondary mycelium</strong>.</li><li>The secondary mycelium is generally dikaryotic.</li><li>It grows through suitable organic matter and absorbs nutrients.</li><li>Under suitable conditions, it forms a reproductive structure called a <strong>fruiting body</strong>.</li><li>The fruiting body develops a stalk and cap.</li><li>The underside of the cap contains numerous gills.</li><li>Basidia develop on the gills.</li><li>Basidiospores are formed on the basidia.</li><li>The spores are released and dispersed.</li><li>They germinate again under suitable conditions, completing the life cycle.</li></ul>",
+		"answer": "<p><strong>Life cycle of mushroom:</strong></p><ul><li>Begins with the formation and dispersal of basidiospores.</li><li>Basidiospores are produced on the gills of a mature mushroom.</li><li>When they land in a suitable place, they germinate.</li><li>Each basidiospore produces a thread-like primary mycelium.</li><li>The primary mycelium is usually single-nucleated.</li><li>Two compatible primary mycelia fuse to form a secondary mycelium.</li><li>The secondary mycelium is generally dikaryotic.</li><li>It grows through suitable organic matter and absorbs nutrients.</li><li>Under suitable conditions, it forms a fruiting body.</li><li>The fruiting body develops a stalk and cap.</li><li>The underside of the cap contains numerous gills.</li><li>Basidia develop on the gills.</li><li>Basidiospores are formed on the basidia.</li><li>The spores are released and dispersed.</li><li>They germinate again under suitable conditions, completing the life cycle.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Write the methods of making mushroom shukuty.",
-		"answer": "<p>Mushroom shukuty can be prepared by <strong>drying mushrooms</strong> in sunlight or by using a suitable dryer. The mushrooms are cleaned, sliced, dried thoroughly, and stored in an airtight container for later use.</p>",
+		"answer": "<p><strong>Methods:</strong></p><ul><li>Clean and slice fresh mushrooms.</li><li>Dry them in sunlight or using a suitable dryer.</li><li>Dry thoroughly to remove moisture.</li><li>Store in an airtight container for later use.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "What are some of the characteristics of poisonous mushroom?",
-		"answer": "<p>Poisonous mushrooms may have several identifying features, but appearance alone cannot reliably determine whether a mushroom is poisonous.</p><ul><li>Some have brightly coloured caps.</li><li>Some have unusual spots or patches on the cap.</li><li>Some have a ring-like structure around the stalk.</li><li>Some have a cup-like structure at the base.</li><li>They may have an unpleasant smell or taste.</li><li>Some change colour when bruised or damaged.</li><li>Some poisonous species resemble edible mushrooms.</li><li>Therefore, colour or appearance should not be used alone to identify poisonous mushrooms.</li><li>Only properly identified edible species should be consumed.</li><li>Examples of poisonous mushrooms include some species of <i>Amanita</i>.</li></ul>",
+		"answer": "<p><strong>Characteristics:</strong></p><ul><li>Some have brightly coloured caps.</li><li>Some have unusual spots or patches on the cap.</li><li>Some have a ring-like structure around the stalk.</li><li>Some have a cup-like structure at the base.</li><li>They may have an unpleasant smell or taste.</li><li>Some change colour when bruised or damaged.</li><li>Some poisonous species resemble edible mushrooms.</li><li>Therefore, colour or appearance should not be used alone to identify poisonous mushrooms.</li><li>Only properly identified edible species should be consumed.</li><li>Examples of poisonous mushrooms include some species of Amanita.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Define hyphae.",
-		"answer": "<p><strong>Hyphae</strong> are thread-like structures that form the body of a fungus.</p>",
+		"answer": "<p>Thread-like structures that form the body of a fungus.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Define pileus.",
-		"answer": "<p><strong>Pileus</strong> is the cap-like upper part of a mushroom's fruiting body.</p>",
+		"answer": "<p>The cap-like upper part of a mushroom's fruiting body.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Define gills.",
-		"answer": "<p><strong>Gills</strong> are thin plate-like structures on the underside of a mushroom cap where spores are produced.</p>",
+		"answer": "<p>Thin plate-like structures on the underside of a mushroom cap where spores are produced.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "It is a single-nucleated thread-like structure. It is produced from basidiospores of mushroom. What is it?",
-		"answer": "<p><strong>Primary mycelium.</strong></p>",
+		"answer": "<p>Primary mycelium.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "What is evolution?",
-		"answer": "<p><strong>Evolution</strong> is the gradual change in the characteristics of organisms over generations.</p>",
+		"answer": "<p>The gradual change in the characteristics of organisms over generations.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "What is embryo?",
-		"answer": "<p>An <strong>embryo</strong> is the early developing stage of an organism formed after fertilization.</p>",
+		"answer": "<p>The early developing stage of an organism formed after fertilization.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "What is mutation?",
-		"answer": "<p>A <strong>mutation</strong> is a sudden change in the genetic material of an organism.</p>",
+		"answer": "<p>A sudden change in the genetic material of an organism.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "What is variation?",
-		"answer": "<p><strong>Variation</strong> is the difference in characteristics among individuals of the same species.</p>",
+		"answer": "<p>The difference in characteristics among individuals of the same species.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Differentiate between somatogenic and blastogenic variation.",
-		"answer": "<p><strong>Somatogenic variation</strong> occurs in body cells due to environmental or acquired factors and is generally not inherited. <strong>Blastogenic variation</strong> occurs in germ cells and can be inherited by offspring.</p>",
+		"answer": "<p><strong>Somatogenic variation:</strong></p><ul><li>Occurs in body cells due to environmental or acquired factors.</li><li>Generally not inherited, e.g. muscle size due to exercise.</li></ul><p><strong>Blastogenic variation:</strong></p><ul><li>Occurs in germ cells.</li><li>Can be inherited by offspring, e.g. eye colour.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Why is platypus called a connecting link? Give suitable reasons.",
-		"answer": "<p>Platypus is called a <strong>connecting link</strong> because it has characteristics of both reptiles and mammals. It has a reptile-like feature of laying eggs but also has mammalian features such as hair and mammary glands.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>It has characteristics of both reptiles and mammals.</li><li>It lays eggs like a reptile.</li><li>It has hair and mammary glands like a mammal.</li><li>Therefore, it is called a connecting link.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Appendix is a vestigial organ. Why?",
-		"answer": "<p>The <strong>appendix</strong> is considered vestigial because it is a reduced remnant of an organ that had a more important function in ancestors. It has little digestive function in modern humans.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>It is a reduced remnant of an organ that had a more important function in ancestors.</li><li>It has little digestive function in modern humans.</li><li>Example: The human appendix is a vestigial organ.</li><li>Therefore, it is considered vestigial.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Evolution"
@@ -295,161 +295,161 @@
 	},
 	{
 		"question": "What is variation? Explain its types.",
-		"answer": "<p><strong>Variation</strong> is the difference in characteristics among individuals of the same species.</p><h3>Types of variation</h3><ul><li><strong>Somatogenic variation:</strong> It occurs in body cells during an organism's lifetime.</li><li>It is usually caused by environmental conditions, habits, nutrition or other acquired factors.</li><li>It is generally not inherited by offspring.</li><li>For example, increased muscle size due to exercise is an acquired variation.</li><li><strong>Blastogenic variation:</strong> It occurs in germ cells or reproductive cells.</li><li>It can be transmitted from parents to offspring.</li><li>It may result from genetic changes such as mutation and recombination.</li><li>Inherited differences can contribute to differences between individuals.</li><li>Variation may be useful, harmful or neutral.</li><li>Variation provides differences on which natural selection can act.</li></ul>",
+		"answer": "<p><strong>Variation:</strong> The difference in characteristics among individuals of the same species.</p><p><strong>Types:</strong></p><ul><li><strong>Somatogenic variation:</strong> Occurs in body cells during an organism's lifetime.</li><li>It is usually caused by environmental conditions, habits or nutrition.</li><li>It is generally not inherited by offspring.</li><li>Example: Increased muscle size due to exercise.</li><li><strong>Blastogenic variation:</strong> Occurs in germ cells or reproductive cells.</li><li>It can be transmitted from parents to offspring.</li><li>It may result from genetic changes such as mutation and recombination.</li><li>Example: Eye colour or blood group differences.</li><li>Variation may be useful, harmful or neutral.</li><li>Variation provides differences on which natural selection can act.</li><li>It is essential for evolution.</li><li>It helps populations adapt to changing environments.</li><li>It increases the chances of survival of a species.</li><li>It is the raw material for natural selection.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Do you really believe evolution as a real thing of how modern organisms were formed? If so, why? Briefly explain your views.",
-		"answer": "<p><strong>Yes, evolution is supported by extensive scientific evidence.</strong></p><ul><li>Evolution explains how populations change over many generations.</li><li>Fossils provide evidence of organisms that lived in the past.</li><li>Comparative anatomy shows similarities between different organisms.</li><li><strong>Homologous organs</strong> suggest common ancestry.</li><li>Vestigial organs provide evidence of changes in organisms over time.</li><li>Embryological similarities can also provide evidence of evolutionary relationships.</li><li>DNA and molecular similarities allow scientists to compare organisms genetically.</li><li>Variation occurs naturally within populations.</li><li>Mutation and recombination create genetic differences.</li><li>Natural selection can cause beneficial inherited traits to become more common.</li><li>Observed changes in populations provide evidence that evolution occurs.</li><li>Therefore, evolution is a major scientific explanation for the diversity of modern organisms.</li></ul>",
+		"answer": "<p><strong>Yes, evolution is supported by extensive scientific evidence.</strong></p><ul><li>Evolution explains how populations change over many generations.</li><li>Fossils provide evidence of organisms that lived in the past.</li><li>Comparative anatomy shows similarities between different organisms.</li><li>Homologous organs suggest common ancestry.</li><li>Vestigial organs provide evidence of changes in organisms over time.</li><li>Embryological similarities can also provide evidence of evolutionary relationships.</li><li>DNA and molecular similarities allow scientists to compare organisms genetically.</li><li>Variation occurs naturally within populations.</li><li>Mutation and recombination create genetic differences.</li><li>Natural selection can cause beneficial inherited traits to become more common.</li><li>Observed changes in populations provide evidence that evolution occurs.</li><li>Example: Antibiotic resistance in bacteria shows evolution in action.</li><li>Example: Peppered moth colour change during industrial revolution.</li><li>Therefore, evolution is a major scientific explanation for the diversity of modern organisms.</li></ul>",
 		"image": null,
 		"mark": 4,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "What is prefix of 10^-9?",
-		"answer": "<p><strong>Nano (n)</strong></p>",
+		"answer": "<p>Nano (n).</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Differentiate between Monera and Protista.",
-		"answer": "<p><strong>Monera:</strong> Prokaryotic organisms without a true nucleus, e.g. bacteria. <strong>Protista:</strong> Eukaryotic organisms with a true nucleus, e.g. Amoeba and Paramecium.</p>",
+		"answer": "<p><strong>Monera:</strong></p><ul><li>Prokaryotic organisms without a true nucleus.</li><li>Example: Bacteria.</li></ul><p><strong>Protista:</strong></p><ul><li>Eukaryotic organisms with a true nucleus.</li><li>Example: Amoeba and Paramecium.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Differentiate between mushroom and yeast.",
-		"answer": "<p><strong>Mushroom</strong> is a multicellular fungus with a visible fruiting body, while <strong>yeast</strong> is a unicellular fungus. Mushroom commonly reproduces by spores, while yeast commonly reproduces by budding.</p>",
+		"answer": "<p><strong>Mushroom:</strong></p><ul><li>Multicellular fungus with a visible fruiting body.</li><li>Reproduces by spores, e.g. oyster mushroom.</li></ul><p><strong>Yeast:</strong></p><ul><li>Unicellular fungus.</li><li>Reproduces by budding, e.g. Saccharomyces.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Why is bacteria called Monera? List out your reasons.",
-		"answer": "<p>Bacteria are placed in <strong>Monera</strong> because they are <strong>unicellular prokaryotes</strong>. They lack a true nucleus and membrane-bound organelles and generally reproduce by binary fission.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>They are unicellular prokaryotes.</li><li>They lack a true nucleus and membrane-bound organelles.</li><li>They generally reproduce by binary fission.</li><li>Therefore, they are placed in Monera.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Write the characteristics of mushroom.",
-		"answer": "<p>Mushrooms are <strong>multicellular fungi</strong> that lack chlorophyll. Their body consists of hyphae forming mycelium, and many have a cap, stalk and gills. They obtain nutrients from dead or decaying organic matter and reproduce by spores.</p>",
+		"answer": "<p><strong>Characteristics:</strong></p><ul><li>Multicellular fungi lacking chlorophyll.</li><li>Body consists of hyphae forming mycelium.</li><li>Many have a cap, stalk and gills.</li><li>Obtain nutrients from dead or decaying organic matter.</li><li>Reproduce by spores.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Differentiate between primary mycelium and secondary mycelium.",
-		"answer": "<p><strong>Primary mycelium</strong> develops from a basidiospore and usually contains a single nucleus per cell. <strong>Secondary mycelium</strong> forms after fusion of compatible primary mycelia and usually contains two nuclei per cell.</p>",
+		"answer": "<p><strong>Primary mycelium:</strong></p><ul><li>Develops from a basidiospore.</li><li>Usually contains a single nucleus per cell.</li></ul><p><strong>Secondary mycelium:</strong></p><ul><li>Forms after fusion of compatible primary mycelia.</li><li>Usually contains two nuclei per cell.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Define scientific study.",
-		"answer": "<p><strong>Scientific study</strong> is the systematic study of natural phenomena using observation, experimentation and evidence.</p>",
+		"answer": "<p>The systematic study of natural phenomena using observation, experimentation and evidence.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Define scientific notation.",
-		"answer": "<p><strong>Scientific notation</strong> expresses a number as a value between 1 and 10 multiplied by a power of 10.</p>",
+		"answer": "<p>A method of expressing a number as a value between 1 and 10 multiplied by a power of 10.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Express 8848 using scientific notation.",
-		"answer": "<p><strong>8.848 × 10<sup>3</sup></strong></p>",
+		"answer": "<p>8.848 × 10³.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Differentiate biology and astronomy.",
-		"answer": "<p><strong>Biology</strong> is the study of living organisms, while <strong>astronomy</strong> is the study of celestial objects and phenomena such as stars, planets and galaxies.</p>",
+		"answer": "<p><strong>Biology:</strong></p><ul><li>The study of living organisms.</li><li>Example: Study of plants and animals.</li></ul><p><strong>Astronomy:</strong></p><ul><li>The study of celestial objects and phenomena.</li><li>Example: Study of stars, planets and galaxies.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Have you ever noticed doctors wear a white cloak-like thing while in a X-ray room? Its called an apron. Why do you think they wear it? List out your reasons.",
-		"answer": "<p>Doctors wear a <strong>lead apron</strong> to protect themselves from harmful X-ray radiation. It helps reduce the amount of radiation reaching sensitive body organs during repeated exposure.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>To protect themselves from harmful X-ray radiation.</li><li>It reduces the amount of radiation reaching sensitive body organs.</li><li>Example: Lead apron is used during X-ray examinations.</li><li>Therefore, doctors wear it for safety.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "What are the challenges of science in the medical field?",
-		"answer": "<p>Major challenges include <strong>developing safe and effective treatments, controlling new diseases, reducing treatment costs, dealing with drug resistance, and ensuring access to modern medical technology</strong>.</p>",
+		"answer": "<p><strong>Challenges:</strong></p><ul><li>Developing safe and effective treatments.</li><li>Controlling new diseases.</li><li>Reducing treatment costs.</li><li>Dealing with drug resistance.</li><li>Ensuring access to modern medical technology.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Write any four safety measures that should be applied while inside a science lab for any practical work.",
-		"answer": "<p><strong>Four laboratory safety measures:</strong></p><ul><li>Wear appropriate protective equipment.</li><li>Do not taste or directly smell chemicals.</li><li>Handle apparatus and chemicals carefully.</li><li>Follow the teacher's instructions and keep the laboratory clean.</li></ul>",
+		"answer": "<p><strong>Safety measures:</strong></p><ul><li>Wear appropriate protective equipment.</li><li>Do not taste or directly smell chemicals.</li><li>Handle apparatus and chemicals carefully.</li><li>Follow the teacher's instructions and keep the laboratory clean.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Scientific Learning"
 	},
 	{
 		"question": "Write scientific names for: tiger, neem, lion, yarchagumba, and leopard.",
-		"answer": "<p><strong>Tiger:</strong> <i>Panthera tigris</i>; <strong>Neem:</strong> <i>Azadirachta indica</i>; <strong>Lion:</strong> <i>Panthera leo</i>; <strong>Yarsagumba:</strong> <i>Ophiocordyceps sinensis</i>; <strong>Leopard:</strong> <i>Panthera pardus</i>.</p>",
+		"answer": "<p><strong>Tiger:</strong> Panthera tigris; <strong>Neem:</strong> Azadirachta indica; <strong>Lion:</strong> Panthera leo; <strong>Yarsagumba:</strong> Ophiocordyceps sinensis; <strong>Leopard:</strong> Panthera pardus.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Define phylum.",
-		"answer": "<p>A <strong>phylum</strong> is a major taxonomic rank below kingdom and above class.</p>",
+		"answer": "<p>A major taxonomic rank below kingdom and above class.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Define species.",
-		"answer": "<p>A <strong>species</strong> is a group of similar organisms that can naturally interbreed and produce fertile offspring.</p>",
+		"answer": "<p>A group of similar organisms that can naturally interbreed and produce fertile offspring.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Why do bacteria belong to Monera?",
-		"answer": "<p>Bacteria belong to <strong>Monera</strong> because they are unicellular prokaryotes lacking a true nucleus.</p>",
+		"answer": "<p>Because they are unicellular prokaryotes lacking a true nucleus.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Which bacteria contains chlorophyll?",
-		"answer": "<p><strong>Cyanobacteria</strong>, such as <i>Nostoc</i> and <i>Anabaena</i>, contain chlorophyll.</p>",
+		"answer": "<p>Cyanobacteria, such as Nostoc and Anabaena.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Differentiate between two kingdom system and five kingdom system.",
-		"answer": "<p>The <strong>two-kingdom system</strong> divides organisms into Plantae and Animalia. The <strong>five-kingdom system</strong> divides them into Monera, Protista, Fungi, Plantae and Animalia based on features such as cell type, organization and nutrition.</p>",
+		"answer": "<p><strong>Two-kingdom system:</strong></p><ul><li>Divides organisms into Plantae and Animalia.</li><li>Example: Fungi were placed in Plantae.</li></ul><p><strong>Five-kingdom system:</strong></p><ul><li>Divides organisms into Monera, Protista, Fungi, Plantae and Animalia.</li><li>Based on cell type, organization and nutrition, e.g. bacteria in Monera.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Differentiate between kingdom and phylum.",
-		"answer": "<p><strong>Kingdom</strong> is a higher taxonomic rank containing several related phyla. <strong>Phylum</strong> is a rank below kingdom containing related classes.</p>",
+		"answer": "<p><strong>Kingdom:</strong></p><ul><li>A higher taxonomic rank containing several related phyla.</li><li>Example: Animalia.</li></ul><p><strong>Phylum:</strong></p><ul><li>A rank below kingdom containing related classes.</li><li>Example: Chordata.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Differentiate Plantae and Animalia kingdoms.",
-		"answer": "<p><strong>Plantae</strong> consists mainly of multicellular autotrophs with cell walls, while <strong>Animalia</strong> consists of multicellular heterotrophs without cell walls. Plants generally make food by photosynthesis, whereas animals obtain food by ingestion.</p>",
+		"answer": "<p><strong>Plantae:</strong></p><ul><li>Mainly multicellular autotrophs with cell walls.</li><li>Make food by photosynthesis, e.g. mango tree.</li></ul><p><strong>Animalia:</strong></p><ul><li>Multicellular heterotrophs without cell walls.</li><li>Obtain food by ingestion, e.g. human.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Classification Of Living beings"
@@ -463,63 +463,63 @@
 	},
 	{
 		"question": "Describe fungi with examples.",
-		"answer": "<p><strong>Fungi</strong> are organisms that generally obtain food by absorption.</p><ul><li>Most fungi are multicellular, although yeast is unicellular.</li><li>Their cell walls are mainly made of chitin.</li><li>They lack chlorophyll.</li><li>Therefore, they cannot prepare food by photosynthesis.</li><li>Their body commonly consists of thread-like structures called <strong>hyphae</strong>.</li><li>A mass of hyphae is called <strong>mycelium</strong>.</li><li>They commonly reproduce by spores.</li><li>Many fungi live on dead and decaying organic matter.</li><li>Some fungi form symbiotic relationships with other organisms.</li><li>Examples include mushroom, yeast, bread mould and <i>Penicillium</i>.</li><li>Some fungi are useful in food production and medicine.</li><li>Others can cause diseases in plants and animals.</li></ul>",
+		"answer": "<p><strong>Fungi:</strong></p><ul><li>Organisms that generally obtain food by absorption.</li><li>Most fungi are multicellular, although yeast is unicellular.</li><li>Their cell walls are mainly made of chitin.</li><li>They lack chlorophyll.</li><li>Therefore, they cannot prepare food by photosynthesis.</li><li>Their body commonly consists of thread-like structures called hyphae.</li><li>A mass of hyphae is called mycelium.</li><li>They commonly reproduce by spores.</li><li>Many fungi live on dead and decaying organic matter.</li><li>Some fungi form symbiotic relationships with other organisms.</li><li>Examples include mushroom, yeast, bread mould and Penicillium.</li><li>Some fungi are useful in food production and medicine.</li><li>Others can cause diseases in plants and animals.</li></ul>",
 		"image": null,
-		"mark": 2,
+		"mark": 4,
 		"chapter": "Classification Of Living beings"
 	},
 	{
 		"question": "Where are gills of mushroom?",
-		"answer": "<p>Gills are found on the <strong>underside of the mushroom's pileus (cap)</strong>.</p>",
+		"answer": "<p>On the underside of the mushroom's pileus (cap).</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Which mushroom is most common in Nepal?",
-		"answer": "<p><strong>Oyster mushroom (<i>Pleurotus</i>)</strong> is one of the most commonly cultivated mushrooms in Nepal.</p>",
+		"answer": "<p>Oyster mushroom (Pleurotus).</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Differentiate edible and non-edible mushrooms.",
-		"answer": "<p><strong>Edible mushrooms</strong> are safe and suitable for consumption, such as oyster mushroom. <strong>Non-edible mushrooms</strong> are not suitable for eating and may be poisonous or otherwise unsafe, such as some species of <i>Amanita</i>.</p>",
+		"answer": "<p><strong>Edible mushrooms:</strong></p><ul><li>Safe and suitable for consumption.</li><li>Example: Oyster mushroom.</li></ul><p><strong>Non-edible mushrooms:</strong></p><ul><li>Not suitable for eating and may be poisonous.</li><li>Example: Some species of Amanita.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Why are farmers attracted to mushrooms?",
-		"answer": "<p>Farmers are attracted to mushroom farming because it requires <strong>less land, relatively little initial investment, agricultural waste can be used as substrate, and mushrooms can provide good income in a short period</strong>.</p>",
+		"answer": "<p><strong>Reasons:</strong></p><ul><li>Requires less land.</li><li>Relatively little initial investment.</li><li>Agricultural waste can be used as substrate.</li><li>Can provide good income in a short period.</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Mushroom"
 	},
 	{
 		"question": "Define fossil.",
-		"answer": "<p>A <strong>fossil</strong> is the preserved remains, impressions or traces of ancient organisms.</p>",
+		"answer": "<p>The preserved remains, impressions or traces of ancient organisms.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Define homologous organs.",
-		"answer": "<p><strong>Homologous organs</strong> have similar basic structure and common origin but may perform different functions.</p>",
+		"answer": "<p>Organs that have similar basic structure and common origin but may perform different functions.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Define analogous organs.",
-		"answer": "<p><strong>Analogous organs</strong> perform similar functions but have different basic structures and origins.</p>",
+		"answer": "<p>Organs that perform similar functions but have different basic structures and origins.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
 	},
 	{
 		"question": "Define mutation.",
-		"answer": "<p>A <strong>mutation</strong> is a sudden change in the DNA or genetic material of an organism.</p>",
+		"answer": "<p>A sudden change in the DNA or genetic material of an organism.</p>",
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
