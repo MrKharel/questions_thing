@@ -123,6 +123,8 @@
   * {
     @apply border-border outline-ring/50;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--background);
   }
   body {
     @apply bg-background text-foreground;
