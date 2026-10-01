@@ -1,7 +1,7 @@
 [
 	{
 		"question": "Prove that f = ma.",
-		"answer": "<p><strong>Derivation:</strong></p><ul><li>Let an object of mass m be moving with initial velocity u.</li><li>A constant force F acts on it for time t, changing its velocity to v.</li><li>Initial momentum, p₁ = mu.</li><li>Final momentum, p₂ = mv.</li><li>Change in momentum, Δp = mv − mu = m(v − u).</li><li>Rate of change of momentum = m(v − u)/t.</li><li>But acceleration, a = (v − u)/t.</li><li>So, rate of change of momentum = ma.</li><li>According to Newton's second law, F ∝ rate of change of momentum.</li><li>Therefore, F ∝ ma.</li><li>Taking k as the constant of proportionality, F = kma.</li><li>In SI units, k = 1.</li><li>Hence, <strong>F = ma</strong>.</li></ul>",
+		"answer": "<p><strong>Derivation:</strong></p><ul><li>According to the second law of Newton that the acceleration produced in an object is directly proportional to the force applied.</li><li>Therefore, a ∝ F. . . eq1</li><li>Acceleration produced in an object is inversely proportional to the mass of the object.</li><li>Therefore, a ∝ 1 / m. . . eq2</li><li>Combining the equations we get: a ∝ F × 1/m</li><li>or, ma ∝ F</li><li>or, F = kma (where k = 1 is a constant)</li><li>If F = 1, m = 1 kg, and a = 1 m/s², we get: F = ma</li></ul>",
 		"image": null,
 		"mark": 2,
 		"chapter": "Force and Motion"
