@@ -61,8 +61,8 @@ const RenderQuestions = (props: { questions: Question[] }) => {
 				<div className="flex gap-2 flex-wrap *:w-fit">
 					<Select
 						items={marks}
-						value={String(markFilter)}
-						onValueChange={(value) => setMarkFilter(value ?? "All")}
+						value={markFilter}
+						onValueChange={(value) => setMarkFilter((value ?? "All") as Mark)}
 					>
 						<SelectTrigger className="w-[180px]">
 							<SelectValue placeholder="Marks" />
@@ -80,7 +80,9 @@ const RenderQuestions = (props: { questions: Question[] }) => {
 
 					<Select
 						value={chapterFilter}
-						onValueChange={(value) => setChapterFilter(value ?? "All chapters")}
+						onValueChange={(value) =>
+							setChapterFilter((value ?? "All chapters") as Chapter)
+						}
 					>
 						<SelectTrigger>
 							<SelectValue placeholder="Chapter" />
