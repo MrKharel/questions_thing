@@ -6,12 +6,18 @@ type Question = {
 	chapter: string;
 };
 
-const QuestionCard = ({ question }: { question: Question }) => {
+const QuestionCard = ({
+	question,
+	index,
+}: {
+	question: Question;
+	index: number;
+}) => {
 	return (
 		<article className="rounded-lg p-4">
 			<header className="mb-3 flex items-start justify-between gap-4">
 				<h2 className="text-base font-semibold leading-snug">
-					{question.question}
+					{index + 1}. {question.question}
 				</h2>
 				<span className="bg-secondary text-secondary-foreground shrink-0 rounded-full px-2.5 py-1 text-xs font-medium">
 					{question.mark} {question.mark === 1 ? "mark" : "marks"}
