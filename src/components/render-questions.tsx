@@ -12,7 +12,8 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
-type Mark = "All" | 1 | 2 | 4;
+type Mark = "All" | "1" | "2" | "4";
+
 type Chapter =
 	| "All chapters"
 	| "Scientific Learning"
@@ -25,11 +26,10 @@ type Chapter =
 
 const marks: { label: string; value: Mark }[] = [
 	{ label: "All mark type", value: "All" },
-	{ label: "1 mark type", value: 1 },
-	{ label: "2 marks type", value: 2 },
-	{ label: "4 marks type", value: 4 },
+	{ label: "1 mark type", value: "1" },
+	{ label: "2 marks type", value: "2" },
+	{ label: "4 marks type", value: "4" },
 ];
-
 const chapters: Chapter[] = [
 	"All chapters",
 	"Scientific Learning",
@@ -49,7 +49,7 @@ const RenderQuestions = (props: { questions: Question[] }) => {
 		() =>
 			props.questions.filter(
 				(q) =>
-					(markFilter === "All" || q.mark === markFilter) &&
+					(markFilter === "All" || String(q.mark) === markFilter) &&
 					(chapterFilter === "All chapters" || q.chapter === chapterFilter),
 			),
 		[props.questions, markFilter, chapterFilter],
@@ -61,7 +61,7 @@ const RenderQuestions = (props: { questions: Question[] }) => {
 				<div className="flex gap-2 flex-wrap *:w-fit">
 					<Select
 						items={marks}
-						value={markFilter}
+						value={String(markFilter)}
 						onValueChange={(value) => setMarkFilter(value ?? "All")}
 					>
 						<SelectTrigger className="w-[180px]">
