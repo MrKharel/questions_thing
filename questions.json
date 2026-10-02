@@ -523,5 +523,61 @@
 		"image": null,
 		"mark": 1,
 		"chapter": "Evolution"
+	},
+	{
+		"question": "What's organic evolution?",
+		"answer": "<p>Organic evolution is the gradual change in living organisms over generations.</p>",
+		"image": null,
+		"mark": 1,
+		"chapter": "Evolution"
+	},
+	{
+		"question": "Write two names of bridge animals?",
+		"answer": "<p>Archaeopteryx and lungfish.</p>",
+		"image": null,
+		"mark": 1,
+		"chapter": "Evolution"
+	},
+	{
+		"question": "Why is deer called a primary consumer?",
+		"answer": "<p>A deer is a primary consumer because it feeds directly on plants. Plants are producers, and animals that eat producers are called primary consumers. For example, a deer eats grass, leaves, and other plants. Therefore, it occupies the primary consumer level in a food chain.</p>",
+		"image": null,
+		"mark": 2,
+		"chapter": "Evolution"
+	},
+	{
+		"question": "What's an inclined place?",
+		"answer": "<p>An inclined place is a sloping surface that makes an angle with the horizontal surface.</p>",
+		"image": null,
+		"mark": 1,
+		"chapter": "Machines"
+	},
+	{
+		"question": "Write the law of movement.",
+		"answer": "<p>An object remains at rest or in uniform motion unless an external force acts on it.</p>",
+		"image": null,
+		"mark": 1,
+		"chapter": "Force and Motion"
+	},
+	{
+		"question": "What's meaning of a machine having 85% efficiency?",
+		"answer": "<p>A machine having <strong>85% efficiency</strong> converts 85% of its input work into useful output work. The remaining 15% of the input work is lost mainly due to friction and other factors. For example, if 100 J of work is supplied, the machine gives 85 J of useful work. Thus, its efficiency is 85%.</p>",
+		"image": null,
+		"mark": 2,
+		"chapter": "Machines"
+	},
+	{
+		"question": "Why is input work always more than output work?",
+		"answer": "<p>Input work is always more than output work because a practical machine loses some energy while operating. Some work is used to overcome friction between moving parts. Some energy may also be lost as heat, sound, or vibration. Therefore, output work is less than input work in a practical machine. For example, a pulley loses some energy due to friction.</p>",
+		"image": null,
+		"mark": 2,
+		"chapter": "Machines"
+	},
+	{
+		"question": "Why does mechanical advantage not have any unit?",
+		"answer": "<p>Mechanical advantage has no unit because it is the ratio of load to effort. Both load and effort are forces measured in newtons. When two quantities having the same unit are divided, their units cancel out. Therefore, mechanical advantage is a unitless quantity. For example, if a machine lifts a 100 N load using a 20 N effort, its mechanical advantage is 5.</p>",
+		"image": null,
+		"mark": 2,
+		"chapter": "Machines"
 	}
 ]
