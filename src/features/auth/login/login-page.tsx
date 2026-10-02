@@ -17,9 +17,9 @@ import { Button } from "@/components/ui/button";
 import { login } from "./action";
 
 const LoginPage = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [isLoading, setIsLoadig] = useState(false);
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+	const [isLoading, setIsLoadig] = useState<boolean>(false);
 	const [error, setError] = useState<null | string>(null);
 
 	const handleSubmit = async (e: any) => {
@@ -27,10 +27,8 @@ const LoginPage = () => {
 		setIsLoading(true);
 		setError(null);
 
-		const { data, error } = await login();
-		if (error !== null) {
-			setError(error.message);
-		}
+		const { error } = await login(email, password);
+		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 

@@ -14,6 +14,8 @@ import {
 } from "../components/form";
 import { Button } from "@/components/ui/button";
 
+import { register } from "./action";
+
 const RegisterPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -25,6 +27,8 @@ const RegisterPage = () => {
 		setIsLoading(true);
 		setError(null);
 
+		const { error } = await register(email, password);
+		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 
