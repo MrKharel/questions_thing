@@ -12,11 +12,13 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
 		<>
 			<section className="flex h-14 px-4 md:px-12 flex justify-between items-center">
 				<div></div>
-				<Link href={pathname === "/register" ? "/login" : "/register"}>
-					<Button variant="outline" size="sm">
-						{pathname === "/register" ? "Login" : "Register"}
-					</Button>
-				</Link>
+				{(pathname === "/register" || pathname === "/login") && (
+					<Link href={pathname === "/register" ? "/login" : "/register"}>
+						<Button variant="outline" size="sm">
+							{pathname === "/register" ? "Login" : "Register"}
+						</Button>
+					</Link>
+				)}
 			</section>
 
 			{props.children}
