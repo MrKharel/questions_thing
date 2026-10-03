@@ -19,7 +19,7 @@ import { login } from "./action";
 const LoginPage = () => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const [isLoading, setIsLoadig] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<null | string>(null);
 
 	const handleSubmit = async (e: any) => {

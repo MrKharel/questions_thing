@@ -18,7 +18,7 @@ import { registerProfile } from "./action";
 
 const RegisterProfilePage = () => {
 	const [username, setUsername] = useState("");
-	const [isLoading, setIsLoadig] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<null | string>(null);
 
 	const handleSubmit = async (e: any) => {

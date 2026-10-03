@@ -19,7 +19,7 @@ import { register } from "./action";
 const RegisterPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [isLoading, setIsLoadig] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<null | string>(null);
 
 	const handleSubmit = async (e: any) => {
