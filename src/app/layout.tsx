@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
-import { Inter, Oxanium } from "next/font/google";
 import "./globals.css";
+import { Inter, Oxanium } from "next/font/google";
 import { cn } from "cn";
+
+import { TanstackProvider } from "@/lib/tanstack-provider";
+
+import type { Metadata } from "next";
 
 const oxanium = Oxanium({
 	subsets: ["latin"],
@@ -23,7 +26,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 			lang="en"
 			className={cn("h-full antialiased", inter.variable, oxanium.variable)}
 		>
-			<body>{children}</body>
+			<body>
+				<TanstackProvider>{children}</TanstackProvider>
+			</body>
 		</html>
 	);
 }
