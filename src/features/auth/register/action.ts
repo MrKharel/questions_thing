@@ -4,7 +4,11 @@ import db from "@/lib/supabase/server";
 
 import { validate } from "@/lib/validate";
 
-const register = async (email: string, password: string) => {
+import type { ActionPromise } from "../types";
+
+type Props = { email: string; password: string };
+
+const register = async ({ email, password }: Props): ActionPromise => {
 	const checks = validate({ email, password });
 	if (!checks.valid) return { data: null, error: { message: checks.message } };
 
@@ -14,3 +18,5 @@ const register = async (email: string, password: string) => {
 
 	return { data: null, error: { message: "The action for this isn't made" } };
 };
+
+export { register };

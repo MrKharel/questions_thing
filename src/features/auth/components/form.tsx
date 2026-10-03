@@ -11,11 +11,11 @@ import { cn } from "cn";
 type ChildrenProps = { children: React.ReactNode };
 
 const FormWrapper = ({ children }: ChildrenProps) => (
-	<section className="self-center w-fit max-w-sm pt-30 sm:pt-40 lg:pt-45 flex flex-col items-center gap-8">
+	<section className="self-center w-fit pt-30 sm:pt-40 lg:pt-45 flex flex-col items-center gap-8">
 		{children}
 		<p className="text-xs text-foreground/70 [&>a]:text-foreground/92">
-			You must agree with <Link href="terms">terms & conditions</Link> to
-			continue
+			By contuining, you agree to our{" "}
+			<Link href="/terms">terms & conditions</Link>
 		</p>
 	</section>
 );
@@ -35,7 +35,10 @@ const FormTitle = ({ children }: ChildrenProps) => (
 type FormContentProps = React.ComponentProps<"form">;
 
 const FormContent = ({ className, children, ...rest }: FormContentProps) => (
-	<form className={cn("flex w-full flex-col gap-4", className)} {...rest}>
+	<form
+		className={cn("flex w-full flex-col gap-4 max-w-[300px]", className)}
+		{...rest}
+	>
 		{children}
 	</form>
 );
@@ -53,7 +56,7 @@ const FormFooter = ({
 const FormError = ({ children }: ChildrenProps) => (
 	<p
 		role="alert"
-		className="text-xs text-foreground/70 [&>a]:text-foreground [&>a]:underline"
+		className="text-sm text-foreground/70 [&>a]:text-foreground [&>a]:underline my-4 text-rose-300 text-center"
 	>
 		{children}
 	</p>
@@ -98,7 +101,7 @@ const FormInput = ({
 					<Icon
 						size={16}
 						aria-hidden="true"
-						className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2"
+						className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-foreground/75"
 					/>
 				)}
 
