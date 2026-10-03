@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { FormWrapper } from "./components/form";
 import { Button } from "@/components/ui/button";
 
 const AuthLayout = (props: { children: React.ReactNode }) => {
@@ -10,7 +11,7 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
 
 	return (
 		<>
-			<section className="flex h-14 px-4 md:px-12 flex justify-between items-center">
+			<header className="h-14 px-4 md:px-12 flex justify-between items-center">
 				<div></div>
 				{(pathname === "/register" || pathname === "/login") && (
 					<Link href={pathname === "/register" ? "/login" : "/register"}>
@@ -19,9 +20,9 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
 						</Button>
 					</Link>
 				)}
-			</section>
+			</header>
 
-			{props.children}
+			<FormWrapper>{props.children}</FormWrapper>
 		</>
 	);
 };

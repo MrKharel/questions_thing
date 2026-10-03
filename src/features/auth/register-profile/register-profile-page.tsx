@@ -1,18 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { UserIcon, LoaderIcon } from "lucide-react";
+import { UserIcon } from "lucide-react";
 
 import {
-	FormWrapper,
-	FormHeader,
-	FormTitle,
 	FormContent,
 	FormInput,
 	FormError,
+	FormButton,
 } from "../components/form";
-import { Button } from "@/components/ui/button";
 
 import { registerProfile } from "./action";
 
@@ -26,18 +22,18 @@ const RegisterProfilePage = () => {
 		setIsLoading(true);
 		setError(null);
 
-		const { error: profileError } = registerProfile(username);
-		if (error) setError(profileError.message);
+		const { error } = await registerProfile({ username });
+		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 
 	return (
-		<FormWrapper>
+		<>
 			<h2 className="text-3xl font-heading text-center">
 				What should we call ya?!
 			</h2>
 
-			<FormContent className="gap-2">
+			<FormContent onSubmit={handleSubmit} className="gap-2">
 				{error && <FormError>{error}</FormError>}
 
 				<FormInput
@@ -50,12 +46,9 @@ const RegisterProfilePage = () => {
 					required
 				/>
 
-				<Button className="w-full">
-					{isLoading && <LoaderIcon size={16} className="animate-spin" />}
-					Continue
-				</Button>
+				<FormButton isLoading={isLoading}>Continue</FormButton>
 			</FormContent>
-		</FormWrapper>
+		</>
 	);
 };
 

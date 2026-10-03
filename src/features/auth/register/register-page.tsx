@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { MailIcon, LockIcon, LoaderIcon } from "lucide-react";
+import { MailIcon, LockIcon } from "lucide-react";
 
 import {
-	FormWrapper,
 	FormHeader,
-	FormTitle,
 	FormContent,
 	FormInput,
 	FormError,
+	FormButton,
 } from "../components/form";
-import { Button } from "@/components/ui/button";
 
 import { register } from "./action";
 
@@ -27,18 +24,22 @@ const RegisterPage = () => {
 		setIsLoading(true);
 		setError(null);
 
-		const { error } = await register(email, password);
+		const { error } = await register({ email, password });
 		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 
 	return (
-		<FormWrapper>
-			<FormTitle>
-				You'll be organized <br /> Just with one signin
-			</FormTitle>
+		<>
+			<FormHeader>
+				<h2>
+					You'll be organized <br /> Just with one signin
+				</h2>
+			</FormHeader>
 
-			<FormContent>
+			<FormContent onSubmit={handleSubmit}>
+				{error && <FormError>{error}</FormError>}
+
 				<FormInput
 					type="email"
 					label="Email"
@@ -62,14 +63,9 @@ const RegisterPage = () => {
 					required
 				/>
 
-				{error && <FormError>{error}</FormError>}
-
-				<Button className="w-full">
-					{isLoading && <LoaderIcon size={16} className="animate-spin" />}
-					Register
-				</Button>
+				<FormButton isLoading={isLoading}>Register</FormButton>
 			</FormContent>
-		</FormWrapper>
+		</>
 	);
 };
 

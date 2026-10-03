@@ -2,9 +2,10 @@
 
 import { useId, useState } from "react";
 import Link from "next/link";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "cn";
 
@@ -13,6 +14,7 @@ type ChildrenProps = { children: React.ReactNode };
 const FormWrapper = ({ children }: ChildrenProps) => (
 	<section className="self-center w-fit pt-30 sm:pt-40 lg:pt-45 flex flex-col items-center gap-8">
 		{children}
+
 		<p className="text-xs text-foreground/70 [&>a]:text-foreground/92">
 			By contuining, you agree to our{" "}
 			<Link href="/terms">terms & conditions</Link>
@@ -21,15 +23,9 @@ const FormWrapper = ({ children }: ChildrenProps) => (
 );
 
 const FormHeader = ({ children }: ChildrenProps) => (
-	<header className="flex items-center justify-between w-screen max-w-screen fixed top-0 left-0 px-4 md:px-12 py-3">
+	<header className="self-center w-fill px-4 md:px-12 py-3 [&>h2]:text-2xl">
 		{children}
 	</header>
-);
-
-const FormTitle = ({ children }: ChildrenProps) => (
-	<h2 className="w-fit font-heading text-2xl tracking-tight text-foreground text-center">
-		{children}
-	</h2>
 );
 
 type FormContentProps = React.ComponentProps<"form">;
@@ -56,7 +52,7 @@ const FormFooter = ({
 const FormError = ({ children }: ChildrenProps) => (
 	<p
 		role="alert"
-		className="text-sm text-foreground/70 [&>a]:text-foreground [&>a]:underline my-4 text-rose-300 text-center"
+		className="text-sm [&>a]:underline underline-offset-3 my-4 text-rose-300 text-center"
 	>
 		{children}
 	</p>
@@ -130,12 +126,23 @@ const FormInput = ({
 	);
 };
 
+type ButtonProps = React.ComponentProps<"button"> & { isLoading: boolean };
+
+const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
+	return (
+		<Button type="submit" onClick={onClick} className="flex gap-2">
+			{isLoading && <LoaderIcon size={16} className="animate-spin" />}
+			{children}
+		</Button>
+	);
+};
+
 export {
 	FormWrapper,
 	FormHeader,
 	FormContent,
 	FormFooter,
-	FormTitle,
 	FormError,
 	FormInput,
+	FormButton,
 };

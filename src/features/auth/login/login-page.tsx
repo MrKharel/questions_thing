@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { MailIcon, LockIcon, LoaderIcon } from "lucide-react";
+import { MailIcon, LockIcon } from "lucide-react";
 
 import {
-	FormWrapper,
 	FormHeader,
-	FormTitle,
 	FormContent,
 	FormInput,
 	FormError,
+	FormButton,
 } from "../components/form";
-import { Button } from "@/components/ui/button";
 
 import { login } from "./action";
 
@@ -27,16 +24,20 @@ const LoginPage = () => {
 		setIsLoading(true);
 		setError(null);
 
-		const { error } = await login(email, password);
-		if (error) setError(error.message);
+		const { error } = await login({ email, password });
+		if (error !== null) setError(error.message);
 		setIsLoading(false);
 	};
 
 	return (
-		<FormWrapper>
-			<FormTitle>Login to corp</FormTitle>
+		<>
+			<FormHeader>
+				<h2>Login to corp</h2>
+			</FormHeader>
 
-			<FormContent>
+			<FormContent onSubmit={handleSubmit}>
+				{error && <FormError>{error}</FormError>}
+
 				<FormInput
 					type="email"
 					label="Email"
@@ -60,14 +61,9 @@ const LoginPage = () => {
 					required
 				/>
 
-				{error && <FormError>{error}</FormError>}
-
-				<Button className="w-full">
-					{isLoading && <LoaderIcon size={16} className="animate-spin" />}
-					Login
-				</Button>
+				<FormButton isLoading={isLoading}>Login</FormButton>
 			</FormContent>
-		</FormWrapper>
+		</>
 	);
 };
 
