@@ -1,15 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { UserIcon } from "lucide-react";
-
+import { useState } from "react";
 import {
-	FormContent,
-	FormInput,
-	FormError,
 	FormButton,
+	FormContent,
+	FormError,
+	FormHeader,
+	FormInput,
 } from "../components/form";
-
 import { registerProfile } from "./action";
 
 const RegisterProfilePage = () => {
@@ -29,9 +28,9 @@ const RegisterProfilePage = () => {
 
 	return (
 		<>
-			<h2 className="text-3xl font-heading text-center">
-				What should we call ya?!
-			</h2>
+			<FormHeader>
+				<h2>What should we call ya?!</h2>
+			</FormHeader>
 
 			<FormContent onSubmit={handleSubmit} className="gap-2">
 				{error && <FormError>{error}</FormError>}

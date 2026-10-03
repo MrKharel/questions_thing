@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { MailIcon, LockIcon } from "lucide-react";
-
 import {
 	FormHeader,
 	FormContent,
@@ -10,23 +9,16 @@ import {
 	FormError,
 	FormButton,
 } from "../components/form";
-
-import { login } from "./action";
+import { useSignInWithPassword } from "@/hooks/use-auth";
 
 const LoginPage = () => {
+	const { signInWithPassword, isLoading, error } = useSignInWithPassword();
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [error, setError] = useState<null | string>(null);
 
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.SubmitEvent) => {
 		e.preventDefault();
-		setIsLoading(true);
-		setError(null);
-
-		const { error } = await login({ email, password });
-		if (error !== null) setError(error.message);
-		setIsLoading(false);
+		await signInWithPassword({ email, password });
 	};
 
 	return (

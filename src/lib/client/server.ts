@@ -8,7 +8,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 	throw new Error("Missing Supabase environment variables");
 }
 
-export const createClient = async () => {
+const createClient = async () => {
 	const cookieStore = await cookies();
 
 	return createServerClient(supabaseUrl, supabaseAnonKey, {
@@ -30,3 +30,5 @@ export const createClient = async () => {
 		},
 	});
 };
+
+export { createClient };

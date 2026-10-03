@@ -1,32 +1,25 @@
 "use client";
 
+import { LockIcon, MailIcon } from "lucide-react";
 import { useState } from "react";
-import { MailIcon, LockIcon } from "lucide-react";
 
+import { useSignUp } from "@/hooks/use-auth";
 import {
-	FormHeader,
-	FormContent,
-	FormInput,
-	FormError,
 	FormButton,
+	FormContent,
+	FormError,
+	FormHeader,
+	FormInput,
 } from "../components/form";
-
-import { register } from "./action";
 
 const RegisterPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<null | string>(null);
+	const { isLoading, error, signUp } = useSignUp();
 
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.SubmitEvent) => {
 		e.preventDefault();
-		setIsLoading(true);
-		setError(null);
-
-		const { error } = await register({ email, password });
-		if (error) setError(error.message);
-		setIsLoading(false);
+		await signUp({ email, password });
 	};
 
 	return (

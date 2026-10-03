@@ -20,20 +20,10 @@
 		}
 	},
 	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		},
+		"enabled": false,
 		"domains": {
 			"next": "recommended",
 			"react": "recommended"
-		}
-	},
-	"assist": {
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
 		}
 	}
 }

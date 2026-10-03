@@ -1,13 +1,12 @@
 "use client";
 
-import { useId, useState } from "react";
-import Link from "next/link";
-import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+import { cn } from "cn";
 import type { LucideIcon } from "lucide-react";
-
+import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+import Link from "next/link";
+import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "cn";
 
 type ChildrenProps = { children: React.ReactNode };
 
@@ -15,7 +14,7 @@ const FormWrapper = ({ children }: ChildrenProps) => (
 	<section className="self-center w-fit pt-30 sm:pt-40 lg:pt-45 flex flex-col items-center gap-8">
 		{children}
 
-		<p className="text-xs text-foreground/70 [&>a]:text-foreground/92">
+		<p className="text-xs text-foreground/70">
 			By contuining, you agree to our{" "}
 			<Link href="/terms">terms & conditions</Link>
 		</p>
@@ -32,7 +31,7 @@ type FormContentProps = React.ComponentProps<"form">;
 
 const FormContent = ({ className, children, ...rest }: FormContentProps) => (
 	<form
-		className={cn("flex w-full flex-col gap-4 max-w-[300px]", className)}
+		className={cn("flex w-full flex-col gap-4 max-w-75", className)}
 		{...rest}
 	>
 		{children}
@@ -130,7 +129,7 @@ type ButtonProps = React.ComponentProps<"button"> & { isLoading: boolean };
 
 const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
 	return (
-		<Button type="submit" onClick={onClick} className="flex gap-2">
+		<Button type="submit" onClick={onClick} className="flex gap-2" {...rest}>
 			{isLoading && <LoaderIcon size={16} className="animate-spin" />}
 			{children}
 		</Button>
@@ -138,11 +137,11 @@ const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
 };
 
 export {
-	FormWrapper,
-	FormHeader,
-	FormContent,
-	FormFooter,
-	FormError,
-	FormInput,
 	FormButton,
+	FormContent,
+	FormError,
+	FormFooter,
+	FormHeader,
+	FormInput,
+	FormWrapper,
 };

@@ -1,8 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { useState } from "react";
-
 import {
 	FormHeader,
 	FormContent,
@@ -10,37 +8,15 @@ import {
 	FormButton,
 	FormError,
 } from "../components/form";
-
-import { useQuery } from "@tanstack/react-query";
-import { fetchProfile } from "@/features/profile";
-import { logout } from "@/features/profile/action";
+import { useSignOut } from "@/hooks/use-auth";
 
 const LogoutPage = () => {
+	const { signOut, isLoading, error } = useSignOut();
 	const [userInput, setUserInput] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<null | string>(null);
-
-	const { data: profile } = useQuery({
-		queryKey: ["user-profile"],
-		queryFn: fetchProfile,
-	});
-	if (!profile) return null;
-
-	if (profile!.error) redirect("/register/profile");
 
 	const handleSubmit = async (e: React.SubmitEvent) => {
 		e.preventDefault();
-		setIsLoading(true);
-
-		if (profile!.data.username !== userInput) {
-			setError(
-				`Enter ${profile!.data.username} correctly. You only have one job. Don't mess this up.`,
-			);
-			return;
-		}
-
-		await logout();
-		setIsLoading(false);
+		await signOut();
 	};
 
 	return (
