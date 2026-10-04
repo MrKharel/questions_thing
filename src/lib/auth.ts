@@ -11,15 +11,16 @@ const signInWithPassword = async (email: string, password: string) => {
 		password: password,
 	});
 	if (error) return { error: { message: error.message, code: error.code } };
-	return { error: null };
+	redirect("/home");
 };
 
 /**
  * What actually happens in backend is:
- * When the user is created successfully, it also created a public.profiles thing.
- * There'd be: { id, email, username }
+ * When the user is created successfully, it also creats a public.profiles row.
+ * There'd be: { id, email, username }. Other's will be null.
  * Username is just everything before '@' in email.
  * Avatar is null from default.
+ * If no email, random string of letters. The user will be prompted to change the username asap.
  */
 const signUp = async (email: string, password: string) => {
 	// TL;DR: this will also create a row in public.profiles btw.

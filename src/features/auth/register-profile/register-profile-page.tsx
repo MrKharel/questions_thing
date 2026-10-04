@@ -1,10 +1,9 @@
 "use client";
 
-import { AuthError, type User } from "@supabase/supabase-js";
-import { useQuery } from "@tanstack/react-query";
+import { setEngine } from "crypto";
 import { UserIcon } from "lucide-react";
 import { useState } from "react";
-import { createClient } from "@/lib/client/client";
+import { validate } from "@/lib/validate";
 import {
 	FormButton,
 	FormContent,
@@ -12,47 +11,39 @@ import {
 	FormHeader,
 	FormInput,
 } from "../components/form";
-import { registerProfile } from "./action";
 
 const RegisterProfilePage = () => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<null | string>(null);
-
-	const { data: user } = useQuery({
-		queryKey: ["user"],
-		queryFn: async () => {
-			const supabase = await createClient();
-
-			const {
-				data,
-				error,
-			}: {
-				data: { user: User | null };
-				error: AuthError | null;
-			} = await supabase.auth.getUser();
-			return { data, error };
-		},
+	const [state, setState] = useState({
+		isLoading: false,
+		error: null as string | null,
 	});
+	const [username, setUsername] = useState("");
 
-	const { data: profile } = useQuery({
-		queryKey: ["profile"],
-		queryFn: async () => {
-			const res = await fetch(`/users/${user!.data.id}`);
-			if (!res.ok) return null;
-			return await res.json();
-		},
-	});
-
-	const [username, setUsername] = useState(profile!.username);
-
-	const handleSubmit = async (e: any) => {
+	const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setIsLoading(true);
-		setError(null);
+		const checks = validate({ username });
+		if (!checks.valid) {
+			setState((prev) => ({ ...prev, error: checks.message }));
+			return;
+		}
 
-		const { error } = await registerProfile({ username });
-		if (error) setError(error.message);
-		setIsLoading(false);
+		setState({ isLoading: true, error: null });
+
+		try {
+			const res = await fetch("/api/users/me", {
+				method: "PATCH",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ data: { username } }),
+			});
+
+			const result = await res.json();
+
+			if (!res.ok || !result.success) {
+				setState((prev) => ({ ...prev, error: result.message }));
+			}
+		} finally {
+			setState((prev) => ({ ...prev, isLoading: false }));
+		}
 	};
 
 	return (
@@ -62,7 +53,7 @@ const RegisterProfilePage = () => {
 			</FormHeader>
 
 			<FormContent onSubmit={handleSubmit} className="gap-2">
-				{error && <FormError>{error}</FormError>}
+				{state.error && <FormError>{state.error}</FormError>}
 
 				<FormInput
 					type="text"
@@ -71,10 +62,11 @@ const RegisterProfilePage = () => {
 					icon={UserIcon}
 					value={username}
 					handleChange={setUsername}
+					autoFocus
 					required
 				/>
 
-				<FormButton isLoading={isLoading}>Continue</FormButton>
+				<FormButton isLoading={state.isLoading}>Continue</FormButton>
 			</FormContent>
 		</>
 	);

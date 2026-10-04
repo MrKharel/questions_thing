@@ -14,6 +14,7 @@ const routeConfigs: RoutePattern[] = [
 	{ pattern: "/register", type: "auth" },
 
 	{ pattern: "/register/profile", type: "protected" },
+	{ pattern: "/logout", type: "protected" },
 ];
 
 const redirects: Record<string, string> = {

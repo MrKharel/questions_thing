@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import {
 	signInWithPassword as signInWithPasswordAction,
 	signOut as signOutAction,
 	signUp as signUpAction,
 } from "@/lib/auth";
 import { validate } from "@/lib/validate";
-import { useState } from "react";
 
 type Error = null | string;
 
@@ -37,7 +37,7 @@ const useSignUp = () => {
 
 const useSignInWithPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<Error>("Invalid login credientials");
+	const [error, setError] = useState<Error>(null);
 
 	const signInWithPassword = async ({
 		email,
