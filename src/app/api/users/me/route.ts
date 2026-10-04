@@ -1,5 +1,5 @@
-import { createClient } from "@/lib/client/server";
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/client/server";
 
 export const GET = async () => {
 	try {
@@ -8,7 +8,7 @@ export const GET = async () => {
 			data: { user },
 			error: authError,
 		} = await supabase.auth.getUser();
-		if (authError || !user) {
+		if (!user || authError) {
 			return NextResponse.json(
 				{ success: false, message: "Unauthorized" },
 				{ status: 401 },
@@ -20,9 +20,7 @@ export const GET = async () => {
 			.select("*")
 			.eq("id", user.id)
 			.single();
-
 		if (error) {
-			console.error(error);
 			return NextResponse.json(
 				{ success: false, message: error.message },
 				{ status: 500 },
@@ -30,9 +28,9 @@ export const GET = async () => {
 		}
 
 		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err) {
+	} catch (err: any) {
 		return NextResponse.json(
-			{ success: false, message: "Internal Server Error" },
+			{ success: false, error: "Internal Server Error" },
 			{ status: 500 },
 		);
 	}
@@ -45,7 +43,7 @@ export const PATCH = async (req: NextRequest) => {
 			data: { user },
 			error: authError,
 		} = await supabase.auth.getUser();
-		if (authError || !user) {
+		if (!user || authError) {
 			return NextResponse.json(
 				{ success: false, message: "Unauthorized" },
 				{ status: 401 },
@@ -53,52 +51,65 @@ export const PATCH = async (req: NextRequest) => {
 		}
 
 		const body = await req.json().catch(() => null);
-		const username = body?.data?.username?.trim();
+		const username = body?.data?.username.trim();
 		const avatar = body?.data?.avatar;
-
-		if (!username && !avatar) {
-			return NextResponse.json(
-				{ success: false, message: "Invalid input" },
-				{ status: 400 },
-			);
-		}
 
 		const updates: { username?: string; avatar?: string } = {};
 		if (username) updates.username = username;
 		if (avatar) updates.avatar = avatar;
 
+		if (!username && !avatar) {
+			return NextResponse.json(
+				{ success: false, message: "Invalid Input" },
+				{ status: 400 },
+			);
+		}
+
 		const { data, error } = await supabase
 			.from("profiles")
 			.update(updates)
 			.eq("id", user.id)
-			.select()
+			.select("*")
 			.single();
 
 		if (error) {
-			console.error(error);
-
-			const isDuplicate = error.code === "23505";
-			const isBadUsername =
-				error.code === "23514" && error.message.includes("username_letters");
-
-			return NextResponse.json(
-				{
-					success: false,
-					message: isDuplicate
-						? "Username already taken"
-						: isBadUsername
-							? "Username can only contain lowercase letters"
-							: "Update failed",
-				},
-				{ status: isDuplicate ? 409 : isBadUsername ? 400 : 500 },
+			console.error(
+				"profile update failed:",
+				error.code,
+				error.message,
+				error.details,
 			);
+
+			switch (error.code) {
+				case "23505":
+					return NextResponse.json(
+						{ success: false, message: "Username already taken" },
+						{ status: 409 },
+					);
+				case "PGRST116": // no row updated: missing profile or RLS blocked it
+					return NextResponse.json(
+						{ success: false, message: "Profile not found" },
+						{ status: 404 },
+					);
+				case "23514":
+				case "22001":
+				case "22P02":
+					return NextResponse.json(
+						{ success: false, message: "Invalid value" },
+						{ status: 400 },
+					);
+				default:
+					return NextResponse.json(
+						{ success: false, message: "Update failed" },
+						{ status: 500 },
+					);
+			}
 		}
 
 		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err) {
-		console.error(err);
+	} catch (err: any) {
 		return NextResponse.json(
-			{ success: false, message: "Internal error" },
+			{ success: false, message: "Internal server error" },
 			{ status: 500 },
 		);
 	}
