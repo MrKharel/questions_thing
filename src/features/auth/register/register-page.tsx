@@ -42,6 +42,7 @@ const RegisterPage = () => {
 					icon={MailIcon}
 					value={email}
 					handleChange={setEmail}
+					autoFocus
 					required
 				/>
 				<FormInput
@@ -56,7 +57,9 @@ const RegisterPage = () => {
 					required
 				/>
 
-				<FormButton isLoading={isLoading}>Register</FormButton>
+				<FormButton isLoading={isLoading} disabled={isLoading}>
+					Register
+				</FormButton>
 			</FormContent>
 		</>
 	);

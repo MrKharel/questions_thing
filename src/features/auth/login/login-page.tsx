@@ -1,8 +1,8 @@
 "use client";
 
-import { useSignInWithPassword } from "@/hooks/use-auth";
 import { LockIcon, MailIcon } from "lucide-react";
 import { useState } from "react";
+import { useSignInWithPassword } from "@/hooks/use-auth";
 import {
 	FormButton,
 	FormContent,
@@ -39,6 +39,7 @@ const LoginPage = () => {
 					icon={MailIcon}
 					value={email}
 					handleChange={setEmail}
+					autoFocus
 					required
 				/>
 				<FormInput
@@ -53,7 +54,9 @@ const LoginPage = () => {
 					required
 				/>
 
-				<FormButton isLoading={isLoading}>Login</FormButton>
+				<FormButton isLoading={isLoading} disabled={isLoading}>
+					Login
+				</FormButton>
 			</FormContent>
 		</>
 	);

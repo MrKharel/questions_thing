@@ -1,12 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { cn } from "cn";
 import type { LucideIcon } from "lucide-react";
 import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
 import Link from "next/link";
 import { useId, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 type ChildrenProps = { children: React.ReactNode };
 
@@ -126,7 +126,12 @@ type ButtonProps = React.ComponentProps<"button"> & { isLoading: boolean };
 
 const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
 	return (
-		<Button type="submit" onClick={onClick} className="flex gap-2" {...rest}>
+		<Button
+			type="submit"
+			onClick={onClick}
+			className="flex gap-2 disabled:cursor-not-allowed"
+			{...rest}
+		>
 			{isLoading && <LoaderIcon size={16} className="animate-spin" />}
 			{children}
 		</Button>

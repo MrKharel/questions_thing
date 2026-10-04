@@ -13,7 +13,8 @@ const routeConfigs: RoutePattern[] = [
 	{ pattern: "/login", type: "auth" },
 	{ pattern: "/register", type: "auth" },
 
-	{ pattern: "/register/profile", type: "protected" },
+	{ pattern: "/dashboard", type: "protected" },
+	{ pattern: "/home", type: "protected" },
 	{ pattern: "/logout", type: "protected" },
 ];
 
@@ -77,34 +78,18 @@ export default async function Proxy(request: NextRequest) {
 	} = await supabase.auth.getUser();
 
 	const hasUser = !!user && !userError;
-	let hasProfile = false;
-
-	if (hasUser) {
-		const { data: profile, error: profileError } = await supabase
-			.from("profiles")
-			.select("*")
-			.eq("id", user.id)
-			.maybeSingle();
-		hasProfile = !!profile && !profileError;
-	}
 
 	switch (routeType) {
 		case "protected": {
-			if (!hasUser || !hasProfile) {
-				const url = request.nextUrl.clone();
-				url.pathname = "/login";
-				url.searchParams.set("redirectTo", pathname + request.nextUrl.search);
-				return NextResponse.redirect(url);
+			if (!hasUser) {
+				return NextResponse.redirect(new URL("/login", request.url));
 			}
 			break;
 		}
 
 		case "auth": {
 			if (hasUser) {
-				const url = request.nextUrl.clone();
-				url.pathname = hasProfile ? "/home" : "/register/profile";
-				url.search = "";
-				return NextResponse.redirect(url);
+				return NextResponse.redirect(new URL("/dashboard", request.url));
 			}
 			break;
 		}
