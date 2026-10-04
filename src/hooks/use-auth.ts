@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import {
 	signInWithPassword as signInWithPasswordAction,
 	signOut as signOutAction,
 	signUp as signUpAction,
 } from "@/lib/auth";
 import { validate } from "@/lib/validate";
+import { useState } from "react";
 
 type Error = null | string;
 
@@ -27,7 +27,8 @@ const useSignUp = () => {
 		setError(null);
 
 		const { error } = await signUpAction(email, password);
-		if (error) return setError(error.message);
+		if (error) setError(error.message);
+
 		setIsLoading(false);
 	};
 
@@ -36,7 +37,7 @@ const useSignUp = () => {
 
 const useSignInWithPassword = () => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<Error>(null);
+	const [error, setError] = useState<Error>("Invalid login credientials");
 
 	const signInWithPassword = async ({
 		email,
@@ -50,8 +51,8 @@ const useSignInWithPassword = () => {
 		if (!checks.valid) setError(checks.message);
 		setError(null);
 
-		const { error } = await signUpAction(email, password);
-		if (error) return setError(error.message);
+		const { error } = await signInWithPasswordAction(email, password);
+		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 
@@ -67,11 +68,11 @@ const useSignOut = () => {
 		setError(null);
 
 		const { error } = await signOutAction();
-		if (error) return setError(error.message);
+		if (error) setError(error.message);
 		setIsLoading(false);
 	};
 
 	return { isLoading, error, signOut };
 };
 
-export { useSignUp, useSignInWithPassword, useSignOut };
+export { useSignInWithPassword, useSignOut, useSignUp };

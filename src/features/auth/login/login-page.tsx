@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { MailIcon, LockIcon } from "lucide-react";
-import {
-	FormHeader,
-	FormContent,
-	FormInput,
-	FormError,
-	FormButton,
-} from "../components/form";
 import { useSignInWithPassword } from "@/hooks/use-auth";
+import { LockIcon, MailIcon } from "lucide-react";
+import { useState } from "react";
+import {
+	FormButton,
+	FormContent,
+	FormError,
+	FormHeader,
+	FormInput,
+} from "../components/form";
 
 const LoginPage = () => {
 	const { signInWithPassword, isLoading, error } = useSignInWithPassword();

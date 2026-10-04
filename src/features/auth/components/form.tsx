@@ -30,10 +30,7 @@ const FormHeader = ({ children }: ChildrenProps) => (
 type FormContentProps = React.ComponentProps<"form">;
 
 const FormContent = ({ className, children, ...rest }: FormContentProps) => (
-	<form
-		className={cn("flex w-full flex-col gap-4 max-w-75", className)}
-		{...rest}
-	>
+	<form className={cn("flex flex-col gap-4 w-68", className)} {...rest}>
 		{children}
 	</form>
 );
@@ -51,7 +48,7 @@ const FormFooter = ({
 const FormError = ({ children }: ChildrenProps) => (
 	<p
 		role="alert"
-		className="text-sm [&>a]:underline underline-offset-3 my-4 text-rose-300 text-center"
+		className="text-sm [&>a]:underline underline-offset-3 mb-2 text-rose-300 text-center"
 	>
 		{children}
 	</p>

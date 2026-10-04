@@ -1,25 +1,39 @@
 "use server";
 
-import { createClient } from "@/lib/clients/auth-db/server";
-
+import { revalidatePath } from "next/cache";
+import { createClient } from "@/lib/client/server";
 import { validate } from "@/lib/validate";
 
 type Props = { username: string };
 
-const registerProfile = async ({ username }: Props) => {
-	const checks = validate({ username });
-	if (!checks.valid) return { data: null, error: { message: checks.message } };
+type Result =
+	| { data: { username: string }; error: null }
+	| { data: null; error: { message: string } };
 
-	const supabase = await createClient();
+export async function updateUsername({ username }: Props): Promise<Result> {
+	const checks = validate({ username: username });
+	if (!checks.valid) {
+		return { data: null, error: { message: checks.message } };
+	}
 
-	const { error } = await supabase
-		.from("profiles")
-		.insert({ username, avatar: null });
-	if (error) return { error: error };
+	try {
+		const supabase = await createClient();
+		const { error } = await supabase
+			.from("profiles")
+			.update({ username: username });
+		if (error) {
+			if (error.code === "23505") {
+				return { data: null, error: { message: "Username already taken." } };
+			}
+			return { data: null, error: { message: "Could not update username." } };
+		}
 
-	return {
-		error: null,
-	};
-};
-
-export { registerProfile };
+		revalidatePath("/", "layout");
+		return { data: { username: username }, error: null };
+	} catch {
+		return {
+			data: null,
+			error: { message: "Something went wrong. Try again." },
+		};
+	}
+}
