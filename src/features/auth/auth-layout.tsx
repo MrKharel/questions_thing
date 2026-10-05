@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { FormWrapper } from "./components/form";
 import { Button } from "@/components/ui/button";
+import { FormWrapper } from "./components/form";
 
 const AuthLayout = (props: { children: React.ReactNode }) => {
 	const pathname = usePathname();

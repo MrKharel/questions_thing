@@ -1,13 +1,12 @@
 "use client";
 
-import { useId, useState } from "react";
-import Link from "next/link";
-import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "cn";
+import type { LucideIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, LoaderIcon } from "lucide-react";
+import Link from "next/link";
+import { useId, useState } from "react";
 
 type ChildrenProps = { children: React.ReactNode };
 
@@ -15,7 +14,7 @@ const FormWrapper = ({ children }: ChildrenProps) => (
 	<section className="self-center w-fit pt-30 sm:pt-40 lg:pt-45 flex flex-col items-center gap-8">
 		{children}
 
-		<p className="text-xs text-foreground/70 [&>a]:text-foreground/92">
+		<p className="text-xs text-foreground/70">
 			By contuining, you agree to our{" "}
 			<Link href="/terms">terms & conditions</Link>
 		</p>
@@ -31,10 +30,7 @@ const FormHeader = ({ children }: ChildrenProps) => (
 type FormContentProps = React.ComponentProps<"form">;
 
 const FormContent = ({ className, children, ...rest }: FormContentProps) => (
-	<form
-		className={cn("flex w-full flex-col gap-4 max-w-[300px]", className)}
-		{...rest}
-	>
+	<form className={cn("flex flex-col gap-4 w-68", className)} {...rest}>
 		{children}
 	</form>
 );
@@ -52,7 +48,7 @@ const FormFooter = ({
 const FormError = ({ children }: ChildrenProps) => (
 	<p
 		role="alert"
-		className="text-sm [&>a]:underline underline-offset-3 my-4 text-rose-300 text-center"
+		className="text-sm [&>a]:underline underline-offset-3 mb-2 text-rose-300 text-center"
 	>
 		{children}
 	</p>
@@ -130,7 +126,12 @@ type ButtonProps = React.ComponentProps<"button"> & { isLoading: boolean };
 
 const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
 	return (
-		<Button type="submit" onClick={onClick} className="flex gap-2">
+		<Button
+			type="submit"
+			onClick={onClick}
+			className="flex gap-2 disabled:cursor-not-allowed"
+			{...rest}
+		>
 			{isLoading && <LoaderIcon size={16} className="animate-spin" />}
 			{children}
 		</Button>
@@ -138,11 +139,11 @@ const FormButton = ({ onClick, isLoading, children, ...rest }: ButtonProps) => {
 };
 
 export {
-	FormWrapper,
-	FormHeader,
-	FormContent,
-	FormFooter,
-	FormError,
-	FormInput,
 	FormButton,
+	FormContent,
+	FormError,
+	FormFooter,
+	FormHeader,
+	FormInput,
+	FormWrapper,
 };
