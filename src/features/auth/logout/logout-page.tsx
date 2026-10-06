@@ -1,9 +1,9 @@
 "use client";
 
-import { useSignOut } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSignOut } from "@/hooks/use-auth";
 import {
 	FormButton,
 	FormContent,
@@ -47,10 +47,10 @@ const LogoutPage = () => {
 
 	return (
 		<>
-			{" "}
 			<FormHeader>
 				<h2>Are you sure to logout?</h2>
 			</FormHeader>
+
 			<FormContent onSubmit={handleSubmit}>
 				{error ? (
 					<FormError>{error}</FormError>

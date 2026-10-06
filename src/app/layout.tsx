@@ -1,10 +1,8 @@
-import "./globals.css";
-import { Inter, Oxanium } from "next/font/google";
-import { cn } from "cn";
-
 import { TanstackProvider } from "@/lib/tanstack-provider";
-
+import { cn } from "cn";
 import type { Metadata } from "next";
+import { Inter, Oxanium } from "next/font/google";
+import "./globals.css";
 
 const oxanium = Oxanium({
 	subsets: ["latin"],
@@ -20,7 +18,11 @@ export const metadata: Metadata = {
 	description: "I'll decide the description later",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
 	return (
 		<html
 			lang="en"

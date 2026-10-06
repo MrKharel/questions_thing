@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/client/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async () => {
 	try {
@@ -28,7 +28,7 @@ export const GET = async () => {
 		}
 
 		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err: any) {
+	} catch {
 		return NextResponse.json(
 			{ success: false, error: "Internal Server Error" },
 			{ status: 500 },
@@ -107,7 +107,7 @@ export const PATCH = async (req: NextRequest) => {
 		}
 
 		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err: any) {
+	} catch {
 		return NextResponse.json(
 			{ success: false, message: "Internal server error" },
 			{ status: 500 },

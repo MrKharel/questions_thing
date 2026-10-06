@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
-
-import { QuestionCard, type Question } from "@/components/ui/question-card";
+import { type Question, QuestionCard } from "@/components/ui/question-card";
 import {
 	Select,
 	SelectContent,
@@ -11,6 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useMemo, useState } from "react";
 
 type Mark = "All" | "1" | "2" | "4";
 
@@ -87,7 +86,7 @@ const RenderQuestions = (props: { questions: Question[] }) => {
 						<SelectTrigger>
 							<SelectValue placeholder="Chapter" />
 						</SelectTrigger>
-						<SelectContent className="w-[250px]">
+						<SelectContent className="w-62.5">
 							<SelectGroup>
 								{chapters.map((chapter) => (
 									<SelectItem key={chapter} value={chapter} className="w-full">
