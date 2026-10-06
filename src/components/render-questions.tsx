@@ -68,7 +68,7 @@ const RenderQuestions = (props: { questions: Question[] }) => {
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 max-w-150 self-center">
       <header>
         <div className="flex gap-2 flex-wrap *:w-fit">
           <Select
