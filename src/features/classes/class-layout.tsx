@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import type { SidebarLinks } from "@/components/nav-main";
 import type { ReactNode } from "react";
 import { HomeIcon } from "lucide-react";
+import { Navbar } from "@/components/navbar";
 
 type ClassLayoutProps = {
   children: ReactNode;
@@ -24,6 +25,14 @@ const ClassLayout = ({ children, id }: ClassLayoutProps) => {
 
       <SidebarInset>
         <Header />
+        <Navbar
+          navItems={[
+            { label: "Overview", url: `/classes/${id}` },
+            { label: "Assignments", url: `/classes/${id}/assignments` },
+            { label: "Members", url: `/classes/${id}/members` },
+            { label: "Settings", url: `/classes/${id}/settings` },
+          ]}
+        />
         {children}
       </SidebarInset>
     </SidebarProvider>
