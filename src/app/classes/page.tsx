@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 const RedirectToClass = () => {
-	redirect("/class/abc");
+  redirect("/classes/abc");
 };
 
 export default RedirectToClass;

@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full antialiased", inter.variable, oxanium.variable)}
     >
-      <body>
+      <body className="text-secondary-foreground/70">
         <TanstackProvider>{children}</TanstackProvider>
       </body>
     </html>
