@@ -1,7 +1,5 @@
-import { RenderQuestions } from "@/components/render-questions";
+const LandingPage = () => {
+  return <>this is the LandingPage</>;
+};
 
-import questions from "../../questions.json";
-
-export default function Home() {
-	return <RenderQuestions questions={questions} />;
-}
+export default LandingPage;

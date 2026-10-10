@@ -1,36 +1,24 @@
-import { TanstackProvider } from "@/lib/tanstack-provider";
-import { cn } from "cn";
-import type { Metadata } from "next";
-import { Inter, Oxanium } from "next/font/google";
 import "./globals.css";
 
-const oxanium = Oxanium({
-  subsets: ["latin"],
-  variable: "--font-heading",
-});
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "I'll decide the name later",
-  description: "I'll decide the description later",
+type RootLayoutProps = {
+  children: ReactNode;
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const metadata: Metadata = {
+  title: "IDK",
+  description: "i have no idea.",
+};
+
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
-    <html
-      lang="en"
-      className={cn("h-full antialiased", inter.variable, oxanium.variable)}
-    >
-      <body className="text-secondary-foreground/70">
-        <TanstackProvider>{children}</TanstackProvider>
-      </body>
+    <html>
+      <body>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;
+export { metadata };
