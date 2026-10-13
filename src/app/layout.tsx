@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import { ThemeProvider } from "@/lib/theme-provider";
+
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
@@ -15,7 +17,9 @@ const metadata: Metadata = {
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 };
