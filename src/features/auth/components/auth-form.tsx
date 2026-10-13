@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 
 import { LucideIcon } from "lucide-react";
 import type { ComponentProps } from "react";
+import { cva, VariantProps } from "class-variance-authority";
 
 const FormWrapper = ({ className, ...props }: ComponentProps<"div">) => {
   return <div className={cn("flex flex-col gap-6", className)} {...props} />;
@@ -43,24 +44,14 @@ const FormInput = ({
   value,
   onChange,
   className,
-  onFocus,
-  onBlur,
   ...rest
 }: FormInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isFocussed, setIsFocussed] = useState(false);
 
   return (
     <div>
       {label && (
-        <label
-          htmlFor={id}
-          className={cn(
-            "text-sm",
-            "text-muted-foreground transition-colors ease-in-out",
-            isFocussed && "text-foreground",
-          )}
-        >
+        <label htmlFor={id} className={cn("text-sm")}>
           {label}
         </label>
       )}
@@ -69,11 +60,7 @@ const FormInput = ({
         {Icon && (
           <Icon
             size={16}
-            className={cn(
-              "absolute top-1/2 -translate-y-1/2 left-2",
-              "text-muted-foreground transition-colors ease-in-out",
-              isFocussed && "text-foreground",
-            )}
+            className={cn("absolute top-1/2 -translate-y-1/2 left-2")}
           />
         )}
 
@@ -83,14 +70,10 @@ const FormInput = ({
           value={value}
           onChange={onChange}
           className={cn(
-            "text-muted-foreground transition-colors ease-in-out",
-            isFocussed && "text-foreground",
             type === "password" && "pr-8",
             Icon && "pl-8",
             className,
           )}
-          onFocus={() => setIsFocussed(true)}
-          onBlur={() => setIsFocussed(false)}
           {...rest}
         />
 
@@ -109,15 +92,45 @@ const FormInput = ({
   );
 };
 
-const FormButton = ({ className, ...rest }: ComponentProps<typeof Button>) => {
+const buttonVariants = cva("", {
+  variants: {
+    variant: {
+      submit: "bg-black dark:bg-white text-white dark:text-black",
+      oauth: "",
+    },
+  },
+  defaultVariants: {
+    variant: "submit",
+  },
+});
+
+type FormButtonProps = ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants>;
+
+const FormButton = ({ className, variant, ...rest }: FormButtonProps) => {
   return (
     <Button
       type="submit"
-      variant={"secondary"}
-      className={cn("", className)}
+      className={cn(buttonVariants({ variant, className }))}
       {...rest}
     />
   );
 };
 
-export { FormWrapper, FormHeader, FormContent, FormInput, FormButton };
+const FormError = ({ className, ...rest }: ComponentProps<"p">) => {
+  return (
+    <p
+      className={cn("text-sm text-destructive self-center my-2", className)}
+      {...rest}
+    />
+  );
+};
+
+export {
+  FormWrapper,
+  FormHeader,
+  FormContent,
+  FormInput,
+  FormButton,
+  FormError,
+};

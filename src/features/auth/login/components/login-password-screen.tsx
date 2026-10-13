@@ -1,19 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useState } from "react";
-import { cn } from "cn";
 
 import { Loader2Icon, ArrowLeftIcon, KeyIcon } from "lucide-react";
 import {
   FormContent,
   FormInput,
   FormButton,
+  FormError,
 } from "@/features/auth/components/auth-form";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";
+import { signInWithPassword } from "../../auth-actions";
 
 const LoginPasswordScreen = () => {
   const { email, password, setPassword } = useFormdataStore();
@@ -25,9 +25,16 @@ const LoginPasswordScreen = () => {
     setIsLoading(true);
     setError(null);
 
-    setTimeout(() => {
+    try {
+      const { error } = await signInWithPassword(email, password);
+      if (error) {
+        setError("Invalid Credientials");
+      }
+    } catch {
+      setError("Unexpected Error Occured. Please try again.");
+    } finally {
       setIsLoading(false);
-    }, 4000);
+    }
   };
 
   return (
@@ -35,9 +42,11 @@ const LoginPasswordScreen = () => {
       onSubmit={handleSubmit}
       className="max-w-xs w-full self-center"
     >
+      {error && <FormError>{error}</FormError>}
+
       <FormInput
         type="password"
-        placeholder="you@email.com"
+        placeholder="supa-strong-password-123"
         icon={KeyIcon}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
