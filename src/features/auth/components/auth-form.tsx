@@ -92,31 +92,6 @@ const FormInput = ({
   );
 };
 
-const buttonVariants = cva("", {
-  variants: {
-    variant: {
-      submit: "bg-black dark:bg-white text-white dark:text-black",
-      oauth: "",
-    },
-  },
-  defaultVariants: {
-    variant: "submit",
-  },
-});
-
-type FormButtonProps = ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants>;
-
-const FormButton = ({ className, variant, ...rest }: FormButtonProps) => {
-  return (
-    <Button
-      type="submit"
-      className={cn(buttonVariants({ variant, className }))}
-      {...rest}
-    />
-  );
-};
-
 const FormError = ({ className, ...rest }: ComponentProps<"p">) => {
   return (
     <p
@@ -131,6 +106,6 @@ export {
   FormHeader,
   FormContent,
   FormInput,
-  FormButton,
   FormError,
+  Button as FormButton,
 };

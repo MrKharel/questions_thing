@@ -23,6 +23,7 @@ const LoginHomeScreen = () => {
   return (
     <FormContent
       onSubmit={handleSubmit}
+
       className="max-w-xs w-full self-center"
     >
       <FormInput
@@ -35,7 +36,9 @@ const LoginHomeScreen = () => {
         required
       />
 
-      <FormButton>Continue with Email</FormButton>
+      <FormButton variant={"secondary"} type="submit">
+        Continue with Email
+      </FormButton>
 
       <Separator className="h-[1px]" />
 

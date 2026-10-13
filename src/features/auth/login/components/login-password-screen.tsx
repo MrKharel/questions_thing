@@ -30,8 +30,6 @@ const LoginPasswordScreen = () => {
       if (error) {
         setError("Invalid Credientials");
       }
-    } catch {
-      setError("Unexpected Error Occured. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +52,12 @@ const LoginPasswordScreen = () => {
         required
       />
 
-      <FormButton className="relative" disabled={isLoading}>
+      <FormButton
+        type="submit"
+        className="relative"
+        disabled={isLoading}
+        variant={"secondary"}
+      >
         Login
         {isLoading && (
           <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />

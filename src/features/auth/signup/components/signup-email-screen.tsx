@@ -10,6 +10,14 @@ import {
   FormButton,
   FormError,
 } from "@/features/auth/components/auth-form";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";
@@ -19,17 +27,20 @@ const SignupEmailScreen = () => {
   const { email, password, setEmail, setPassword } = useFormdataStore();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSuccessful, setIsSuccessful] = useState<boolean | null>(null);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
+    setIsSuccessful(null);
 
     const { error } = await signUp(email, password);
     if (error) {
       setError(error.message);
+      setIsSuccessful(false);
     }
-
+    setIsSuccessful(true);
     setIsLoading(false);
   };
 
@@ -58,7 +69,12 @@ const SignupEmailScreen = () => {
         required
       />
 
-      <FormButton className="relative" disabled={isLoading}>
+      <FormButton
+        className="relative"
+        disabled={isLoading || isSuccessful ? true : false}
+        variant="secondary"
+        type="submit"
+      >
         Continue
         {isLoading && (
           <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />
@@ -72,6 +88,34 @@ const SignupEmailScreen = () => {
         <ArrowLeftIcon size={16} />
         Back
       </Button>
+
+      <Dialog open={isSuccessful ? true : false} onOpenChange={setIsSuccessful}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Check your email</DialogTitle>
+            <DialogDescription>
+              We need to verify that it&apos;s really you. We&apos;ve sent a
+              verification link to{" "}
+              <span className="font-medium text-foreground">{email}</span>.
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="sm:justify-start">
+            <Button
+              nativeButton={false}
+              render={
+                <a
+                  href="https://mail.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+            >
+              Open Gmail
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </FormContent>
   );
 };
