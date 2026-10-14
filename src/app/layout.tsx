@@ -1,6 +1,8 @@
 import "./globals.css";
 
-import { themeProvider } from "@/lib/theme-provider";
+import { ThemeProvider } from "@/lib/theme-provider";
+import { ThemeScript } from "@/lib/theme-script";
+import { TanstackProvider } from "@/lib/tanstack-provider";
 
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
@@ -18,13 +20,13 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(${themeProvider.toString()})()`,
-          }}
-        />
+        <ThemeScript />
       </head>
-      <body>{children}</body>
+      <body>
+        <TanstackProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </TanstackProvider>
+      </body>
     </html>
   );
 };

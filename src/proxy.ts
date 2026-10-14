@@ -18,9 +18,7 @@ const routeConfigs: RoutePattern[] = [
   { pattern: "/classes/*", type: "protected" },
 ];
 
-const redirects: Record<string, string> = {
-  "": "/classes",
-};
+const redirects: Record<string, string> = {};
 
 function normalizePathname(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith("/")) {

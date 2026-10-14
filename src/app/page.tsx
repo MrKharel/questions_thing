@@ -1,9 +1,7 @@
+import Home from "@/features/home";
+
 const LandingPage = () => {
-  return (
-    <>
-      this is not the landing page. <br /> actually this is the laning page.
-    </>
-  );
+  return <Home />;
 };
 
 export default LandingPage;
