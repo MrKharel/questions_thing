@@ -1,27 +1,24 @@
-import { NextResponse } from "next/server";
+import { done } from "@/lib/api";
 
-import type { Profile, ApiResponse } from "../../types";
+import { Profile } from "@/lib/types";
 
-const UserProfile: Profile = {
+const data: Profile = {
   id: "1",
-  username: "ajeshkharel1",
+  username: "ajeshkharel",
   display_name: "Ajesh Kharel",
   email: "ajeshkharel5@gmail.com",
   avatar: null,
-  bio: "Just Living my Life... Nothing Special",
+  bio: "Nothing serious, and interesting. Just living my life.",
   location: "Jhapa, Nepal",
-  created_at: `2099-12-11T06:04:17Z`,
-  updated_at: `2099-12-11T06:04:17Z`,
+  created_at: "2059-12-26T06:15:26Z",
+  updated_at: "2059-12-26T06:15:26Z",
 };
 
-const GET = async (): Promise<NextResponse<ApiResponse<Profile>>> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(NextResponse.json({ success: true, data: UserProfile }));
-    }, 3000);
-  });
+export const GET = async () => {
+  return done(data, 200);
 };
 
-const PATCH = async () => {};
-
-export { GET, PATCH };
+export const PATCH = async () => {
+  const patchedData = { ...data, username: "AjeshKharel" };
+  return done(patchedData, 200);
+};
