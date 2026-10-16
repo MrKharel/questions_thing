@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FormContent, FormButton } from "@/features/auth/components/auth-form";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Dialog } from "@/components/ui/dialog";
 
 const SignupHomeScreen = () => {
   return (

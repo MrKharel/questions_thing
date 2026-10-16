@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { BookOpenIcon, CalendarIcon, PlusIcon, SearchIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { dateFormatter } from "@/lib/date-formatter";

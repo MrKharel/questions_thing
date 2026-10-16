@@ -7,9 +7,8 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { ComponentProps } from "react";
-import { cva, VariantProps } from "class-variance-authority";
 
 const FormWrapper = ({ className, ...props }: ComponentProps<"div">) => {
   return <div className={cn("flex flex-col gap-6", className)} {...props} />;
