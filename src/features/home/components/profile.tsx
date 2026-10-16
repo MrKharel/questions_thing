@@ -71,13 +71,17 @@ const EditScreen = ({ profile, onClose }: EditScreenProps) => {
   const profileMutation = useProfileMutation();
 
   // Local draft so typing doesn't touch the cached profile until saved.
-  const [draft, setDraft] = useState<{ display_name?: string; bio?: string }>({
-    display_name: profile.display_name ?? "",
-    bio: profile.bio ?? "",
+  const [draft, setDraft] = useState<{
+    display_name: string | undefined;
+    bio: string | undefined;
+  }>({
+    display_name: profile.display_name ?? undefined,
+    bio: profile.bio ? profile.bio : undefined,
   });
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log({ draft, profile });
     profileMutation.mutate(draft);
   };
 

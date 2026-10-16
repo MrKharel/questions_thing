@@ -39,10 +39,9 @@ export const useProfileMutation = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, display_name, avatar, bio, location }),
       }).then((result) => {
-        console.log(result);
         return result.json();
       });
-      console.log(result);
+      console.log({ result });
       if (!result.success) throw new Error(result.error);
       return result.data;
     },
@@ -54,14 +53,6 @@ export const useProfileMutation = () => {
         return { ...old, ...variables };
       });
       return { previous };
-    },
-    onError: (_err, _vars, context) => {
-      if (context?.previous) {
-        queryClient.setQueryData(PROFILE_QUERY_KEY, context.previous);
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: PROFILE_QUERY_KEY });
     },
   });
 };

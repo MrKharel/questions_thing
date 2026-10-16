@@ -34,10 +34,10 @@ export const GET = async () => {
 export const PATCH = async (req: NextRequest) => {
   const querySchema = z
     .object({
-      username: z.string().trim().min(3).max(32).optional(),
-      display_name: z.string().min(5).max(32).optional(),
+      username: z.string().trim().min(1).max(32).optional(),
+      display_name: z.string().min(1).max(32).optional(),
       bio: z.string().min(1).max(300).optional(),
-      location: z.string().min(6).max(30).optional(),
+      location: z.string().min(1).max(30).optional(),
       avatar: z.string().url().nullable().optional(),
     })
     .refine(
@@ -48,7 +48,7 @@ export const PATCH = async (req: NextRequest) => {
           query.bio,
           query.location,
           query.avatar,
-        ].filter(Boolean).length < 1,
+        ].filter(Boolean).length >= 1,
       {
         message:
           "Provide atleast one of: username, display_name, bio, location or avatar",
@@ -57,14 +57,21 @@ export const PATCH = async (req: NextRequest) => {
 
   try {
     const body = await req.json().catch(() => null);
-    const { username, display_name, bio, location, avatar } = await body?.data;
-    const updates = querySchema.parse({
-      username,
-      display_name,
-      bio,
-      location,
-      avatar,
+    const parsed = querySchema.safeParse({
+      username: body.username ?? undefined,
+      display_name: body.display_name ?? undefined,
+      bio: body.bio ?? undefined,
+      location: body.location ?? undefined,
+      avatar: body.avatar ?? undefined,
     });
+
+    if (!parsed.success) {
+      return fail(
+        { message: parsed.error.issues[0]?.message ?? "Invalid query" },
+        400,
+      );
+    }
+    const updates = parsed.data;
 
     const supabase = await createClient();
     const {
@@ -73,17 +80,19 @@ export const PATCH = async (req: NextRequest) => {
     } = await supabase.auth.getUser();
     if (!user || userError) return fail({ message: "Unauthorized" }, 401);
 
-    const { error } = await supabase
-      .from("profile")
+    const { data, error } = await supabase
+      .from("profiles")
       .update(updates)
-      .eq("id", user.id);
+      .eq("id", user.id)
+      .select()
+      .single();
 
     if (error) {
       console.error("[profile PATCH] failed:", error);
       return fail({ message: "Unexpected error occured" }, 500);
     }
 
-    return done(null, 200);
+    return done(data, 200);
   } catch (err) {
     console.error("[profile PATCH] unhandled:", err);
     return fail({ message: "Internal server error" }, 500);
