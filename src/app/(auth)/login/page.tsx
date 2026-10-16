@@ -1,7 +1,11 @@
 import LoginForm from "@/features/auth/login";
 
-const LoginPage = () => {
-  return <LoginForm />;
+const LoginPage = ({
+  searchParams,
+}: {
+  searchParams: Promise<{ screen?: string }>;
+}) => {
+  return <LoginForm searchParams={searchParams} />;
 };
 
 export default LoginPage;
