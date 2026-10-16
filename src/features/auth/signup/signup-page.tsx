@@ -5,7 +5,7 @@ import { SignupEmailScreen } from "./components/signup-email-screen";
 const SignupForm = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ screen?: string }>;
+  searchParams: Promise<{ screen?: string | undefined }>;
 }) => {
   const screen = (await searchParams).screen;
 

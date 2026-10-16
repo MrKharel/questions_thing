@@ -1,7 +1,11 @@
 import Home from "@/features/home";
 
-const LandingPage = () => {
-  return <Home />;
+const LandingPage = ({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) => {
+  return <Home searchParams={searchParams} />;
 };
 
 export default LandingPage;
