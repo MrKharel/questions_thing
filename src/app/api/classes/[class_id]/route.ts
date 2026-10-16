@@ -3,9 +3,10 @@ import z from "zod";
 import { NextRequest } from "next/server";
 import { done, fail } from "@/lib/api";
 
-type Params = Promise<{ class_id: string }>;
-
-export const GET = async (_req: NextRequest, params: Params) => {
+export const GET = async (
+  _req: NextRequest,
+  { params }: { params: Promise<{ class_id: string }> },
+) => {
   try {
     const { class_id } = await params;
     const supabase = await createClient();
@@ -28,7 +29,10 @@ export const GET = async (_req: NextRequest, params: Params) => {
   }
 };
 
-export const PATCH = async (req: NextRequest, params: Params) => {
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: Promise<{ class_id: string }> },
+) => {
   const querySchema = z
     .object({
       subject: z.string().min(1).max(50).optional(),
@@ -65,7 +69,10 @@ export const PATCH = async (req: NextRequest, params: Params) => {
   }
 };
 
-export const DELETE = async (_req: NextRequest, params: Params) => {
+export const DELETE = async (
+  _req: NextRequest,
+  { params }: { params: Promise<{ class_id: string }> },
+) => {
   try {
     const { class_id } = await params;
 

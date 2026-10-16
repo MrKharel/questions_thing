@@ -7,7 +7,7 @@ import { Textarea } from "./textarea";
 import type { ComponentProps } from "react";
 import type { LucideIcon } from "lucide-react";
 
-type FormInputProps = ComponentProps<typeof Input> & {
+type FormTextareaProps = ComponentProps<typeof Textarea> & {
   label?: string;
   icon?: LucideIcon;
 };
@@ -17,7 +17,7 @@ export const FormTextarea = ({
   icon: Icon,
   className,
   ...rest
-}: FormInputProps) => {
+}: FormTextareaProps) => {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-xs text-foreground/80">{label}</label>
