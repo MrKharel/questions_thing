@@ -6,7 +6,7 @@ import type { Profile } from "@/lib/types";
 const PROFILE_QUERY_KEY = ["user_profile"] as const;
 
 export const useProfileQuery = () => {
-  return useQuery({
+  return useQuery<Profile>({
     queryKey: PROFILE_QUERY_KEY,
     queryFn: async () => {
       const res = await fetch("/api/users/me").then((req) => req.json());

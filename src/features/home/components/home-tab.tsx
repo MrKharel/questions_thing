@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { BookOpenIcon, CalendarIcon, PlusIcon, SearchIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { dateFormatter } from "@/lib/date-formatter";
@@ -99,21 +100,21 @@ const ClassCard = ({ virtualClass }: { virtualClass: Class }) => {
   return (
     <Link
       href={`/class/${virtualClass.id}`}
-      className="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <Card className="h-full transition-colors hover:border-ring/50 hover:bg-muted/50">
-        <CardContent className="flex h-full flex-col gap-3 p-4">
-          <div className="min-w-0 space-y-1">
+      <Card className="rounded-md p-0 py-2 hover:bg-card/80">
+        <CardContent className="flex h-full flex-col gap-3">
+          <div className="flex flex-col gap-1">
             <CardTitle className="truncate text-base font-semibold">
               {virtualClass.subject}
             </CardTitle>
+
             {virtualClass.description && (
               <CardDescription className="line-clamp-2 text-sm">
                 {virtualClass.description}
               </CardDescription>
             )}
           </div>
-
           <p className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
             <CalendarIcon className="h-3.5 w-3.5" />
             Created {dateFormatter.format(new Date(virtualClass.created_at))}

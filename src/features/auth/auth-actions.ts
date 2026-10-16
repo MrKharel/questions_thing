@@ -32,7 +32,7 @@ export const signInWithPassword = async (email: string, password: string) => {
     return { error: { code: error.code, message: error.message } };
   }
 
-  redirect("/classes");
+  redirect("/");
 };
 
 export const signOut = async () => {
