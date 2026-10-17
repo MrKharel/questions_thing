@@ -1,116 +1,100 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/client/server";
+import createClient from "@/lib/supabase/server";
+import z from "zod";
+import { NextRequest } from "next/server";
+import { done, fail } from "@/lib/api";
 
 export const GET = async () => {
-	try {
-		const supabase = await createClient();
-		const {
-			data: { user },
-			error: authError,
-		} = await supabase.auth.getUser();
-		if (!user || authError) {
-			return NextResponse.json(
-				{ success: false, message: "Unauthorized" },
-				{ status: 401 },
-			);
-		}
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+    if (!user || userError) return fail({ message: "Unauthorized" }, 401);
 
-		const { data, error } = await supabase
-			.from("profiles")
-			.select("*")
-			.eq("id", user.id)
-			.single();
-		if (error) {
-			return NextResponse.json(
-				{ success: false, message: error.message },
-				{ status: 500 },
-			);
-		}
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
 
-		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err: any) {
-		return NextResponse.json(
-			{ success: false, error: "Internal Server Error" },
-			{ status: 500 },
-		);
-	}
+    if (error) {
+      console.error("[profile GET] lookup failed:", error);
+      return fail({ message: "Unexpected error occurred" }, 500);
+    }
+    if (!data) return fail({ message: "Not found" }, 404);
+
+    return done(data, 200);
+  } catch (err) {
+    console.error("[profile GET] unhandled:", err);
+    return fail({ message: "Internal server error" }, 500);
+  }
 };
 
 export const PATCH = async (req: NextRequest) => {
-	try {
-		const supabase = await createClient();
-		const {
-			data: { user },
-			error: authError,
-		} = await supabase.auth.getUser();
-		if (!user || authError) {
-			return NextResponse.json(
-				{ success: false, message: "Unauthorized" },
-				{ status: 401 },
-			);
-		}
+  const querySchema = z
+    .object({
+      username: z.string().trim().min(1).max(32).optional(),
+      display_name: z.string().min(1).max(32).optional(),
+      bio: z.string().min(1).max(300).optional(),
+      location: z.string().min(1).max(30).optional(),
+      avatar: z.string().url().nullable().optional(),
+    })
+    .refine(
+      (query) =>
+        [
+          query.username,
+          query.display_name,
+          query.bio,
+          query.location,
+          query.avatar,
+        ].filter(Boolean).length >= 1,
+      {
+        message:
+          "Provide atleast one of: username, display_name, bio, location or avatar",
+      },
+    );
 
-		const body = await req.json().catch(() => null);
-		const username = body?.data?.username.trim();
-		const avatar = body?.data?.avatar;
+  try {
+    const body = await req.json().catch(() => null);
+    const parsed = querySchema.safeParse({
+      username: body.username ?? undefined,
+      display_name: body.display_name ?? undefined,
+      bio: body.bio ?? undefined,
+      location: body.location ?? undefined,
+      avatar: body.avatar ?? undefined,
+    });
 
-		const updates: { username?: string; avatar?: string } = {};
-		if (username) updates.username = username;
-		if (avatar) updates.avatar = avatar;
+    if (!parsed.success) {
+      return fail(
+        { message: parsed.error.issues[0]?.message ?? "Invalid query" },
+        400,
+      );
+    }
+    const updates = parsed.data;
 
-		if (!username && !avatar) {
-			return NextResponse.json(
-				{ success: false, message: "Invalid Input" },
-				{ status: 400 },
-			);
-		}
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+    if (!user || userError) return fail({ message: "Unauthorized" }, 401);
 
-		const { data, error } = await supabase
-			.from("profiles")
-			.update(updates)
-			.eq("id", user.id)
-			.select("*")
-			.single();
+    const { data, error } = await supabase
+      .from("profiles")
+      .update(updates)
+      .eq("id", user.id)
+      .select()
+      .single();
 
-		if (error) {
-			console.error(
-				"profile update failed:",
-				error.code,
-				error.message,
-				error.details,
-			);
+    if (error) {
+      console.error("[profile PATCH] failed:", error);
+      return fail({ message: "Unexpected error occured" }, 500);
+    }
 
-			switch (error.code) {
-				case "23505":
-					return NextResponse.json(
-						{ success: false, message: "Username already taken" },
-						{ status: 409 },
-					);
-				case "PGRST116": // no row updated: missing profile or RLS blocked it
-					return NextResponse.json(
-						{ success: false, message: "Profile not found" },
-						{ status: 404 },
-					);
-				case "23514":
-				case "22001":
-				case "22P02":
-					return NextResponse.json(
-						{ success: false, message: "Invalid value" },
-						{ status: 400 },
-					);
-				default:
-					return NextResponse.json(
-						{ success: false, message: "Update failed" },
-						{ status: 500 },
-					);
-			}
-		}
-
-		return NextResponse.json({ success: true, data }, { status: 200 });
-	} catch (err: any) {
-		return NextResponse.json(
-			{ success: false, message: "Internal server error" },
-			{ status: 500 },
-		);
-	}
+    return done(data, 200);
+  } catch (err) {
+    console.error("[profile PATCH] unhandled:", err);
+    return fail({ message: "Internal server error" }, 500);
+  }
 };

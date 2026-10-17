@@ -1,5 +1,9 @@
-import AuthLayout from "@/features/auth";
+import type { ReactNode } from "react";
 
-export default function Auth_Layout(props: { children: React.ReactNode }) {
-	return <AuthLayout>{props.children}</AuthLayout>;
-}
+import { AuthLayoutComponent } from "@/features/auth/auth-layout";
+
+const AuthLayout = ({ children }: { children: ReactNode }) => {
+  return <AuthLayoutComponent>{children}</AuthLayoutComponent>;
+};
+
+export default AuthLayout;

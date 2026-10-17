@@ -1,7 +1,11 @@
-import { RenderQuestions } from "@/components/render-questions";
+import Home from "@/features/home";
 
-import questions from "../../questions.json";
+const LandingPage = ({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) => {
+  return <Home searchParams={searchParams} />;
+};
 
-export default function Home() {
-	return <RenderQuestions questions={questions} />;
-}
+export default LandingPage;
