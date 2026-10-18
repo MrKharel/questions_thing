@@ -1,7 +1,8 @@
 "use client";
 
 import { MailIcon } from "lucide-react";
-import { FormContent, FormInput, FormButton } from "@/components/ui/form";
+import { FormContent, FormInput } from "@/components/ui/form";
+import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";
@@ -31,9 +32,9 @@ const LoginHomeScreen = () => {
         required
       />
 
-      <FormButton variant={"secondary"} type="submit">
+      <Button variant={"secondary"} type="submit">
         Continue with Email
-      </FormButton>
+      </Button>
 
       <Separator className="h-[1px]" />
 

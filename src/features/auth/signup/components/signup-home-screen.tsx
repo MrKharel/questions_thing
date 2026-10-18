@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { FormContent, FormButton } from "@/components/ui/form";
+import { FormContent } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -21,14 +21,14 @@ const SignupHomeScreen = () => {
 
       <Separator className={"h-[1px]"} />
 
-      <FormButton
+      <Button
         variant="secondary"
         type="submit"
         nativeButton={false}
         render={<Link href="/signup?screen=signup_with_email" />}
       >
         Continue with Email
-      </FormButton>
+      </Button>
     </FormContent>
   );
 };

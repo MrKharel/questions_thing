@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Loader2Icon, ArrowLeftIcon, KeyIcon } from "lucide-react";
-import { FormContent, FormInput, FormButton, FormError } from "@/components/ui/form";
+import { FormContent, FormInput, FormError } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";
@@ -44,10 +44,10 @@ const LoginPasswordScreen = () => {
         required
       />
 
-      <FormButton type="submit" className="relative" disabled={isLoading} variant={"secondary"}>
+      <Button type="submit" className="relative" disabled={isLoading} variant={"secondary"}>
         Login
         {isLoading && <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />}
-      </FormButton>
+      </Button>
       <Button variant="outline" nativeButton={false} render={<Link href="/login" />}>
         <ArrowLeftIcon size={16} />
         Back

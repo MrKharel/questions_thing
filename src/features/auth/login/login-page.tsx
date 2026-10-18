@@ -1,9 +1,15 @@
+import { redirect } from "next/navigation";
+
 import { Form, FormHeader } from "@/components/ui/form";
 import { LoginHomeScreen } from "./components/login-home-screen";
 import { LoginPasswordScreen } from "./components/login-password-screen";
 
 const LoginForm = async ({ searchParams }: { searchParams: Promise<{ screen?: string | undefined }> }) => {
   const screen = (await searchParams).screen;
+
+  if (screen && screen !== "enter_password") {
+    redirect("/login");
+  }
 
   return (
     <Form>

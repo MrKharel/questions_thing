@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
-import { Form, FormContent, FormTitle, FormButton } from "@/components/ui/form";
+import { Form, FormContent, FormTitle } from "@/components/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { Button, Button } from "@/components/ui/button";
 
 const JoinClass = () => {
   const [code, setCode] = useState<string>("");
@@ -47,7 +48,7 @@ const JoinClass = () => {
           </InputOTPGroup>
         </InputOTP>
 
-        <FormButton className="w-full self-center">Create new class</FormButton>
+        <Button className="w-full self-center">Create new class</Button>
       </FormContent>
     </Form>
   );

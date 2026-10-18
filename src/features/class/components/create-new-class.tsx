@@ -14,7 +14,6 @@ import {
   FormInputLabel,
   FormGroup,
   FormLabel,
-  FormButton,
 } from "@/components/ui/form";
 import {
   Select,
@@ -24,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 import { useProfileQuery } from "@/hooks/use-profile";
 
@@ -215,7 +215,7 @@ const CreateNewClass = () => {
           </div>
         </FormGroup>
 
-        <FormButton className={"w-full md:w-fit self-center md:self-end"}>Create new class</FormButton>
+        <Button className={"w-full md:w-fit self-center md:self-end"}>Create new class</Button>
       </FormContent>
     </Form>
   );

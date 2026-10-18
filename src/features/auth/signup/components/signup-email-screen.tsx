@@ -61,7 +61,7 @@ const SignupEmailScreen = () => {
         required
       />
 
-      <FormButton
+      <Button
         className="relative"
         disabled={isLoading || isSuccessful ? true : false}
         variant="secondary"
@@ -69,7 +69,7 @@ const SignupEmailScreen = () => {
       >
         Continue
         {isLoading && <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />}
-      </FormButton>
+      </Button>
       <Button variant="outline" nativeButton={false} render={<Link href="/signup" />}>
         <ArrowLeftIcon size={16} />
         Back
