@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useProfileQuery, useProfileMutation } from "@/hooks/use-profile";
+import { useProfileQuery, useUpdateProfileMutation } from "@/hooks/use-profile";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { FormInput, FormTextarea } from "@/components/ui/form";
@@ -24,7 +24,10 @@ const Profile = () => {
   return (
     <aside className="flex w-full flex-row gap-5 md:max-w-60 md:flex-col md:items-stretch">
       {isEditing ? (
-        <EditScreen profile={profile.data} onClose={() => setIsEditing(false)} />
+        <EditScreen
+          profile={profile.data}
+          onClose={() => setIsEditing(false)}
+        />
       ) : (
         <ViewScreen profile={profile.data} onEdit={() => setIsEditing(true)} />
       )}
@@ -43,10 +46,16 @@ const ViewScreen = ({ profile, onEdit }: ViewScreenProps) => {
           <h1 className="truncate text-xl font-bold tracking-wide text-foreground">
             {profile.display_name ?? profile.username}
           </h1>
-          <p className="truncate text-sm font-light text-muted-foreground">{profile.username}</p>
+          <p className="truncate text-sm font-light text-muted-foreground">
+            {profile.username}
+          </p>
         </div>
 
-        {profile.bio && <p className="text-sm leading-relaxed text-foreground/90">{profile.bio}</p>}
+        {profile.bio && (
+          <p className="text-sm leading-relaxed text-foreground/90">
+            {profile.bio}
+          </p>
+        )}
 
         <Button variant="outline" onClick={onEdit}>
           Edit Profile
@@ -58,7 +67,7 @@ const ViewScreen = ({ profile, onEdit }: ViewScreenProps) => {
 
 // edit the profile
 const EditScreen = ({ profile, onClose }: EditScreenProps) => {
-  const profileMutation = useProfileMutation();
+  const profileMutation = useUpdateProfileMutation();
 
   // Local draft so typing doesn't touch the cached profile until saved.
   const [draft, setDraft] = useState<{
@@ -81,7 +90,9 @@ const EditScreen = ({ profile, onClose }: EditScreenProps) => {
         label="Display Name"
         placeholder={profile.username}
         value={draft.display_name ?? ""}
-        onChange={(e) => setDraft((d) => ({ ...d, display_name: e.target.value }))}
+        onChange={(e) =>
+          setDraft((d) => ({ ...d, display_name: e.target.value }))
+        }
       />
       <FormTextarea
         label="Bio"
@@ -91,7 +102,11 @@ const EditScreen = ({ profile, onClose }: EditScreenProps) => {
       />
 
       <div className="flex gap-2">
-        <Button type="submit" className="flex-1" disabled={profileMutation.isPending}>
+        <Button
+          type="submit"
+          className="flex-1"
+          disabled={profileMutation.isPending}
+        >
           {profileMutation.isPending ? "Saving..." : "Save"}
         </Button>
         <Button
