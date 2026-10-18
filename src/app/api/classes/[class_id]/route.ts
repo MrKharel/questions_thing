@@ -35,26 +35,47 @@ export const PATCH = async (
 ) => {
   const querySchema = z
     .object({
-      subject: z.string().min(1).max(50).optional(),
-      description: z.string().min(1).max(300).optional(),
+      subject: z.string().min(3).max(32).optional(),
+      description: z.string().min(0).max(250).optional(),
+      visibility: z.string().optional(),
+      max_members: z.number().optional(),
+      allow_late_submissions: z.boolean().optional(),
+      members_can_see_eachother: z.boolean().optional(),
+      students_can_comment: z.boolean().optional(),
     })
     .refine(
-      (query) => [query.subject, query.description].filter(Boolean).length < 1,
+      (query) =>
+        [
+          query.subject,
+          query.description,
+          query.visibility,
+          query.max_members,
+          query.allow_late_submissions,
+          query.members_can_see_eachother,
+          query.students_can_comment,
+        ].filter(Boolean).length < 1,
       {
-        message: "Provide atleast one of: subject || description",
+        message:
+          "Provide atleast one of: subject, description, visibility, max_members, allow_late_submissions, members_can_see_eachother, students_can_comment",
       },
     );
 
   try {
-    const body = await req.json().catch(() => null);
-    const { subject, description } = await body?.data;
-
-    const updates = querySchema.parse({
-      subject,
-      description,
+    const body = await req
+      .json()
+      .then((body) => body.data)
+      .catch(() => null);
+    const updates = querySchema.safeParse({
+      subject: body.subject,
+      description: body.description,
+      visibility: body.visibility,
+      max_members: body.max_members,
+      allow_late_submissions: body.allow_late_submissions,
+      members_can_see_eachother: body.members_can_see_eachother,
+      students_can_comment: body.students_can_comment,
     });
-
     const { class_id } = await params;
+
     const supabase = await createClient();
     const { error } = await supabase
       .from("classes")
@@ -63,7 +84,7 @@ export const PATCH = async (
 
     if (error) return fail({ message: "Unexpected error occured" }, 500);
 
-    return done(null, 200);
+    return done(updates, 200);
   } catch {
     return fail({ message: "Internal server error" }, 500);
   }

@@ -6,7 +6,12 @@ import { BookOpenIcon, CalendarIcon, PlusIcon, SearchIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { dateFormatter } from "@/lib/date-formatter";
 
-import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -81,7 +86,8 @@ const Header = ({ search, onSearch }: HeaderProps) => {
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>
-      <Button nativeButton={false} render={<Link href={"/class/new/create"} />}>
+
+      <Button nativeButton={false} render={<Link href={"/class/new/join"} />}>
         <PlusIcon size={16} />
         New
       </Button>
@@ -99,10 +105,14 @@ const ClassCard = ({ virtualClass }: { virtualClass: Class }) => {
       <Card className="rounded-md p-0 py-2 hover:bg-card/80">
         <CardContent className="flex h-full flex-col gap-3">
           <div className="flex flex-col gap-1">
-            <CardTitle className="truncate text-base font-semibold">{virtualClass.subject}</CardTitle>
+            <CardTitle className="truncate text-base font-semibold">
+              {virtualClass.subject}
+            </CardTitle>
 
             {virtualClass.description && (
-              <CardDescription className="line-clamp-2 text-sm">{virtualClass.description}</CardDescription>
+              <CardDescription className="line-clamp-2 text-sm">
+                {virtualClass.description}
+              </CardDescription>
             )}
           </div>
           <p className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -139,7 +149,9 @@ const NoClasses = () => {
     <section className="flex flex-col items-center gap-3 rounded-lg border border-dashed px-6 py-16 text-center">
       <BookOpenIcon className="h-8 w-8 text-muted-foreground" />
       <div className="space-y-1">
-        <h2 className="text-lg font-semibold text-foreground">No classes yet</h2>
+        <h2 className="text-lg font-semibold text-foreground">
+          No classes yet
+        </h2>
         <p className="text-sm text-muted-foreground">
           Create a class or ask your teacher for an invite to get started.
         </p>

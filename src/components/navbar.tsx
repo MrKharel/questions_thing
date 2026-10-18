@@ -38,6 +38,7 @@ const Navbar = ({ navItems, className, ...props }: NavbarProps) => {
 
           return (
             <Link
+              key={item.url}
               href={item.url}
               aria-current={active ? "page" : undefined}
               className={cn(

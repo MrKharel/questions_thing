@@ -6,7 +6,7 @@ import { cn } from "cn";
 import { useProfileQuery } from "@/hooks/use-profile";
 
 import { Button } from "./ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "./ui/input";
 
 import type { ComponentProps } from "react";

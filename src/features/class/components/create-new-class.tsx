@@ -49,9 +49,10 @@ type Formdata = {
   description: string;
 };
 type Config = {
-  visibility: Visibility;
-  members_can_see_each_other: boolean;
-  max_members: MaxMembers;
+  visibility: "private" | "public";
+  max_members: number;
+  allow_late_submissions: boolean;
+  members_can_see_eachother: boolean;
   students_can_comment: boolean;
 };
 
@@ -61,9 +62,10 @@ const CreateNewClass = () => {
   const [formdata, setFormata] = useState<Formdata>({ subject: "", description: "" });
   const [config, setConfig] = useState<Config>({
     visibility: "private",
-    members_can_see_each_other: true,
+    members_can_see_eachother: true,
     max_members: 15,
     students_can_comment: true,
+    allow_late_submissions: true,
   });
 
   return (
@@ -163,14 +165,14 @@ const CreateNewClass = () => {
             <div>
               <FormLabel>Members can see each other</FormLabel>
               <FormDescription>
-                Members {config.members_can_see_each_other ? "can" : "cannot"} all the members who are in part
+                Members {config.members_can_see_eachother ? "can" : "cannot"} all the members who are in part
                 of the class.
               </FormDescription>
             </div>
             <Select
               items={yesNoItems}
-              value={config.members_can_see_each_other}
-              onValueChange={(e) => setConfig((prev) => ({ ...prev, members_can_see_each_other: e ?? true }))}
+              value={config.members_can_see_eachother}
+              onValueChange={(e) => setConfig((prev) => ({ ...prev, members_can_see_eachother: e ?? true }))}
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Theme" />
@@ -201,6 +203,33 @@ const CreateNewClass = () => {
             >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Theme" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {yesNoItems.map((item) => (
+                    <SelectItem key={String(item.value)} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex justify-between items-center gap-2 border-t border-border mt-2 pt-2">
+            <div>
+              <FormLabel>Allow late submissions</FormLabel>
+              <FormDescription>
+                Students {config.allow_late_submissions ? "can" : "cannot"} submit assignments after due date
+              </FormDescription>
+            </div>
+            <Select
+              items={yesNoItems}
+              value={config.allow_late_submissions}
+              onValueChange={(e) => setConfig((prev) => ({ ...prev, allow_late_submissions: e ?? true }))}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Yes" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>

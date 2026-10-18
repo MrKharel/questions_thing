@@ -3,8 +3,12 @@
 import { useState } from "react";
 
 import { Form, FormContent, FormTitle } from "@/components/ui/form";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { Button, Button } from "@/components/ui/button";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { Button } from "@/components/ui/button";
 
 const JoinClass = () => {
   const [code, setCode] = useState<string>("");
@@ -18,10 +22,14 @@ const JoinClass = () => {
       <FormTitle>Join a class</FormTitle>
 
       <p className="text-center text-sm text-foreground/60">
-        Enter the class code provided by your teacher to join your class and get started.
+        Enter the class code provided by your teacher to join your class and get
+        started.
       </p>
 
-      <FormContent onSubmit={handleSubmit} className="gap-6 justify-center items-center">
+      <FormContent
+        onSubmit={handleSubmit}
+        className="gap-6 justify-center items-center"
+      >
         <InputOTP maxLength={6} value={code} onChange={(e) => setCode(e)}>
           <InputOTPGroup className="gap-2 self-center">
             <InputOTPSlot index={0} className="size-10 !rounded-lg uppercase" />
@@ -43,7 +51,7 @@ const JoinClass = () => {
             />
             <InputOTPSlot
               index={5}
-              className="size-10 rounded-lg border text-lg font-medium uppercase first:rounded-lg first:border"
+              className="size-10 rounded-lg border text-lg font-medium uppercase !rounded-lg"
             />
           </InputOTPGroup>
         </InputOTP>

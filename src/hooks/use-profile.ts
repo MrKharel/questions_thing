@@ -17,7 +17,7 @@ export const useProfileQuery = () => {
   });
 };
 
-export const useProfileMutation = () => {
+export const useUpdateProfileMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
