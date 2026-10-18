@@ -7,7 +7,7 @@ const CLASSES_QUERY_KEY = ["class"] as const;
 const CLASSES_API_ENDPOINT = "api/classes/";
 const CLASS_STALE_TIME = 5 * 60 * 1000; // five-minutes
 
-export const useClassesQuery = () => {
+const useClassesQuery = () => {
   return useQuery<Class[]>({
     queryKey: CLASSES_QUERY_KEY,
     queryFn: async () => {
@@ -21,7 +21,7 @@ export const useClassesQuery = () => {
   });
 };
 
-export const useClassQuery = (id: string) => {
+const useClassQuery = (id: string) => {
   return useQuery<Class>({
     queryKey: [id] as const,
     queryFn: async () => {
@@ -35,74 +35,108 @@ export const useClassQuery = (id: string) => {
   });
 };
 
-type MutationProps = {
-  id: string;
-  subject?: string;
-  description?: string;
-  visibility?: "private" | "public";
-  max_members?: number;
-  allow_late_submissions?: boolean;
-  members_can_see_eachother?: boolean;
-  students_can_comment?: boolean;
-};
+type MutationProps = Partial<
+  Pick<
+    Class,
+    | "subject"
+    | "description"
+    | "visibility"
+    | "max_members"
+    | "allow_late_submissions"
+    | "members_can_see_eachother"
+    | "students_can_comment"
+  >
+>;
+type MutationContext = { previous?: Class; previousList?: Class[] };
 
-export const useUpdateClassMutation = () => {
+const useUpdateClassMutation = (id: string) => {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: async ({ id, ...rest }: MutationProps) => {
-      const result = await fetch(`/api/classes/${id}`, {
+  return useMutation<Class, Error, MutationProps, MutationContext>({
+    mutationFn: async (variables) => {
+      const res = await fetch(`/api/classes/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...rest }),
-      }).then((result) => result.json());
-      console.log({ result });
-      if (!result.success) throw new Error(result.error);
-      return result.data;
+        body: JSON.stringify(variables),
+      }).then((req) => req.json());
+      if (!res.success) throw new Error(res.error);
+      return res.data;
     },
     onMutate: async (variables) => {
+      await queryClient.cancelQueries({ queryKey: [id] });
       await queryClient.cancelQueries({ queryKey: CLASSES_QUERY_KEY });
-      const previous = queryClient.getQueryData<Class>(CLASSES_QUERY_KEY);
-      queryClient.setQueryData<Class>(CLASSES_QUERY_KEY, (old) => {
+
+      const previous = queryClient.getQueryData<Class>([id]);
+      const previousList = queryClient.getQueryData<Class[]>(CLASSES_QUERY_KEY);
+
+      queryClient.setQueryData<Class>([id], (old) => {
         if (!old) return old;
         return { ...old, ...variables };
       });
-      return { previous };
+      queryClient.setQueryData<Class[]>(CLASSES_QUERY_KEY, (old) => {
+        if (!old) return old;
+        return old.map((item) =>
+          item.id === id ? { ...item, ...variables } : item,
+        );
+      });
+
+      return { previous, previousList };
+    },
+    onError: (_error, _variables, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData([id], context.previous);
+      }
+      if (context?.previousList) {
+        queryClient.setQueryData(CLASSES_QUERY_KEY, context.previousList);
+      }
+    },
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Class>([id], updated);
+      queryClient.setQueryData<Class[]>(CLASSES_QUERY_KEY, (old) => {
+        if (!old) return old;
+        return old.map((item) => (item.id === id ? updated : item));
+      });
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [id] });
+      queryClient.invalidateQueries({ queryKey: CLASSES_QUERY_KEY });
     },
   });
 };
 
-export const useCreateClassMutation = () => {
+type CreateProps = Pick<Class, "subject"> & MutationProps;
+
+const useCreateClassMutation = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: async ({ id, ...rest }: MutationProps) => {
-      const result = await fetch(`/api/classes/${id}`, {
-        method: "PATCH",
+  return useMutation<Class, Error, CreateProps>({
+    mutationFn: async (variables) => {
+      const res = await fetch("/api/classes", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...rest }),
-      }).then((result) => result.json());
-      console.log({ result });
-      if (!result.success) throw new Error(result.error);
-      return result.data;
+        body: JSON.stringify(variables),
+      }).then((req) => req.json());
+      if (!res.success) throw new Error(res.error);
+      return res.data;
     },
-    onMutate: async (variables) => {
-      await queryClient.cancelQueries({ queryKey: CLASSES_QUERY_KEY });
-      const previous = queryClient.getQueryData<Class>(CLASSES_QUERY_KEY);
-      queryClient.setQueryData<Class>(CLASSES_QUERY_KEY, (old) => {
+    onSuccess: (created) => {
+      queryClient.setQueryData<Class>([created.id], created);
+      queryClient.setQueryData<Class[]>(CLASSES_QUERY_KEY, (old) => {
         if (!old) return old;
-        return { ...old, ...variables };
+        return [...old, created];
       });
-      return { previous };
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: CLASSES_QUERY_KEY });
     },
   });
 };
 
-export const useDeleteClassMutation = () => {
+const useDeleteClassMutation = (id: string) => {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: async ({ id }: Pick<MutationProps, "id">) => {
+  return useMutation<Class, Error, MutationProps, MutationContext>({
+    mutationFn: async () => {
       const result = await fetch(`/api/classes/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -110,14 +144,47 @@ export const useDeleteClassMutation = () => {
       if (!result.success) throw new Error(result.error);
       return result.data;
     },
-    onMutate: async (variables) => {
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: [id] });
       await queryClient.cancelQueries({ queryKey: CLASSES_QUERY_KEY });
-      const previous = queryClient.getQueryData<Class>(CLASSES_QUERY_KEY);
-      queryClient.setQueryData<Class>(CLASSES_QUERY_KEY, (old) => {
+
+      const previous = queryClient.getQueryData<Class>([id]);
+      const previousList = queryClient.getQueryData<Class[]>(CLASSES_QUERY_KEY);
+
+      queryClient.setQueryData<null>([id], () => null);
+      queryClient.setQueryData<Class[]>(CLASSES_QUERY_KEY, (old) => {
         if (!old) return old;
-        return { ...old, ...variables };
+        return old.filter((clas) => clas.id !== id);
       });
-      return { previous };
+
+      return { previous, previousList };
+    },
+    onError: (_error, _variables, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData([id], context.previous);
+      }
+      if (context?.previousList) {
+        queryClient.setQueryData(CLASSES_QUERY_KEY, context.previousList);
+      }
+    },
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Class>([id], updated);
+      queryClient.setQueryData<Class[]>(CLASSES_QUERY_KEY, (old) => {
+        if (!old) return old;
+        return old.map((item) => (item.id === id ? updated : item));
+      });
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [id] });
+      queryClient.invalidateQueries({ queryKey: CLASSES_QUERY_KEY });
     },
   });
+};
+
+export {
+  useClassQuery,
+  useClassesQuery,
+  useCreateClassMutation,
+  useUpdateClassMutation,
+  useDeleteClassMutation,
 };
