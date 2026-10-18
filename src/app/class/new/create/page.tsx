@@ -1,5 +1,7 @@
+import { CreateNewClass } from "@/features/class/components/create-new-class";
+
 const CreateClassPage = () => {
-  return <>this is the create class thing.</>;
+  return <CreateNewClass />;
 };
 
 export default CreateClassPage;

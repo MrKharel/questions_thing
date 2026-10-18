@@ -1,5 +1,7 @@
+import { JoinClass } from "@/features/class/components/join-class";
+
 const JoinClassPage = () => {
-  return <>this is the join class page thing.</>;
+  return <JoinClass />;
 };
 
 export default JoinClassPage;

@@ -1,12 +1,7 @@
 "use client";
 
 import { MailIcon } from "lucide-react";
-import {
-  FormContent,
-  FormInput,
-  FormButton,
-} from "@/features/auth/components/auth-form";
-import { Separator } from "@/components/ui/separator";
+import { FormContent, FormInput, FormButton } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";

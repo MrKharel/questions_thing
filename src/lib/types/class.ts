@@ -4,6 +4,11 @@ export type Class = {
   id: string; // primary
   subject: string;
   description: string | null;
+  visibility: "private" | "public";
+  max_members: number;
+  allow_late_submissions: boolean;
+  members_can_see_eachother: boolean;
+  students_can_comment: boolean;
   created_by: string;
   created_at: iso;
   updated_at: iso;

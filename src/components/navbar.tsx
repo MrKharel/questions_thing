@@ -36,31 +36,25 @@ const Navbar = ({ navItems, className, ...props }: NavbarProps) => {
 
           console.log({ path, pathname, active, url: item.url });
 
-          return <NavItem key={item.url} {...item} active={active} />;
+          return (
+            <Link
+              href={item.url}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "relative inline-flex shrink-0 items-center gap-2 px-3 py-3 text-sm font-medium",
+                "text-muted-foreground transition-colors hover:text-foreground",
+                "after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:rounded-full after:content-['']",
+                active ? "text-foreground after:bg-primary" : "after:bg-transparent",
+              )}
+            >
+              {item.icon && <item.icon className="size-4" aria-hidden="true" />}
+              {item.label}
+            </Link>
+          );
         })}
       </div>
     </nav>
   );
 };
-
-type NavItemProps = NavItem & {
-  active: boolean;
-};
-
-const NavItem = ({ label, url, icon: Icon, active }: NavItemProps) => (
-  <Link
-    href={url}
-    aria-current={active ? "page" : undefined}
-    className={cn(
-      "relative inline-flex shrink-0 items-center gap-2 px-3 py-3 text-sm font-medium",
-      "text-muted-foreground transition-colors hover:text-foreground",
-      "after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:rounded-full after:content-['']",
-      active ? "text-foreground after:bg-primary" : "after:bg-transparent",
-    )}
-  >
-    {Icon && <Icon className="size-4" aria-hidden="true" />}
-    {label}
-  </Link>
-);
 
 export { Navbar };

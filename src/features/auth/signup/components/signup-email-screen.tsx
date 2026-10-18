@@ -4,12 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Loader2Icon, ArrowLeftIcon, KeyIcon, MailIcon } from "lucide-react";
-import {
-  FormContent,
-  FormInput,
-  FormButton,
-  FormError,
-} from "@/features/auth/components/auth-form";
+import { FormContent, FormInput, FormError } from "@/components/ui/form";
 import {
   Dialog,
   DialogContent,
@@ -45,10 +40,7 @@ const SignupEmailScreen = () => {
   };
 
   return (
-    <FormContent
-      onSubmit={handleSubmit}
-      className="max-w-xs w-full self-center"
-    >
+    <FormContent onSubmit={handleSubmit} className="max-w-xs w-full self-center">
       {error && <FormError>{error}</FormError>}
 
       <FormInput
@@ -76,15 +68,9 @@ const SignupEmailScreen = () => {
         type="submit"
       >
         Continue
-        {isLoading && (
-          <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />
-        )}
+        {isLoading && <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />}
       </FormButton>
-      <Button
-        variant="outline"
-        nativeButton={false}
-        render={<Link href="/signup" />}
-      >
+      <Button variant="outline" nativeButton={false} render={<Link href="/signup" />}>
         <ArrowLeftIcon size={16} />
         Back
       </Button>
@@ -94,8 +80,7 @@ const SignupEmailScreen = () => {
           <DialogHeader>
             <DialogTitle>Check your email</DialogTitle>
             <DialogDescription>
-              We need to verify that it&apos;s really you. We&apos;ve sent a
-              verification link to{" "}
+              We need to verify that it&apos;s really you. We&apos;ve sent a verification link to{" "}
               <span className="font-medium text-foreground">{email}</span>.
             </DialogDescription>
           </DialogHeader>
@@ -103,13 +88,7 @@ const SignupEmailScreen = () => {
           <DialogFooter className="sm:justify-start">
             <Button
               nativeButton={false}
-              render={
-                <a
-                  href="https://mail.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              }
+              render={<a href="https://mail.google.com" target="_blank" rel="noopener noreferrer" />}
             >
               Open Gmail
             </Button>

@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 const ClassPage = () => {
-  return <>this is the class page.:query</>;
+  redirect("/");
 };
 
 export default ClassPage;

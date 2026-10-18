@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { FormContent, FormButton } from "@/features/auth/components/auth-form";
+import { FormContent, FormButton } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 

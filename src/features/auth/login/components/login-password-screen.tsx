@@ -4,12 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Loader2Icon, ArrowLeftIcon, KeyIcon } from "lucide-react";
-import {
-  FormContent,
-  FormInput,
-  FormButton,
-  FormError,
-} from "@/features/auth/components/auth-form";
+import { FormContent, FormInput, FormButton, FormError } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import { useFormdataStore } from "../use-formdata-store";
@@ -36,10 +31,7 @@ const LoginPasswordScreen = () => {
   };
 
   return (
-    <FormContent
-      onSubmit={handleSubmit}
-      className="max-w-xs w-full self-center"
-    >
+    <FormContent onSubmit={handleSubmit} className="max-w-xs w-full self-center">
       {error && <FormError>{error}</FormError>}
 
       <FormInput
@@ -52,22 +44,11 @@ const LoginPasswordScreen = () => {
         required
       />
 
-      <FormButton
-        type="submit"
-        className="relative"
-        disabled={isLoading}
-        variant={"secondary"}
-      >
+      <FormButton type="submit" className="relative" disabled={isLoading} variant={"secondary"}>
         Login
-        {isLoading && (
-          <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />
-        )}
+        {isLoading && <Loader2Icon className="absolute top-1/2 -translate-y-1/2 right-2 animate-spin" />}
       </FormButton>
-      <Button
-        variant="outline"
-        nativeButton={false}
-        render={<Link href="/login" />}
-      >
+      <Button variant="outline" nativeButton={false} render={<Link href="/login" />}>
         <ArrowLeftIcon size={16} />
         Back
       </Button>
