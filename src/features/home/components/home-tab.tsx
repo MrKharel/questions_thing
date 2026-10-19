@@ -2,16 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { BookOpenIcon, CalendarIcon, PlusIcon, SearchIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { dateFormatter } from "@/lib/date-formatter";
 
-import {
-  Card,
-  CardContent,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -24,7 +20,6 @@ const CLASSES_STALE_TIME = 5 * 60 * 1000; // 5 minutes
 const SKELETON_COUNT = 4;
 
 // types
-type HeaderProps = { search: string; onSearch: (value: string) => void };
 type NoResultsProps = { search: string };
 
 const HomeTab = () => {
@@ -41,17 +36,16 @@ const HomeTab = () => {
     staleTime: CLASSES_STALE_TIME,
   });
 
-  if (classesLoading) return <ClassesSkeleton />;
-  if (!classes || classes.length === 0) return <NoClasses />;
+  if (!classesLoading && (!classes || classes.length === 0))
+    return <NoClasses />;
 
-  // filter by subject, case-insensitive
-  const filtered = classes.filter((virtualClass) =>
+  const filtered = classes!.filter((virtualClass) =>
     virtualClass.subject.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
     <section className="space-y-4">
-      <Header search={search} onSearch={setSearch} />
+      <Header search={search} onSearch={setSearch} filtered={filtered} />
 
       <div className="flex items-center gap-2">
         <h2 className="text-lg font-semibold text-foreground">Classes</h2>
@@ -60,12 +54,37 @@ const HomeTab = () => {
         </span>
       </div>
 
-      {filtered.length === 0 ? (
-        <NoResults search={search} />
+      {classesLoading ? (
+        <ClassesSkeleton />
+      ) : filtered.length === 0 ? (
+        <NoClasses />
       ) : (
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div>
           {filtered.map((virtualClass) => (
-            <ClassCard key={virtualClass.id} virtualClass={virtualClass} />
+            <Link
+              key={virtualClass.id}
+              href={`/class/${virtualClass.id}`}
+              className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring border-t last:border-b border-border py-3 px-8"
+            >
+              <div className="flex h-full flex-col gap-3">
+                <div className="flex flex-col">
+                  <h3 className="truncate text-lg font-semibold text-foreground leading-7">
+                    {virtualClass.subject}
+                  </h3>
+
+                  {virtualClass.description && (
+                    <p className="line-clamp-2 text-sm text-foreground/84">
+                      {virtualClass.description}
+                    </p>
+                  )}
+                </div>
+                <p className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground font-semibold leading-7">
+                  <CalendarIcon size={14} />
+                  Created{" "}
+                  {dateFormatter.format(new Date(virtualClass.created_at))}
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       )}
@@ -73,8 +92,16 @@ const HomeTab = () => {
   );
 };
 
+type HeaderProps = {
+  search: string;
+  onSearch: (value: string) => void;
+  filtered: Class[];
+};
+
 // search + create
-const Header = ({ search, onSearch }: HeaderProps) => {
+const Header = ({ search, onSearch, filtered }: HeaderProps) => {
+  const router = useRouter();
+
   return (
     <header className="flex items-center gap-2">
       <div className="relative flex-1">
@@ -84,6 +111,11 @@ const Header = ({ search, onSearch }: HeaderProps) => {
           placeholder="Search your classes"
           value={search}
           onChange={(e) => onSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (filtered.length === 1 && e.key === "Enter") {
+              router.push(`/class/${filtered[0].id}`);
+            }
+          }}
         />
       </div>
 
@@ -95,51 +127,24 @@ const Header = ({ search, onSearch }: HeaderProps) => {
   );
 };
 
-// a single class in the list
-const ClassCard = ({ virtualClass }: { virtualClass: Class }) => {
-  return (
-    <Link
-      href={`/class/${virtualClass.id}`}
-      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-    >
-      <Card className="rounded-md p-0 py-2 hover:bg-card/80">
-        <CardContent className="flex h-full flex-col gap-3">
-          <div className="flex flex-col gap-1">
-            <CardTitle className="truncate text-base font-semibold">
-              {virtualClass.subject}
-            </CardTitle>
-
-            {virtualClass.description && (
-              <CardDescription className="line-clamp-2 text-sm">
-                {virtualClass.description}
-              </CardDescription>
-            )}
-          </div>
-          <p className="mt-auto flex items-center gap-1.5 text-xs text-muted-foreground">
-            <CalendarIcon className="h-3.5 w-3.5" />
-            Created {dateFormatter.format(new Date(virtualClass.created_at))}
-          </p>
-        </CardContent>
-      </Card>
-    </Link>
-  );
-};
-
 /* - - - - - - - - - - - - STATES - - - - - - - - - - - - - */
 const ClassesSkeleton = () => {
   return (
-    <section className="animate-pulse space-y-4">
-      <div className="flex items-center gap-2">
-        <div className="h-9 flex-1 rounded-md bg-muted" />
-        <div className="h-9 w-20 rounded-md bg-muted" />
-      </div>
-      <div className="h-6 w-24 rounded bg-muted" />
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-        {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
-          <div key={i} className="h-24 rounded-lg border bg-muted/50" />
-        ))}
-      </div>
-    </section>
+    <div className="grid grid-cols-1">
+      {Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-3 py-3 px-8 border-t border-border"
+        >
+          <div className="flex flex-col gap-1.5">
+            <Skeleton className="h-5 w-2/5" />
+            <Skeleton className="h-3.5 w-full" />
+            <Skeleton className="h-3.5 w-2/3" />
+          </div>
+          <Skeleton className="h-3 w-1/5" />
+        </div>
+      ))}
+    </div>
   );
 };
 

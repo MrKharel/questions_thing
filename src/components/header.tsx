@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { InboxIcon } from "lucide-react";
 import { cn } from "cn";
+
 import { useProfileQuery } from "@/hooks/use-profile";
 
 import { Button } from "./ui/button";
@@ -15,12 +17,28 @@ type HeaderProps = ComponentProps<"div"> & {};
 
 const Header = ({ className, ...rest }: HeaderProps) => {
   return (
-    <header className={cn("flex justify-between items-center h-12 px-4 bg-sidebar", className)} {...rest}>
-      <div></div>
+    <header
+      className={cn(
+        "flex justify-between items-center h-12 px-4 bg-sidebar",
+        className,
+      )}
+      {...rest}
+    >
+      <div>
+        <Breadcrumbs />
+      </div>
 
       <div className="flex items-center gap-2 [&>a]:px-2 [&>button]:px-2">
-        <Input className={"h-8 bg-muted/70 border border-border"} placeholder="Ctrl + K :: Search" />
-        <Button variant="outline" size={"sm"} nativeButton={false} render={<Link href="/inbox" />}>
+        <Input
+          className={"h-8 bg-muted/70 border border-border"}
+          placeholder="Ctrl + K :: Search"
+        />
+        <Button
+          variant="outline"
+          size={"sm"}
+          nativeButton={false}
+          render={<Link href="/inbox" />}
+        >
           <InboxIcon size={16} />
         </Button>
         <Profile />
@@ -36,10 +54,18 @@ const Profile = () => {
     <div>
       <Avatar className={"size-9"}>
         <AvatarImage src={profileQuery.data?.avatar ?? ""}></AvatarImage>
-        <AvatarFallback>{profileQuery.data?.username.slice(0, 2)}</AvatarFallback>
+        <AvatarFallback>
+          {profileQuery.data?.username.slice(0, 2)}
+        </AvatarFallback>
       </Avatar>
     </div>
   );
+};
+
+const Breadcrumbs = () => {
+  const pathname = usePathname();
+
+  return <div></div>;
 };
 
 export { Header };
