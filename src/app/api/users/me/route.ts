@@ -37,7 +37,7 @@ export const PATCH = async (req: NextRequest) => {
       username: z.string().trim().min(1).max(32).optional(),
       display_name: z.string().min(1).max(32).optional(),
       bio: z.string().min(1).max(300).optional(),
-      location: z.string().min(1).max(30).optional(),
+      location: z.string().min(1).max(50).optional(),
       avatar: z.string().url().nullable().optional(),
     })
     .refine(

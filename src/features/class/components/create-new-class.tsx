@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BookIcon, Loader2Icon } from "lucide-react";
+import { BookIcon } from "lucide-react";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -48,7 +48,7 @@ const yesNoItems: { value: boolean; label: string }[] = [
 
 type Formdata = {
   subject: string;
-  description: string;
+  description: null | string;
 };
 type Config = {
   visibility: "private" | "public";
@@ -65,7 +65,7 @@ const CreateNewClass = () => {
 
   const [formdata, setFormata] = useState<Formdata>({
     subject: "",
-    description: "",
+    description: null,
   });
   const [config, setConfig] = useState<Config>({
     visibility: "private",
@@ -75,16 +75,29 @@ const CreateNewClass = () => {
     allow_late_submissions: true,
   });
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createClassMutation.mutate({ ...formdata, ...config });
-    router.push(`/classes/${createClassMutation.data!.id}`);
+    const id = crypto.randomUUID();
+    const inserts = {
+      id,
+      ...formdata,
+      ...config,
+    };
+    console.log({ inserts });
+    createClassMutation.mutate(inserts);
+    router.push(`/class/${id}`);
   };
 
   return (
     <Form className="my-16 px-4 md:px-0 max-w-lg">
       <FormContent onSubmit={handleSubmit} className="gap-4">
         <FormTitle className="self-start">Create New Class</FormTitle>
+
+        {createClassMutation.isError && (
+          <p className="text-rose-400 text-sm self-start">
+            {createClassMutation.error.message}
+          </p>
+        )}
 
         <div className="flex gap-4 items-center">
           <div className="flex flex-col gap-1">
@@ -94,7 +107,7 @@ const CreateNewClass = () => {
                 <AvatarImage
                   src={profileQuery.data?.avatar ?? ""}
                   className={"bg-background"}
-                ></AvatarImage>
+                />
                 <AvatarFallback className={"bg-background"}>
                   {profileQuery.data?.username.slice(0, 2)}
                 </AvatarFallback>
@@ -106,21 +119,25 @@ const CreateNewClass = () => {
           </div>
           <FormInput
             icon={BookIcon}
-            label="Subject *"
+            label={"Subject *"}
             placeholder={"Mathematics 101"}
             value={formdata.subject}
             onChange={(e) =>
               setFormata((prev) => ({ ...prev, subject: e.target.value }))
             }
+            required
           />
         </div>
 
         <FormTextarea
-          label="Description *"
+          label="Description"
           placeholder="This class teaches the mathematics and has 101 courses inside it."
-          value={formdata.description}
+          value={formdata.description ?? ""}
           onChange={(e) =>
-            setFormata((prev) => ({ ...prev, description: e.target.value }))
+            setFormata((prev) => ({
+              ...prev,
+              description: e.target.value === "" ?? null,
+            }))
           }
           showWordCount
         />
@@ -293,9 +310,6 @@ const CreateNewClass = () => {
           type="submit"
           className={"w-full md:w-fit self-center md:self-end"}
         >
-          {createClassMutation.isPending && (
-            <Loader2Icon size={16} className="animate-spin" />
-          )}
           Create new class
         </Button>
       </FormContent>

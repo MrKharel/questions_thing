@@ -7,29 +7,27 @@ const CLASSES_QUERY_KEY = ["class"] as const;
 const CLASSES_API_ENDPOINT = "api/classes/";
 const CLASS_STALE_TIME = 5 * 60 * 1000; // five-minutes
 
+// GET all classes
 const useClassesQuery = () => {
   return useQuery<Class[]>({
     queryKey: CLASSES_QUERY_KEY,
     queryFn: async () => {
-      const result = await fetch(CLASSES_API_ENDPOINT).then((req) =>
-        req.json(),
-      );
-      if (!result.success) throw new Error(result.error);
-      return result.data;
+      const res = await fetch(CLASSES_API_ENDPOINT).then((req) => req.json());
+      if (!res.success) throw new Error(res.error);
+      return res.data;
     },
     staleTime: CLASS_STALE_TIME,
   });
 };
 
+// GET just one class with its id
 const useClassQuery = (id: string) => {
   return useQuery<Class>({
     queryKey: [id] as const,
     queryFn: async () => {
-      const result = await fetch(`/api/classes/${id}`).then((req) =>
-        req.json(),
-      );
-      if (!result.success) throw new Error(result.error);
-      return result.data;
+      const res = await fetch(`/api/classes/${id}`).then((req) => req.json());
+      if (!res.success) throw new Error(res.error);
+      return res.data;
     },
     staleTime: CLASS_STALE_TIME,
   });
@@ -104,20 +102,24 @@ const useUpdateClassMutation = (id: string) => {
   });
 };
 
-type CreateProps = Pick<Class, "subject"> & MutationProps;
+type CreateProps = Pick<Class, "subject" | "id"> & MutationProps;
 
 const useCreateClassMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation<Class, Error, CreateProps>({
     mutationFn: async (variables) => {
+      console.log({ variables });
       const res = await fetch("/api/classes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(variables),
-      }).then((req) => req.json());
-      if (!res.success) throw new Error(res.error);
-      return res.data;
+      });
+      const json = await res.json().catch(() => null);
+      if (!json.success || res.ok) {
+        throw new Error(json!.error.message ?? `Request Failed ${res.status}`);
+      }
+      return json.data;
     },
     onSuccess: (created) => {
       queryClient.setQueryData<Class>([created.id], created);

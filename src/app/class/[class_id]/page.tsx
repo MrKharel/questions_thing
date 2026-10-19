@@ -1,7 +1,7 @@
-import ClassPageComponent from "@/features/class/home";
+import ClassOverview from "@/features/class/overview";
 
 const ClassPage = () => {
-  return <ClassPageComponent />;
+  return <ClassOverview />;
 };
 
 export default ClassPage;
