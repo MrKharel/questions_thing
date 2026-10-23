@@ -1,11 +1,7 @@
-import SignupForm from "@/features/auth/signup";
+import { SignupHomePage as SignupHome } from "@/features/auth/signup";
 
-const SignupPage = ({
-  searchParams,
-}: {
-  searchParams: Promise<{ screen?: string | undefined }>;
-}) => {
-  return <SignupForm searchParams={searchParams} />;
+const SignupPage = () => {
+	return <SignupHome />;
 };
 
 export default SignupPage;

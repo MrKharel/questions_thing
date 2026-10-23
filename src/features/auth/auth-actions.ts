@@ -1,48 +1,51 @@
 "use server";
-
-import { redirect } from "next/navigation";
 import createClient from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export const signUp = async (email: string, password: string) => {
-  const supabase = await createClient();
+/* ---------------------------------------- SIGNIN FUNCTIONS ---------------------------------------- */
+export async function signinWithPassword({ email, password }: { email: string; password: string }) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.signInWithPassword({ email, password });
+	if (error) {
+		return { error: { message: error.message } };
+	}
+	redirect("/");
+}
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: { emailRedirectTo: "/login" },
-  });
+/* ---------------------------------------- EMAIL PASSWORD RESET FUNCTIONS ---------------------------------------- */
+export async function resetPasswordForEmail(email: string) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.resetPasswordForEmail(email, {
+		redirectTo: "http://locahost:3000/help/reset-password",
+	});
+	if (!error) {
+		return { error: null };
+	}
+	return { error: { message: error.message } };
+}
 
-  if (error) {
-    console.log(error);
-    return { error: { code: error.code, message: error.message } };
-  }
+export async function updateUserPassword(password: string) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({ password });
+	if (error) {
+		return { error: { message: error.message } };
+	}
+	return { error: null };
+}
 
-  return { error: null };
-};
+/* ---------------------------------------- SIGNUP FUNCTIONS ---------------------------------------- */
+export async function signupWithEmail({ email, password }: { email: string; password: string }) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: "/login" } });
+	if (!error) {
+		return { error: null };
+	}
+	return { error: { message: error.message } };
+}
 
-export const signInWithPassword = async (email: string, password: string) => {
-  const supabase = await createClient();
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  });
-
-  if (error) {
-    return { error: { code: error.code, message: error.message } };
-  }
-
-  redirect("/");
-};
-
-export const signOut = async () => {
-  const supabase = await createClient();
-
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    return { error: { code: error.code, message: error.message } };
-  }
-
-  redirect("/login");
-};
+/* ---------------------------------------- SIGNOUT FUNCTIONS ---------------------------------------- */
+export async function signout() {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.signOut({});
+	if (!error) redirect("/login");
+}

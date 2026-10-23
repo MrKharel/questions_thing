@@ -1,11 +1,13 @@
-import Home from "@/features/home";
+"use client";
+import { Button } from "@/components/ui/button";
+import { signout } from "@/features/auth";
 
-const LandingPage = ({
-  searchParams,
-}: {
-  searchParams: Promise<{ tab?: string }>;
-}) => {
-  return <Home searchParams={searchParams} />;
+const Landing_Page = () => {
+  return (
+    <Button onClick={signout} className={"w-fit"}>
+      Signout, okay?
+    </Button>
+  );
 };
 
-export default LandingPage;
+export default Landing_Page;

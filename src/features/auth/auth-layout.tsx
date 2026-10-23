@@ -1,53 +1,48 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Suspense, type ReactNode } from "react";
 
-import type { ReactNode } from "react";
-
-const AuthLayoutComponent = ({ children }: { children: ReactNode }) => {
+export const AuthLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
+  console.log({ pathname });
 
   return (
-    <div className="min-h-screen w-screen flex flex-col">
-      <header className="flex justify-between items-center h-16 px-4 w-full max-w-[1200px] self-center">
-        <h1 className="font-mono tracking-tight text-lg">QuestionThings</h1>
+    <>
+      <header className="flex justify-between px-4 sm:px-8 h-14 items-center">
+        <section></section>
 
-        {pathname === "/login" ? (
-          <Button
-            variant="outline"
-            size="sm"
-            nativeButton={false}
-            render={<Link href="/signup" />}
-          >
-            Sign Up
-          </Button>
-        ) : pathname === "/signup" ? (
-          <Button
-            variant="outline"
-            size="sm"
-            nativeButton={false}
-            render={<Link href="/login" />}
-          >
-            Login
-          </Button>
-        ) : (
-          ""
-        )}
+        <section>
+          {pathname === "/signup" ? (
+            <Button
+              variant="outline"
+              nativeButton={false}
+              render={<Link href="/login" />}
+            >
+              Login
+            </Button>
+          ) : pathname === "/login" ? (
+            <Button
+              variant="outline"
+              nativeButton={false}
+              render={<Link href="/signup" />}
+            >
+              Signup
+            </Button>
+          ) : (
+            <></>
+          )}
+        </section>
       </header>
 
-      <div className="mt-22 self-center w-full max-w-[320px]">{children}</div>
-
-      <p className="text-center self-center text-xs text-foreground/70 mt-4 max-w-[320px] w-full">
-        By contuining, you agree to all of our{" "}
-        <Link href="/terms" className="text-foreground">
-          terms and conditions.
-        </Link>
-      </p>
-    </div>
+      <Form className="mt-20">
+        <Suspense fallback={<></>}>{children}</Suspense>
+        <p className="text-sm font-light text-foreground/60">
+          By continuing, you agree to our terms and conditions.
+        </p>
+      </Form>
+    </>
   );
 };
-
-export { AuthLayoutComponent };

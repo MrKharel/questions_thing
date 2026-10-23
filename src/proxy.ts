@@ -3,22 +3,22 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 type RouteType = "protected" | "public" | "auth";
-
-interface RoutePattern {
-  pattern: string;
-  type: RouteType;
-}
+type RoutePattern = { pattern: string; type: RouteType };
 
 const routeConfigs: RoutePattern[] = [
+  // AUTH routes
   { pattern: "/login", type: "auth" },
   { pattern: "/signup", type: "auth" },
 
-  { pattern: "/", type: "protected" },
-  { pattern: "/class", type: "protected" },
-  { pattern: "/class/*", type: "protected" },
-];
+  // PUBLIC routes
+  { pattern: "/help/forgot-password", type: "public" },
 
-const redirects: Record<string, string> = {};
+  // PROTECTED routes
+  { pattern: "/", type: "protected" },
+];
+const redirects: Record<string, string> = {
+  "/help": "/login",
+};
 
 function normalizePathname(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith("/")) {
@@ -63,15 +63,13 @@ export default async function Proxy(request: NextRequest) {
   }
 
   let supabaseResponse = NextResponse.next({ request });
-
   const supabase = await createClient();
 
   const {
     data: { user },
     error: userError,
   } = await supabase.auth.getUser();
-
-  const hasUser = !!user && !userError;
+  const hasUser = user && !userError;
 
   switch (routeType) {
     case "protected": {

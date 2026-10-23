@@ -1,35 +1,33 @@
 import "./globals.css";
-
-import { ThemeProvider } from "@/lib/theme-provider";
-import { ThemeScript } from "@/lib/theme-script";
-import { TanstackProvider } from "@/lib/tanstack-provider";
-
-import type { ReactNode } from "react";
+import { Fira_Code, Geist } from "next/font/google";
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { cn } from "cn";
 
-type RootLayoutProps = {
-  children: ReactNode;
+const sans = Geist({
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+const monospace = Fira_Code({
+  variable: "--font-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Study Hard, Guyz",
 };
 
-const metadata: Metadata = {
-  title: "IDK",
-  description: "i have no idea.",
-};
-
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeScript />
-      </head>
-      <body>
-        <TanstackProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </TanstackProvider>
-      </body>
+    <html
+      lang="en"
+      className={cn(sans.variable, monospace.variable)}
+      suppressHydrationWarning
+    >
+      <body>{children}</body>
     </html>
   );
 };
 
 export default RootLayout;
-export { metadata };
