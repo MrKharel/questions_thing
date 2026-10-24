@@ -1,13 +1,3 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { signout } from "@/features/auth";
-
-const Landing_Page = () => {
-  return (
-    <Button onClick={signout} className={"w-fit"}>
-      Signout, okay?
-    </Button>
-  );
-};
-
-export default Landing_Page;
+export default async function Landing_Page() {
+	return <>this is landing page</>;
+}

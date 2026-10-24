@@ -1,14 +1,37 @@
-import { getProfile, updateProfile } from "@/actions/profile";
+import { getProfile, getProfileByUsername, updateProfile } from "@/actions/profile";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { Profile } from "@/actions/profile";
 
 const PROFILE_QUERY_KEY = ["user-profile"] as const;
 
+export const profileKeys = {
+	me: ["profile", "me"] as const,
+	byUsername: (username: string) => ["profile", username] as const,
+};
+
 export function useProfileQuery() {
+	const queryClient = useQueryClient();
+
 	return useQuery({
-		queryKey: PROFILE_QUERY_KEY,
-		queryFn: getProfile,
+		queryKey: profileKeys.me,
+		queryFn: async () => {
+			const profile = await getProfile();
+			if (!("username" in profile)) throw profile;
+			queryClient.setQueryData(profileKeys.byUsername(profile.username), profile);
+			return profile;
+		},
+	});
+}
+
+export function useProfileQueryByUsername(username: string) {
+	return useQuery({
+		queryKey: profileKeys.byUsername(username),
+		queryFn: async () => {
+			const profile = await getProfileByUsername(username, { single: true });
+			if (!("username" in profile)) throw profile;
+			return profile;
+		},
 	});
 }
 

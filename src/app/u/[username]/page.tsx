@@ -1,5 +1,7 @@
-export default async function ProfilePage({ params }: { params: Promise<{ username: string }> }) {
-  const { username } = await params;
+import { ProfilePage as Profile } from "@/features/profile";
 
-  return <>this is the profile page. username: {username}</>;
+export default async function ProfilePage({ params }: { params: Promise<{ username: string }> }) {
+	const { username } = await params;
+
+	return <Profile username={username} />;
 }

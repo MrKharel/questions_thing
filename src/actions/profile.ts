@@ -1,6 +1,7 @@
 "use server";
 import z from "zod";
 import createClient from "@/lib/supabase/server";
+import createServiceRoleClient from "@/lib/supabase/service-role";
 
 import { AppError } from ".";
 import type { Response } from ".";
@@ -17,7 +18,7 @@ const ProfileSchema = z.object({
 	avatar: z.string().url("Avatar must be a valid URL").nullable(),
 	location: z.string().max(100, "Location must be at most 100 characters").nullable(),
 	bio: z.string().max(500, "Bio must be at most 500 characters").nullable(),
-	preferredRoles: z.string().max(200, "Preferred roles must be at most 200 characters").nullable(),
+	preferredRole: z.string().max(200, "Preferred roles must be at most 200 characters").nullable(),
 	createdAt: z.string(),
 	updatedAt: z.string(),
 	deletedAt: z.string().nullable().optional(),
@@ -45,17 +46,42 @@ const toAppError = (error: { code?: string; message: string }) => {
 	return new AppError("DATABASE", "Unexpected error occured");
 };
 
-export const getProfile = async (): Response<Profile> => {
+export async function getProfile(): Response<Profile> {
 	const supabase = await createClient();
 
-	const { data, error } = await supabase.from("profiles").select("*").is("deletedAt", null).single();
+	const { data, error } = await supabase.from("profiles").select().is("deletedAt", null).single();
 	if (error) throw toAppError(error);
 
 	const parsed = ProfileSchema.safeParse(data);
 	if (!parsed.success) throw new AppError("DATABASE", "Profile data is malformed");
 
 	return data;
-};
+}
+
+export async function getProfileByUsername(username: string, { single }: { single?: false }): Response<Profile[]>;
+export async function getProfileByUsername(username: string, { single }: { single?: true }): Response<Profile>;
+export async function getProfileByUsername(username: string, { single }: { single?: boolean }): Response<Profile | Profile[]> {
+	const supabase = await createClient();
+
+	if (single) {
+		const { data, error } = await supabase.from("profiles").select("*").eq("username", username).is("deletedAt", null).single();
+		if (error) throw toAppError(error);
+
+		const parsed = ProfileSchema.safeParse(data);
+		if (!parsed.success) throw new AppError("DATABASE", "Profile data is malformed");
+
+		return data;
+	}
+
+	// multi-row level lookup
+	const { data, error } = await supabase.from("profiles").select("*").eq("username", username).is("deletedAt", null);
+	if (error) throw toAppError(error);
+
+	const parsed = ProfileSchema.safeParse(data);
+	if (!parsed.success) throw new AppError("DATABASE", "Profile data is malformed");
+
+	return data;
+}
 
 export const updateProfile = async (updates: ProfilePatches): Response<Profile> => {
 	const parsedPatch = ProfilePatchSchema.safeParse(updates);
