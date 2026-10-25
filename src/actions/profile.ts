@@ -1,7 +1,6 @@
 "use server";
 import z from "zod";
 import createClient from "@/lib/supabase/server";
-import createServiceRoleClient from "@/lib/supabase/service-role";
 
 import { AppError } from ".";
 import type { Response } from ".";
@@ -43,7 +42,7 @@ export type ProfilePatches = z.infer<typeof ProfilePatchSchema>;
 const toAppError = (error: { code?: string; message: string }) => {
 	if (error.code === "PGRST116") return new AppError("NOT_FOUND", "Profile not found");
 	if (error.code === "23505") return new AppError("CONFLICT", "That username is already taken");
-	return new AppError("DATABASE", "Unexpected error occured");
+	return new AppError("DATABASE", error.message);
 };
 
 export async function getProfile(): Response<Profile> {
@@ -86,6 +85,7 @@ export async function getProfileByUsername(username: string, { single }: { singl
 export const updateProfile = async (updates: ProfilePatches): Response<Profile> => {
 	const parsedPatch = ProfilePatchSchema.safeParse(updates);
 	if (!parsedPatch.success) {
+		console.error(parsedPatch.error.issues[0].message);
 		throw new AppError("VALIDATION", parsedPatch.error.issues[0].message);
 	}
 
@@ -97,7 +97,10 @@ export const updateProfile = async (updates: ProfilePatches): Response<Profile> 
 		.is("deletedAt", null)
 		.select()
 		.single();
-	if (error) throw toAppError(error);
+	if (error) {
+		console.error(error);
+		throw toAppError(error);
+	}
 
 	const parsed = ProfileSchema.safeParse(data);
 	if (!parsed.success) throw new AppError("DATABASE", "Profile data is malformed");

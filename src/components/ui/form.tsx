@@ -8,10 +8,7 @@ import type { ComponentProps, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
 export const Form = ({ className, ...rest }: ComponentProps<"div">) => (
-	<div
-		className={cn("w-screen max-w-xs self-center flex flex-col gap-6 items-center justify-center", className)}
-		{...rest}
-	/>
+	<div className={cn("w-screen max-w-xs self-center flex flex-col gap-6 items-center justify-center", className)} {...rest} />
 );
 
 export const FormHeader = ({ className, ...rest }: ComponentProps<"div">) => (
@@ -38,13 +35,7 @@ export const FormInput = ({
 
 			<div className="relative">
 				{Icon && (
-					<Icon
-						size={16}
-						className={cn(
-							"absolute top-1/2 left-2 -translate-y-1/2 text-foreground/75",
-							isFocussed && "text-foreground",
-						)}
-					/>
+					<Icon size={16} className={cn("absolute top-1/2 left-2 -translate-y-1/2 text-foreground/75", isFocussed && "text-foreground")} />
 				)}
 
 				<Input
@@ -61,10 +52,8 @@ export const FormInput = ({
 					<button
 						type="button"
 						onClick={() => setShowPassword((prev) => !prev)}
-						className={cn(
-							"absolute top-1/2 right-2 -translate-y-1/2 text-foreground/75",
-							isFocussed && "text-foreground",
-						)}>
+						className={cn("absolute top-1/2 right-2 -translate-y-1/2 text-foreground/75", isFocussed && "text-foreground")}
+					>
 						{showPassword ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
 					</button>
 				)}
@@ -75,12 +64,22 @@ export const FormInput = ({
 
 export const FormTextarea = ({
 	label,
+	showWordCount = true,
 	className,
+	maxLength = 200,
+	value,
 	...rest
-}: ComponentProps<typeof Textarea> & { label?: ReactNode }) => {
+}: ComponentProps<typeof Textarea> & { label?: ReactNode; showWordCount?: boolean }) => {
 	return (
 		<div className="flex flex-col gap-1">
-			{label && <FormInputsLabel className="flex justify-between">{label}</FormInputsLabel>}
+			{label && (
+				<FormInputsLabel className="flex justify-between">
+					<span>{label}</span>
+					<span>
+						{String(value).length} / {maxLength}
+					</span>
+				</FormInputsLabel>
+			)}
 
 			<div>
 				<Textarea className={cn("", className)} {...rest} />

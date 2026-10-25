@@ -43,6 +43,9 @@ export function useProfileMutation() {
 		onMutate: (variables) => {
 			queryClient.invalidateQueries({ queryKey: PROFILE_QUERY_KEY });
 			const previous = queryClient.getQueryData(PROFILE_QUERY_KEY);
+
+			console.log({ variables, previous });
+
 			queryClient.setQueryData(PROFILE_QUERY_KEY, (old: Profile) => ({ ...old, ...variables }));
 			return { previous };
 		},
@@ -53,3 +56,4 @@ export function useProfileMutation() {
 		},
 	});
 }
+

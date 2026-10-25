@@ -1,17 +1,9 @@
-"use client";
-import { useProfileQueryByUsername } from "@/hooks/use-profile";
+import { ProfileInfoSection } from "./components/profile-info-section";
 
 export function ProfilePage({ username }: { username: string }) {
-	const profileQuery = useProfileQueryByUsername(username);
-
-	if (profileQuery.isLoading) return <>loading</>;
-	if (!profileQuery.data) return <>no user found. 404</>;
-
-	const { data: profile } = profileQuery;
-
 	return (
-		<div>
-			{profile.username} {profile.id}
+		<div className="flex flex-col md:flex-row gap-4 md:gap-0 mt-6 max-w-[1200px] w-full self-center">
+			<ProfileInfoSection username={username} />
 		</div>
 	);
 }
