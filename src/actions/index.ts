@@ -1,6 +1,6 @@
 export type Response<Type> = Promise<{ message: string; code?: string } | Type>;
 
-export type AppErrorCode = "UNAUTHORIZED" | "VALIDATION" | "NOT_FOUND" | "CONFLICT" | "DATABASE";
+export type AppErrorCode = "UNAUTHORIZED" | "VALIDATION" | "NOT_FOUND" | "CONFLICT" | "DATABASE" | "FORBIDDEN";
 
 export class AppError extends Error {
 	code: AppErrorCode;

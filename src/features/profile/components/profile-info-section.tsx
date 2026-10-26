@@ -51,8 +51,10 @@ function ViewProfile({ profile }: { profile: Profile }) {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="flex flex-col gap-1">
-				<h3 className="text-2xl text-foreground">{profile.displayName ?? profile.username}</h3>
-				<p className="text-foreground/70 text-xl">@{profile.username}</p>
+				<div>
+					<h3 className="text-xl text-foreground">{profile.displayName ?? profile.username}</h3>
+					<p className="text-foreground/70 text-lg">@{profile.username}</p>
+				</div>
 
 				{profile.preferredRole && (
 					<Badge variant="secondary" className="self-start gap-1">
@@ -125,7 +127,10 @@ function EditProfile({ profile }: { profile: Profile }) {
 			bio: formdata.bio,
 			location: formdata.location,
 		});
-		router.push(`/u/${profile.username}`);
+		if (profileMutation.error) {
+			setError(error);
+		}
+		profileMutation.isPending && router.push(`/u/${profile.username}`);
 	}
 
 	return (
@@ -159,6 +164,7 @@ function EditProfile({ profile }: { profile: Profile }) {
 					placeholder="Display Name"
 					label={<>Name</>}
 				/>
+
 				<FormTextarea
 					value={formdata.bio}
 					onChange={(e) => setFormdata((prev) => ({ ...prev, bio: e.target.value }))}
@@ -178,7 +184,8 @@ function EditProfile({ profile }: { profile: Profile }) {
 				{error && <p className="text-xs text-destructive">{error}</p>}
 
 				<div className="flex flex-col gap-1">
-					<Button type="submit" disabled={!isDirty} className="relative">
+					<Button type="submit" disabled={!isDirty || profileMutation.isPending} className="relative">
+						{profileMutation.isPending && <Loader2Icon className="size-4 animate-spin absolute top-1/2 -translate-y-1/2 right-2" />}
 						Save
 					</Button>
 					<Button variant="outline" className="bg-muted" nativeButton={false} render={<Link href={`/u/${profile.username}`} />}>

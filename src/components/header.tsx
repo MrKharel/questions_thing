@@ -16,7 +16,7 @@ type HeaderProps = ComponentProps<"div"> & {};
 
 const Header = ({ className, ...rest }: HeaderProps) => {
 	return (
-		<header className={cn("flex justify-between items-center h-12 px-2 sm:px-4 bg-sidebar", className)} {...rest}>
+		<header className={cn("flex justify-between items-center h-10 px-2 sm:px-4 bg-sidebar", className)} {...rest}>
 			<div>
 				<Breadcrumbs />
 			</div>
@@ -38,7 +38,7 @@ const Profile = () => {
 	return (
 		<div>
 			<Avatar className="size-9 bg-transparent">
-				<AvatarImage src={profile?.avatar ?? ""}></AvatarImage>
+				<AvatarImage src={profile?.avatar ?? "/default-image.jfif"}></AvatarImage>
 				<AvatarFallback>{profile?.username.slice(0, 2)}</AvatarFallback>
 			</Avatar>
 		</div>

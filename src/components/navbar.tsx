@@ -17,8 +17,8 @@ export function Navbar({ links, className }: { className?: string; links: NavLin
 	return (
 		<nav aria-label="Main navigation" className={cn("border-b border-border bg-sidebar", className)}>
 			<div className="flex gap-1 overflow-x-auto">
-				{links.map((link) => (
-					<NavLink {...link} />
+				{links.map((link, index) => (
+					<NavLink key={index} {...link} />
 				))}
 			</div>
 		</nav>
@@ -35,11 +35,10 @@ function NavLink({ label, url, activeUrl, icon: Icon }: NavLink) {
 
 	return (
 		<Link
-			key={url}
 			href={url}
 			aria-current={active ? "page" : undefined}
 			className={cn(
-				"relative inline-flex shrink-0 items-center gap-2 px-3 py-3 text-sm font-medium",
+				"relative inline-flex shrink-0 items-center gap-2 px-3 pb-3 text-sm font-medium",
 				"text-muted-foreground transition-colors hover:text-foreground",
 				"after:absolute after:inset-x-2 after:bottom-0 after:h-0.5 after:rounded-full after:content-['']",
 				active ? "text-foreground after:bg-primary" : "after:bg-transparent",

@@ -8,16 +8,18 @@ import type { ComponentProps, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
 export const Form = ({ className, ...rest }: ComponentProps<"div">) => (
-	<div className={cn("w-screen max-w-xs self-center flex flex-col gap-6 items-center justify-center", className)} {...rest} />
+	<div className={cn("w-screen max-w-xs self-center flex flex-col gap-6", className)} {...rest} />
 );
 
 export const FormHeader = ({ className, ...rest }: ComponentProps<"div">) => (
-	<header className={cn("flex flex-col items-center gap-1.5 self-center *:text-center", className)} {...rest} />
+	<header className={cn("flex flex-col gap-1.5 w-full", className)} {...rest} />
 );
 
 export const FormContent = ({ className, ...rest }: ComponentProps<"form">) => (
 	<form className={cn("flex flex-col gap-3 w-full", className)} {...rest} />
 );
+
+export const FormFooter = ({ className, ...rest }: ComponentProps<"footer">) => <footer className={cn("self-end", className)} {...rest} />;
 
 export const FormInput = ({
 	label,
@@ -97,5 +99,5 @@ export const FormDescription = ({ className, ...rest }: ComponentProps<"p">) => 
 );
 
 export const FormInputsLabel = ({ className, ...rest }: ComponentProps<"label">) => (
-	<label className={cn("text-sm text-bold text-foreground/89 tracking-wide", className)} {...rest} />
+	<label className={cn("text-sm text-foreground/89 tracking-wide font-bold", className)} {...rest} />
 );
