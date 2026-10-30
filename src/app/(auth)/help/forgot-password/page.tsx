@@ -1,5 +1,5 @@
-import { ForgotPasswordPage as ForgotPassword } from "@/features/auth/forgot-password";
+import { ForgotPasswordPage as ForgotPassword } from "@/modules/auth/forgot-password";
 
 export default async function ForgotPasswordPage() {
-	return <ForgotPassword />;
+  return <ForgotPassword />;
 }

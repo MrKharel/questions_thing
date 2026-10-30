@@ -1,7 +1,7 @@
-import { SignupHomePage as SignupHome } from "@/features/auth/signup";
+import { SignupHomePage as SignupHome } from "@/modules/auth/signup";
 
 const SignupPage = () => {
-	return <SignupHome />;
+  return <SignupHome />;
 };
 
 export default SignupPage;
