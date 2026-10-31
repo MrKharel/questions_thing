@@ -1,7 +1,8 @@
 import { Suspense } from "react";
-import { AuthLayout as LayoutComponent } from "@/features/auth/auth-layout";
+import { AuthLayout as LayoutComponent } from "@/modules/auth/auth-layout";
+
 import type { ReactNode } from "react";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Login... and study hard GUYZ",

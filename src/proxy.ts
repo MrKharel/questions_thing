@@ -10,11 +10,12 @@ const routeConfigs: RoutePattern[] = [
   { pattern: "/login", type: "auth" },
   { pattern: "/signup", type: "auth" },
 
-  // PUBLIC routes
   { pattern: "/help/forgot-password", type: "public" },
 
   // PROTECTED routes
   { pattern: "/", type: "protected" },
+  { pattern: "/class", type: "protected" },
+  { pattern: "/class/*", type: "protected" },
 ];
 const redirects: Record<string, string> = {
   "/help": "/login",
