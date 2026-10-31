@@ -37,7 +37,7 @@ export const AuthLayout = ({ children }: { children: ReactNode }) => {
         </section>
       </header>
 
-      <Form className="mt-20 w-fit">
+      <Form className="mt-20 w-fit" variant="auth">
         <Suspense fallback={<></>}>{children}</Suspense>
         <p className="text-sm font-light text-foreground/60">
           By continuing, you agree to our terms and conditions.

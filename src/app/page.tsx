@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { signout } from "@/features/auth";
+import { signout } from "@/modules/auth";
 
 const Landing_Page = () => {
   return (

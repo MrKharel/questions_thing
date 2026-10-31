@@ -25,7 +25,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       className={cn(sans.variable, monospace.variable)}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body className="flex flex-col">{children}</body>
     </html>
   );
 };
