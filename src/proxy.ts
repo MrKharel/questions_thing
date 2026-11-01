@@ -5,16 +5,18 @@ import type { NextRequest } from "next/server";
 type RouteType = "protected" | "public" | "auth";
 type RoutePattern = { pattern: string; type: RouteType };
 
+const PROTECTED_SAFE_REDIRECT = "/";
+const AUTH_SAFE_REDIRECT = "/onboarding/login";
+
 const routeConfigs: RoutePattern[] = [
   // AUTH routes
-  { pattern: "/login", type: "auth" },
-  { pattern: "/signup", type: "auth" },
-
-  // PUBLIC routes
-  { pattern: "/help/forgot-password", type: "public" },
+  { pattern: "/onboarding/register", type: "auth" },
+  { pattern: "/onboarding/login", type: "auth" },
 
   // PROTECTED routes
   { pattern: "/", type: "protected" },
+  { pattern: "/class", type: "protected" },
+  { pattern: "/class/*", type: "protected" },
 ];
 const redirects: Record<string, string> = {
   "/help": "/login",
@@ -75,7 +77,7 @@ export default async function Proxy(request: NextRequest) {
     case "protected": {
       if (!hasUser) {
         const url = request.nextUrl.clone();
-        url.pathname = "/login";
+        url.pathname = AUTH_SAFE_REDIRECT;
         url.searchParams.set("redirectTo", pathname + request.nextUrl.search);
         return NextResponse.redirect(url);
       }
@@ -85,7 +87,7 @@ export default async function Proxy(request: NextRequest) {
     case "auth": {
       if (hasUser) {
         const url = request.nextUrl.clone();
-        url.pathname = "/classes";
+        url.pathname = PROTECTED_SAFE_REDIRECT;
         url.search = "";
         return NextResponse.redirect(url);
       }

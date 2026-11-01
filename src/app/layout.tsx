@@ -1,8 +1,11 @@
 import "./globals.css";
 import { Fira_Code, Geist } from "next/font/google";
+import { cn } from "cn";
+
+import { TanstackProvider } from "@/components/ui/tanstack-provider";
+
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { cn } from "cn";
 
 const sans = Geist({
   weight: ["300", "400", "500", "600"],
@@ -20,12 +23,10 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html
-      lang="en"
-      className={cn(sans.variable, monospace.variable)}
-      suppressHydrationWarning
-    >
-      <body>{children}</body>
+    <html lang="en" className={cn(sans.variable, monospace.variable)} suppressHydrationWarning>
+      <body className="flex flex-col">
+        <TanstackProvider>{children}</TanstackProvider>
+      </body>
     </html>
   );
 };
