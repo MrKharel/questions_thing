@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Mail, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldGroup, FieldDescription, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Field, FieldGroup, FieldDescription, FieldLabel, FieldSet, FieldError } from "@/components/ui/field";
 import {
   Dialog,
   DialogContent,
@@ -96,6 +96,8 @@ function RegisterForm() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Field>
+
+              {state.error && <FieldError className="text-center">{state.error}</FieldError>}
             </FieldSet>
 
             <Button type="submit" className="relative" disabled={state.isLoading || (state.isSuccessful ? true : false)}>
