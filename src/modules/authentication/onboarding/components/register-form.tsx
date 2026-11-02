@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Mail, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Field, FieldGroup, FieldDescription, FieldLabel, FieldSet } from "@/components/ui/field";
+import { Field, FieldGroup, FieldDescription, FieldLabel, FieldSet, FieldError } from "@/components/ui/field";
 import {
   Dialog,
   DialogContent,
@@ -65,6 +65,7 @@ function RegisterForm() {
                   autoComplete="username"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  autoFocus
                 />
                 <FieldDescription>Choose a unique username for your account</FieldDescription>
               </Field>
@@ -96,6 +97,8 @@ function RegisterForm() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Field>
+
+              {state.error && <FieldError className="text-center">{state.error}</FieldError>}
             </FieldSet>
 
             <Button type="submit" className="relative" disabled={state.isLoading || (state.isSuccessful ? true : false)}>
@@ -109,6 +112,7 @@ function RegisterForm() {
           </FieldGroup>
         </form>
       </CardContent>
+
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="items-center text-center">

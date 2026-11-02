@@ -54,7 +54,8 @@ function LoginForm() {
                   type="email"
                   placeholder="you@email.com"
                   autoComplete="email"
-                  required={true}
+                  required
+                  autoFocus
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
