@@ -5,7 +5,17 @@ import createClient from "@/lib/supabase/server";
 export async function sendResetPasswordEmail(email: string) {
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `/onboarding/reset-password` });
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (!siteUrl) {
+    console.error({ message: "NEXT_PUBLIC_SITE_URL is not configured" });
+    throw new Error("NEXT_PUBLIC_SITE_URL is not configured");
+  }
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/onboarding/reset-password`,
+  });
+
   if (error) {
     console.error(error);
     throw new Error(error.message);

@@ -87,6 +87,8 @@ function ResetPasswordForm() {
               <ArrowLeftIcon className="size-4" />
               Back to Login
             </Button>
+
+            <CardDescription>Make sure that you absolutely didn't change the url at all.</CardDescription>
           </FieldGroup>
         </form>
       </CardContent>
