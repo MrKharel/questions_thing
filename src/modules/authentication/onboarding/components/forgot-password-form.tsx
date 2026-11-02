@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle2Icon, Loader2Icon } from "lucide-react";
+import { CheckCircle2Icon, Loader2Icon, ArrowLeftIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -75,10 +75,9 @@ function ForgotPasswordForm() {
 
       <CardContent>
         <form onSubmit={handleSubmit} noValidate={false} aria-busy={isLoading}>
-          <FieldGroup>
+          <FieldGroup className="gap-3">
             <FieldSet disabled={isLoading}>
               <Field data-invalid={error ? true : undefined}>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   name="email"
@@ -112,17 +111,10 @@ function ForgotPasswordForm() {
               )}
             </Button>
 
-            <div className="flex flex-col items-center gap-1 text-sm">
-              <Link href="/onboarding/login" className="underline-offset-4 hover:underline">
-                Back to login
-              </Link>
-              <span className="text-muted-foreground">
-                Don&apos;t have an account yet?{" "}
-                <Link href="/onboarding/register" className="text-foreground underline-offset-4 hover:underline">
-                  Register
-                </Link>
-              </span>
-            </div>
+            <Button nativeButton={false} variant="outline" render={<Link href="/onboarding/login" className="no-underline" />}>
+              <ArrowLeftIcon className="size-4" />
+              Back to login
+            </Button>
           </FieldGroup>
         </form>
       </CardContent>

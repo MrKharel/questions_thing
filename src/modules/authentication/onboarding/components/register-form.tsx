@@ -65,6 +65,7 @@ function RegisterForm() {
                   autoComplete="username"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  autoFocus
                 />
                 <FieldDescription>Choose a unique username for your account</FieldDescription>
               </Field>
@@ -111,6 +112,7 @@ function RegisterForm() {
           </FieldGroup>
         </form>
       </CardContent>
+
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="items-center text-center">
