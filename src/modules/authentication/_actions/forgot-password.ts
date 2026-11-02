@@ -5,7 +5,7 @@ import createClient from "@/lib/supabase/server";
 export async function sendResetPasswordEmail(email: string) {
   const supabase = await createClient();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const siteUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
   if (!siteUrl) {
     console.error({ message: "NEXT_PUBLIC_SITE_URL is not configured" });
