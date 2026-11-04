@@ -14,12 +14,11 @@ const routeConfigs: RoutePattern[] = [
   { pattern: "/onboarding/login", type: "auth" },
 
   // PROTECTED routes
-  { pattern: "/", type: "protected" },
-  { pattern: "/class", type: "protected" },
-  { pattern: "/class/*", type: "protected" },
+  { pattern: "/dashboard", type: "protected" },
+  { pattern: "/dashboard/*", type: "protected" },
 ];
 const redirects: Record<string, string> = {
-  "/help": "/login",
+  "/onboarding": "/onboarding/login",
 };
 
 function normalizePathname(pathname: string): string {

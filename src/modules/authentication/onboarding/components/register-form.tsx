@@ -25,6 +25,7 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [orgName, setOrgName] = useState("");
   const [state, setState] = useState({ isLoading: false, error: null as null | string, isSuccessful: null as null | boolean });
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -95,6 +96,18 @@ function RegisterForm() {
                   required={false}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="org_name">Organization Name</FieldLabel>
+                <Input
+                  id="org_name"
+                  type="text"
+                  placeholder="ABC High School Pvt. Ltd."
+                  autoComplete="off"
+                  value={orgName}
+                  onChange={(e) => setOrgName(e.target.value)}
                 />
               </Field>
 
