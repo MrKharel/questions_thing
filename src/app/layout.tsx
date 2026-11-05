@@ -1,9 +1,10 @@
 import "./globals.css";
+import { Toaster } from "@/components/ui/toast";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { TanstackProvider } from "@/components/ui/tanstack-provider";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata: Metadata = {
   title: "Study Hard, Guyz",
@@ -16,6 +17,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         <TanstackProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
+            <Toaster />
           </ThemeProvider>
         </TanstackProvider>
       </body>

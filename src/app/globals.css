@@ -200,3 +200,7 @@
     text-wrap: balance;
   }
 }
+
+.link {
+  @apply hover:underline underline-offset-4 text-primary;
+}
