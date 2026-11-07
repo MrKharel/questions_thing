@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="flex flex-col">
+      <body>
         <TanstackProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}

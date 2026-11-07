@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 
-import { signout } from "@/modules/authentication/_actions/signout";
+import { signout } from "@/features/auth/";
 
 export default function HomePage() {
   return (

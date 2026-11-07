@@ -2,11 +2,12 @@ import createClient from "./lib/supabase/server";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-type RouteType = "protected" | "public" | "auth";
+type RouteType = "protected" | "public" | "onboarding" | "auth";
 type RoutePattern = { pattern: string; type: RouteType };
 
 const PROTECTED_SAFE_REDIRECT = "/home";
 const AUTH_SAFE_REDIRECT = "/login";
+const ONBOARDING_SAFE_REDIRECT = "/onboarding";
 
 const routeConfigs: RoutePattern[] = [
   // AUTH routes
@@ -14,6 +15,7 @@ const routeConfigs: RoutePattern[] = [
   { pattern: "/signup", type: "auth" },
   { pattern: "/forgot-password", type: "auth" },
   { pattern: "/reset-password", type: "auth" },
+  { pattern: "/onboarding", type: "onboarding" },
 
   // PROTECTED routes
   { pattern: "/", type: "protected" },
@@ -73,10 +75,18 @@ export default async function Proxy(request: NextRequest) {
     error: userError,
   } = await supabase.auth.getUser();
   const hasUser = user && !userError;
+  let hasProfile = false;
+
+  if (hasUser) {
+    const { data: profile, error: profileError } = await supabase.from("profile").select("id").eq("id", user.id).maybeSingle();
+    if (profile && !profileError) {
+      hasProfile = true;
+    }
+  }
 
   switch (routeType) {
     case "protected": {
-      if (!hasUser) {
+      if (!hasProfile || !hasUser) {
         const url = request.nextUrl.clone();
         url.pathname = AUTH_SAFE_REDIRECT;
         url.searchParams.set("redirectTo", pathname + request.nextUrl.search);
@@ -88,11 +98,31 @@ export default async function Proxy(request: NextRequest) {
     case "auth": {
       if (hasUser) {
         const url = request.nextUrl.clone();
-        url.pathname = PROTECTED_SAFE_REDIRECT;
+        if (hasProfile) {
+          url.pathname = PROTECTED_SAFE_REDIRECT;
+          url.search = "";
+          return NextResponse.redirect(url);
+        }
+        url.pathname = ONBOARDING_SAFE_REDIRECT;
         url.search = "";
         return NextResponse.redirect(url);
       }
       break;
+    }
+
+    case "onboarding": {
+      if (!hasUser) {
+        const url = request.nextUrl.clone();
+        url.pathname = AUTH_SAFE_REDIRECT;
+        url.searchParams.set("redirectTo", pathname + request.nextUrl.search);
+        return NextResponse.redirect(url);
+      }
+      if (hasProfile) {
+        const url = request.nextUrl.clone();
+        url.pathname = PROTECTED_SAFE_REDIRECT;
+        url.search = "";
+        return NextResponse.redirect(url);
+      }
     }
   }
 
