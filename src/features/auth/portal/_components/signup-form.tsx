@@ -17,6 +17,7 @@ function SignupForm() {
     email: "",
     password: "",
   });
+  const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
@@ -24,7 +25,7 @@ function SignupForm() {
 
     try {
       setIsLoading(true);
-      const signupSuccessful = await signup(formdata);
+      const signupSuccessful = await signup(formdata, { name });
       if (signupSuccessful) {
         toast.add({ description: "Signup Successful. Check your email.", type: "success" });
       }
@@ -35,28 +36,27 @@ function SignupForm() {
     }
   }
 
-  function showToast() {
-    const id = toast.add({
-      title: "Event created",
-      description: "Sunday, December 3 at 9:00 AM",
-      actionProps: {
-        children: "Undo",
-        onClick() {
-          toast.close(id);
-        },
-      },
-    });
-  }
-
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">Signup Form</CardTitle>
+        <CardTitle className="text-2xl">Signup to QuestionsThing</CardTitle>
       </CardHeader>
 
       <CardContent>
         <form onSubmit={handleSubmit}>
           <FieldSet>
+            <Field>
+              <FieldLabel htmlFor="name">Name *</FieldLabel>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Mark Zuckerburg"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Field>
+
             <Field>
               <FieldLabel htmlFor="email">Email *</FieldLabel>
               <Input

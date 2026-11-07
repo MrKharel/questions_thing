@@ -6,8 +6,8 @@ type FetchProfileProps = {
   name?: string;
 };
 
-export function fetchProfile(props: { name: string }): Promise<Profile>;
-export function fetchProfile(props?: { name?: undefined }): Promise<Profile[]>;
+export async function fetchProfile(props: { name: string }): Promise<Profile>;
+export async function fetchProfile(props?: { name?: undefined }): Promise<Profile[]>;
 export async function fetchProfile({ name }: FetchProfileProps = {}): Promise<Profile | Profile[]> {
   const supabase = await createClient();
 
