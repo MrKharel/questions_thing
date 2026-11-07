@@ -5,22 +5,23 @@ import type { NextRequest } from "next/server";
 type RouteType = "protected" | "public" | "auth";
 type RoutePattern = { pattern: string; type: RouteType };
 
-const PROTECTED_SAFE_REDIRECT = "/";
-const AUTH_SAFE_REDIRECT = "/onboarding/login";
+const PROTECTED_SAFE_REDIRECT = "/home";
+const AUTH_SAFE_REDIRECT = "/login";
 
 const routeConfigs: RoutePattern[] = [
   // AUTH routes
-  { pattern: "/onboarding/register", type: "auth" },
-  { pattern: "/onboarding/login", type: "auth" },
+  { pattern: "/login", type: "auth" },
+  { pattern: "/signup", type: "auth" },
+  { pattern: "/forgot-password", type: "auth" },
+  { pattern: "/reset-password", type: "auth" },
 
   // PROTECTED routes
   { pattern: "/", type: "protected" },
-  { pattern: "/class", type: "protected" },
-  { pattern: "/class/*", type: "protected" },
+  { pattern: "/home", type: "protected" },
+  { pattern: "/dashboard", type: "protected" },
+  { pattern: "/dashboard/*", type: "protected" },
 ];
-const redirects: Record<string, string> = {
-  "/help": "/login",
-};
+const redirects: Record<string, string> = {};
 
 function normalizePathname(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith("/")) {
