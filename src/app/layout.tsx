@@ -1,21 +1,10 @@
 import "./globals.css";
-import { Fira_Code, Geist } from "next/font/google";
-import { cn } from "cn";
-
+import { Toaster } from "@/components/ui/toast";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { TanstackProvider } from "@/components/ui/tanstack-provider";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-
-const sans = Geist({
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-const monospace = Fira_Code({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Study Hard, Guyz",
@@ -23,9 +12,14 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <html lang="en" className={cn(sans.variable, monospace.variable)} suppressHydrationWarning>
-      <body className="flex flex-col">
-        <TanstackProvider>{children}</TanstackProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <TanstackProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </TanstackProvider>
       </body>
     </html>
   );
