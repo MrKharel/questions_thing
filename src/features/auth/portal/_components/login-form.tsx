@@ -1,4 +1,4 @@
-"use client";
+euse client";
 
 import { useState } from "react";
 import { redirect } from "next/navigation";
